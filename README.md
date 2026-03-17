@@ -1,17 +1,9 @@
 # hugeicons_showcase
 
-A new Flutter project.
+A small [Flutter](flutter.dev) project to showcase and help developers utilize the many icons provided by [flutter-hugeicons](https://pub.dev/packages/hugeicons).
 
-## Getting Started
+Provides for quickly searching and copying the relevant icon data for quicker flutter development.
 
-This project is a starting point for a Flutter application.
+Within the Apple ecosystem, this works with the system clipboard, providing for syncing across devices (if using).
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Simply tap the icon to copy the String `HugeIcons.strokeRounded$iconName` to your clipboard. Long press to copy `HugeIcon(icon: HugeIcons.strokeRounded$iconName)`, instead.

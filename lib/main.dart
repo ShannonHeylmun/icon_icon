@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:hugeicons_showcase/icons_service.dart';
 
+const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
 void main() {
   runApp(const MyApp());
 }
@@ -13,17 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const MyHomePage(title: 'HugeIcons Lookup'),
+      title: 'HugeIcons Lookup',
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: seedColor)),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -34,7 +33,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        leading: HugeIcon(icon: HugeIcons.strokeRoundedHugeicons),
+        leadingWidth: 42,
+        backgroundColor: seedColor,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Container(
@@ -51,12 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () => IconsService().searchController.clear(),
               ),
               // Add a search icon or button to the search bar
-              prefixIcon: IconButton(
-                icon: Icon(Icons.search, color: Colors.black),
-                onPressed: () {
-                  // Perform the search here
-                },
-              ),
+              // prefixIcon: IconButton(
+              //   icon: Icon(Icons.search, color: Colors.black),
+              //   onPressed: () {
+              //     // Perform the search here
+              //   },
+              // ),
               // border: OutlineInputBorder(
               //   borderRadius: BorderRadius.circular(20.0),
               // ),
@@ -73,11 +74,20 @@ class _MyHomePageState extends State<MyHomePage> {
             itemCount: iconsToShow.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: HugeIcon(icon: iconsToShow[index].$2, size: 48),
+                leading: HugeIcon(
+                  icon: iconsToShow[index].$2,
+                  size: 48,
+                  secondaryColor: Theme.of(context).primaryColor,
+                ),
                 title: Text(iconsToShow[index].$1),
+                onTap: () async {
+                  await FlutterClipboard.copy(
+                    "HugeIcons.strokeRounded${iconsToShow[index].$1}",
+                  );
+                },
                 onLongPress: () async {
                   await FlutterClipboard.copy(
-                    "HugeIconsStrokeRounded.strokeRounded${iconsToShow[index].$1}",
+                    "HugeIcon(icon: HugeIcons.strokeRounded${iconsToShow[index].$1})",
                   );
                 },
               );
