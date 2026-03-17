@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hugeicons_showcase/helper_huge_icons.dart';
+import 'package:hugeicons_showcase/huge_icons_lookup/helper_huge_icons.dart';
 
 class IconsService {
   // singleton pattern
