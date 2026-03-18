@@ -1,22 +1,24 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:hugeicons_showcase/huge_icons_lookup/icons_service.dart';
-import 'package:hugeicons_showcase/main.dart';
+import 'package:hugeicons_showcase/emoji/emoji_service.dart';
+import 'package:unicode_emojis/unicode_emojis.dart';
 
-class HugeIconsLookupPage extends StatelessWidget {
-  const HugeIconsLookupPage({super.key});
+class EmojiScreen extends StatelessWidget {
+  const EmojiScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-          child: HugeIcon(icon: HugeIcons.strokeRoundedHugeicons),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: HugeIcon(icon: HugeIcons.strokeRoundedSmile),
+          ),
           onTap: () => Scaffold.of(context).openDrawer(),
         ),
         leadingWidth: 42,
-        backgroundColor: seedColor,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Container(
@@ -24,41 +26,43 @@ class HugeIconsLookupPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           // Use a Material design search bar
           child: TextField(
-            controller: IconsService().searchController,
+            controller: EmojiService().searchController,
             decoration: InputDecoration(
               hintText: 'Search...',
               // Add a clear button to the search bar
               suffixIcon: IconButton(
                 icon: Icon(Icons.clear, color: Colors.black),
-                onPressed: () => IconsService().searchController.clear(),
+                onPressed: () => EmojiService().searchController.clear(),
               ),
             ),
           ),
         ),
       ),
       body: StreamBuilder(
-        stream: IconsService().refinedListStream,
-        builder: (context, asyncSnapshot) {
-          List<(String, List<List<dynamic>>)> iconsToShow =
-              asyncSnapshot.data ?? [];
+        stream: EmojiService().refinedListStream,
+        builder: (context, AsyncSnapshot<List<Object>> asyncSnapshot) {
+          List<Object> iconsToShow = asyncSnapshot.data ?? [];
           return ListView.builder(
             itemCount: iconsToShow.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: HugeIcon(
-                  icon: iconsToShow[index].$2,
-                  size: 48,
-                  secondaryColor: Theme.of(context).primaryColor,
-                ),
-                title: Text(iconsToShow[index].$1),
+                leading: iconsToShow[index] is Emoji
+                    ? Text(
+                        (iconsToShow[index] as Emoji).emoji,
+                        style: TextStyle(fontSize: 32),
+                      )
+                    : null,
+                title: Text((iconsToShow[index] as Emoji).name),
+                dense: true,
+                subtitle: Text((iconsToShow[index] as Emoji).unified),
                 onTap: () async {
                   await FlutterClipboard.copy(
-                    "HugeIcons.strokeRounded${iconsToShow[index].$1}",
+                    (iconsToShow[index] as Emoji).emoji,
                   );
                 },
                 onLongPress: () async {
                   await FlutterClipboard.copy(
-                    "HugeIcon(icon: HugeIcons.strokeRounded${iconsToShow[index].$1})",
+                    "U+${(iconsToShow[index] as Emoji).unified}",
                   );
                 },
               );
