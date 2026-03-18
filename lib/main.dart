@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:hugeicons/hugeicons.dart';
 import 'package:hugeicons_showcase/emoji/emoji_screen.dart';
 import 'package:hugeicons_showcase/huge_icons_lookup/huge_icons_lookup_page.dart';
+import 'package:hugeicons_showcase/material_icons/material_icons_page.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
+import 'package:flutter/material.dart';
+
 const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
-void main() {
+
+main() {
   runApp(const MyApp());
 }
 
@@ -20,11 +26,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  BehaviorSubject<Widget> _selectedPage = BehaviorSubject.seeded(
+  final BehaviorSubject<Widget> _selectedPage = BehaviorSubject.seeded(
     HugeIconsLookupPage(),
   );
-  // Widget _selectedPage = HugeIconsLookupPage();
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,6 +51,17 @@ class _MyAppState extends State<MyApp> {
               padding: EdgeInsets.zero,
               children: [
                 ListTile(
+                  leading: Text(
+                    UnicodeEmojis.allEmojis.first.emoji,
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  title: Text("Unicode Emoji"),
+                  onTap: () {
+                    _selectedPage.add(EmojiScreen());
+                    _key.currentState!.closeDrawer();
+                  },
+                ),
+                ListTile(
                   leading: HugeIcon(icon: HugeIcons.strokeRoundedHugeicons),
                   title: Text("Huge Icons"),
                   onTap: () {
@@ -55,10 +70,10 @@ class _MyAppState extends State<MyApp> {
                   },
                 ),
                 ListTile(
-                  leading: HugeIcon(icon: HugeIcons.strokeRoundedSmile),
-                  title: Text("Unicode Emoji"),
+                  leading: Icon(MdiIcons.materialDesign, size: 24),
+                  title: Text("Material Design Icons"),
                   onTap: () {
-                    _selectedPage.add(EmojiScreen());
+                    _selectedPage.add(MaterialIconsPage());
                     _key.currentState!.closeDrawer();
                   },
                 ),

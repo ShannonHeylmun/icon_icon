@@ -14,7 +14,10 @@ class EmojiScreen extends StatelessWidget {
         leading: GestureDetector(
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0),
-            child: HugeIcon(icon: HugeIcons.strokeRoundedSmile),
+            child: Text(
+              UnicodeEmojis.allEmojis.first.emoji,
+              style: TextStyle(fontSize: 36),
+            ),
           ),
           onTap: () => Scaffold.of(context).openDrawer(),
         ),

@@ -2,7 +2,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:hugeicons_showcase/huge_icons_lookup/icons_service.dart';
-import 'package:hugeicons_showcase/main.dart';
+import 'package:hugeicons_showcase/main.dart' hide Icons;
 
 class HugeIconsLookupPage extends StatelessWidget {
   const HugeIconsLookupPage({super.key});
@@ -12,7 +12,10 @@ class HugeIconsLookupPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-          child: HugeIcon(icon: HugeIcons.strokeRoundedHugeicons),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: HugeIcon(icon: HugeIcons.strokeRoundedHugeicons),
+          ),
           onTap: () => Scaffold.of(context).openDrawer(),
         ),
         leadingWidth: 42,

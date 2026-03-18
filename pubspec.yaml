@@ -36,15 +36,20 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts: ^8.0.2
   hugeicons: ^1.1.5
-  dart_eval: ^0.8.4
+  # dart_eval: ^0.8.4
   clipboard: ^3.0.14
   unicode_emojis: ^0.5.1
   rxdart: ^0.28.0
+  reflectable: ^5.2.1
+  build: ^4.0.4
+  material_design_icons_flutter: ^7.0.7296
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  reflectable_builder: ^1.2.1
+  build_runner: ^2.13.0
 
 flutter:
 
@@ -69,10 +74,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Material Design Icons
+      fonts:
+        - asset: packages/material_design_icons_flutter/fonts/materialdesignicons-webfont.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
