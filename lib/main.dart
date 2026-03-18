@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:hugeicons/hugeicons.dart';
+import 'package:hugeicons_showcase/animated_icons/animated_icons_page.dart';
 import 'package:hugeicons_showcase/emoji/emoji_screen.dart';
 import 'package:hugeicons_showcase/huge_icons_lookup/huge_icons_lookup_page.dart';
 import 'package:hugeicons_showcase/material_icons/material_icons_page.dart';
@@ -25,10 +26,33 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   final BehaviorSubject<Widget> _selectedPage = BehaviorSubject.seeded(
     HugeIconsLookupPage(),
   );
+
+  late AnimationController controller;
+  late Animation<double> animation;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+
+    controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1))
+          ..forward()
+          ..repeat(reverse: true);
+    animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -74,6 +98,18 @@ class _MyAppState extends State<MyApp> {
                   title: Text("Material Design Icons"),
                   onTap: () {
                     _selectedPage.add(MaterialIconsPage());
+                    _key.currentState!.closeDrawer();
+                  },
+                ),
+                ListTile(
+                  leading: AnimatedIcon(
+                    icon: AnimatedIcons.search_ellipsis,
+                    size: 24.0,
+                    progress: animation,
+                  ),
+                  title: Text("Animated Icons"),
+                  onTap: () {
+                    _selectedPage.add(AnimatedIconsPage());
                     _key.currentState!.closeDrawer();
                   },
                 ),
