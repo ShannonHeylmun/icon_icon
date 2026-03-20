@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/huge_icons_lookup/icons_service.dart';
 import 'package:hugeicons_showcase/main.dart';
@@ -14,8 +15,11 @@ class HugeIconsLookupPage extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         leadingIcon: HugeIcon(icon: HugeIcons.strokeRoundedSnow),
-        searchController: IconsService().searchController,
         color: seedColor,
+        titleText: "Huge Icons",
+      ),
+      bottomNavigationBar: BottomSearchCard(
+        controller: IconsService().searchController,
       ),
       body: StreamBuilder(
         stream: IconsService().refinedListStream,

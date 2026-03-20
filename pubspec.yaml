@@ -47,6 +47,7 @@ dependencies:
   popover: ^0.4.0
   prevent_orphan_text: ^0.0.3
   fluentui_system_icons: ^1.1.273
+  footer: ^0.0.4
 
 dev_dependencies:
   flutter_test:

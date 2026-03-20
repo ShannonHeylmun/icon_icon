@@ -1,5 +1,6 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/material_icons/material_icons_service.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -12,9 +13,12 @@ class MaterialIconsPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         context,
-        color: Color(0xff9f86ff),
-        searchController: MaterialIconsService().searchController,
+        color: Color.fromARGB(255, 230, 113, 67),
+        titleText: "Material Design",
         leadingIcon: Icon(MdiIcons.snowflake, size: 30),
+      ),
+      bottomNavigationBar: BottomSearchCard(
+        controller: MaterialIconsService().searchController,
       ),
       body: StreamBuilder(
         stream: MaterialIconsService().refinedListStream,

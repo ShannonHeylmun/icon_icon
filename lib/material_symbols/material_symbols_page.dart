@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/components/responsive_icons.dart';
 import 'package:hugeicons_showcase/material_symbols/material_symbols_service.dart';
@@ -16,7 +16,7 @@ class MaterialSymbolsPage extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: const Text('Select style'),
+            title: const Text('Select family'),
             children: <Widget>[
               SimpleDialogOption(
                 onPressed: () {
@@ -91,12 +91,16 @@ class MaterialSymbolsPage extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         color: Color(0xff9f86ff),
-        searchController: MaterialSymbolsService().searchController,
+
         leadingIcon: Icon(Symbols.mode_cool, size: 36),
         paddingLeft: 0,
         actions: [
-          IconButton(onPressed: selectStyle, icon: Icon(Symbols.filter)),
+          IconButton(onPressed: selectStyle, icon: Icon(Symbols.filter_list)),
         ],
+        titleText: "Material Symbols",
+      ),
+      bottomNavigationBar: BottomSearchCard(
+        controller: MaterialSymbolsService().searchController,
       ),
       body: StreamBuilder(
         stream: MaterialSymbolsService().refinedListStream,

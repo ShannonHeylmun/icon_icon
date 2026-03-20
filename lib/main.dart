@@ -1,7 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as material;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_page.dart';
@@ -14,8 +13,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
-
-import 'package:flutter/material.dart';
 
 const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
 
@@ -101,7 +98,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                 ),
                 ListTile(
                   leading: Text(
-                    UnicodeEmojis.search("snowflake")!.first.emoji,
+                    UnicodeEmojis.search("snowflake").first.emoji,
                     style: TextStyle(fontSize: 22),
                   ),
                   title: Text("Unicode Emoji"),

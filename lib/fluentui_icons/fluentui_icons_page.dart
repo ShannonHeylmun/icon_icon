@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/components/responsive_icons.dart';
 import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_service.dart';
@@ -15,7 +16,7 @@ class FluentIconsPage extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: const Text('Select assignment'),
+            title: const Text('Select family'),
             children: <Widget>[
               SimpleDialogOption(
                 onPressed: () {
@@ -32,21 +33,21 @@ class FluentIconsPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, FluentIconSymbolStyle.light);
-                },
-                child: Text(
-                  'Light',
-                  style: TextStyle(
-                    fontWeight:
-                        FluentIconsService().symbolStyleBehaviorSubject.value ==
-                            FluentIconSymbolStyle.light
-                        ? FontWeight.bold
-                        : FontWeight.normal,
-                  ),
-                ),
-              ),
+              // SimpleDialogOption(
+              //   onPressed: () {
+              //     Navigator.pop(context, FluentIconSymbolStyle.light);
+              //   },
+              //   child: Text(
+              //     'Light',
+              //     style: TextStyle(
+              //       fontWeight:
+              //           FluentIconsService().symbolStyleBehaviorSubject.value ==
+              //               FluentIconSymbolStyle.light
+              //           ? FontWeight.bold
+              //           : FontWeight.normal,
+              //     ),
+              //   ),
+              // ),
               SimpleDialogOption(
                 onPressed: () {
                   Navigator.pop(context, FluentIconSymbolStyle.filled);
@@ -84,7 +85,6 @@ class FluentIconsPage extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         color: Color(0xff9f86ff),
-        searchController: FluentIconsService().searchController,
         leadingIcon: Icon(FluentIcons.weather_snowflake_24_regular, size: 36),
         paddingLeft: 0,
         actions: [
@@ -93,6 +93,10 @@ class FluentIconsPage extends StatelessWidget {
             icon: Icon(FluentIcons.filter_12_filled),
           ),
         ],
+        titleText: "FluentUI Icons",
+      ),
+      bottomNavigationBar: BottomSearchCard(
+        controller: FluentIconsService().searchController,
       ),
       body: StreamBuilder(
         stream: FluentIconsService().refinedListStream,

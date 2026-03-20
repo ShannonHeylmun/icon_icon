@@ -1,6 +1,8 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:footer/footer_view.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_service.dart';
+import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 
 class AnimatedIconsPage extends StatefulWidget {
@@ -41,12 +43,15 @@ class _AnimatedIconsPageState extends State<AnimatedIconsPage>
       appBar: CustomAppBar(
         context,
         color: animatedIconsColor,
-        searchController: AnimatedIconsService().searchController,
         leadingIcon: AnimatedIcon(
           icon: AnimatedIcons.menu_close,
           size: 36.0,
           progress: animation,
         ),
+        titleText: "Animated Icons",
+      ),
+      bottomNavigationBar: BottomSearchCard(
+        controller: AnimatedIconsService().searchController,
       ),
       body: StreamBuilder(
         stream: AnimatedIconsService().refinedListStream,
