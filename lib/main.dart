@@ -1,11 +1,16 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:hugeicons/hugeicons.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_page.dart';
+import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_page.dart';
+import 'package:hugeicons_showcase/material_symbols/material_symbols_page.dart';
 import 'package:hugeicons_showcase/emoji/emoji_screen.dart';
 import 'package:hugeicons_showcase/huge_icons_lookup/huge_icons_lookup_page.dart';
 import 'package:hugeicons_showcase/material_icons/material_icons_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
@@ -56,6 +61,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Glyph Lookup',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: seedColor)),
       home: Scaffold(
@@ -66,9 +72,6 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
           stream: _selectedPage.stream,
         ),
         drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
           child: SafeArea(
             child: ListView(
               // Important: Remove any padding from the ListView.
@@ -110,6 +113,22 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   title: Text("Animated Icons"),
                   onTap: () {
                     _selectedPage.add(AnimatedIconsPage());
+                    _key.currentState!.closeDrawer();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Symbols.abc),
+                  title: Text("Material Symbols"),
+                  onTap: () {
+                    _selectedPage.add(MaterialSymbolsPage());
+                    _key.currentState!.closeDrawer();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(FluentIcons.fluent_20_filled),
+                  title: Text("Fluent Icons"),
+                  onTap: () {
+                    _selectedPage.add(FluentIconsPage());
                     _key.currentState!.closeDrawer();
                   },
                 ),

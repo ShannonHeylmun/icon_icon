@@ -1,76 +1,131 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/emoji/emoji_service.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
+import 'package:prevent_orphan_text/prevent_orphan_text.dart';
 
 class EmojiScreen extends StatelessWidget {
   const EmojiScreen({super.key});
 
+  Future<void> onTap(BuildContext context, Emoji emoji) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Double Tap to Copy Emoji"),
+            Text("Long Press to Copy Code Point"),
+            emoji.skinVariations != null
+                ? Wrap(
+                    spacing: 20,
+
+                    children: emoji.skinVariations!.map((variation) {
+                      return InkWell(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            variation.emoji,
+                            style: TextStyle(fontSize: 32),
+                          ),
+                        ),
+                        onDoubleTap: () async {
+                          await FlutterClipboard.copy(variation.emoji);
+                        },
+                        onLongPress: () async {
+                          await FlutterClipboard.copy(variation.unified);
+                        },
+                      );
+                    }).toList(),
+                  )
+                : SizedBox.shrink(),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(
-              UnicodeEmojis.allEmojis.first.emoji,
-              style: TextStyle(fontSize: 36),
-            ),
-          ),
-          onTap: () => Scaffold.of(context).openDrawer(),
-        ),
-        leadingWidth: 42,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Container(
-          // Add padding around the search bar
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          // Use a Material design search bar
-          child: TextField(
-            controller: EmojiService().searchController,
-            decoration: InputDecoration(
-              hintText: 'Search...',
-              // Add a clear button to the search bar
-              suffixIcon: IconButton(
-                icon: Icon(Icons.clear, color: Colors.black),
-                onPressed: () => EmojiService().searchController.clear(),
-              ),
-            ),
-          ),
+      appBar: CustomAppBar(
+        context,
+        searchController: EmojiService().searchController,
+        leadingIcon: Text(
+          UnicodeEmojis.allEmojis.first.emoji,
+          style: TextStyle(fontSize: 30),
         ),
       ),
       body: StreamBuilder(
         stream: EmojiService().refinedListStream,
-        builder: (context, AsyncSnapshot<List<Object>> asyncSnapshot) {
-          List<Object> iconsToShow = asyncSnapshot.data ?? [];
-          return ListView.builder(
-            itemCount: iconsToShow.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: iconsToShow[index] is Emoji
-                    ? Text(
-                        (iconsToShow[index] as Emoji).emoji,
-                        style: TextStyle(fontSize: 32),
-                      )
-                    : null,
-                title: Text((iconsToShow[index] as Emoji).name),
-                dense: true,
-                subtitle: Text((iconsToShow[index] as Emoji).unified),
-                onTap: () async {
-                  await FlutterClipboard.copy(
-                    (iconsToShow[index] as Emoji).emoji,
-                  );
-                },
-                onLongPress: () async {
-                  await FlutterClipboard.copy(
-                    "U+${(iconsToShow[index] as Emoji).unified}",
-                  );
-                },
-              );
-            },
-          );
+        builder: (context, AsyncSnapshot<List<Emoji>> asyncSnapshot) {
+          List<Emoji> iconsToShow = asyncSnapshot.data ?? [];
+          return MediaQuery.sizeOf(context).shortestSide < 600
+              ? ListView.builder(
+                  itemCount: iconsToShow.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () => onTap(context, iconsToShow[index]),
+                      onLongPress: () async {
+                        await FlutterClipboard.copy(
+                          (iconsToShow[index]).unified,
+                        );
+                      },
+                      onDoubleTap: () async {
+                        await FlutterClipboard.copy((iconsToShow[index]).emoji);
+                      },
+                      child: ListTile(
+                        leading: Text(
+                          (iconsToShow[index]).emoji,
+                          style: TextStyle(fontSize: 32),
+                        ),
+                        title: Text((iconsToShow[index]).name),
+                        dense: true,
+                        subtitle: Text((iconsToShow[index]).unified),
+                      ),
+                    );
+                  },
+                )
+              : GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                  ),
+                  itemCount: iconsToShow.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: InkWell(
+                        onTap: () => onTap(context, iconsToShow[index]),
+                        onLongPress: () async {
+                          await FlutterClipboard.copy(
+                            (iconsToShow[index]).unified,
+                          );
+                        },
+                        onDoubleTap: () async {
+                          await FlutterClipboard.copy(iconsToShow[index].emoji);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                iconsToShow[index].emoji,
+                                style: TextStyle(fontSize: 32),
+                              ),
+                              PreventOrphanText(
+                                iconsToShow[index].name,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
         },
       ),
     );

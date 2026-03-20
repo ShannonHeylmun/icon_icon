@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hugeicons_showcase/main.dart' hide Icons;
-import 'package:hugeicons_showcase/material_icons/material_helper.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:reflectable/mirrors.dart';
 
 import 'package:rxdart/subjects.dart';
 
 List<(String, IconData?)> getAllIcons() {
   List<String> names = MdiIcons.getNames();
   List<(String, IconData?)> icons = [];
-  names.forEach((name) => icons.add((name, MdiIcons.fromString(name))));
+  for (var name in names) {
+    icons.add((name, MdiIcons.fromString(name)));
+  }
   return icons;
 }
 
