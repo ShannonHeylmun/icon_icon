@@ -54,7 +54,7 @@ class EmojiScreen extends StatelessWidget {
         context,
         searchController: EmojiService().searchController,
         leadingIcon: Text(
-          UnicodeEmojis.allEmojis.first.emoji,
+          UnicodeEmojis.search("snowflake").first.emoji,
           style: TextStyle(fontSize: 30),
         ),
       ),

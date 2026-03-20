@@ -14,7 +14,7 @@ class MaterialIconsPage extends StatelessWidget {
         context,
         color: Color(0xff9f86ff),
         searchController: MaterialIconsService().searchController,
-        leadingIcon: Icon(MdiIcons.materialDesign, size: 30),
+        leadingIcon: Icon(MdiIcons.snowflake, size: 30),
       ),
       body: StreamBuilder(
         stream: MaterialIconsService().refinedListStream,

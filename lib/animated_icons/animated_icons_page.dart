@@ -10,6 +10,8 @@ class AnimatedIconsPage extends StatefulWidget {
   State<AnimatedIconsPage> createState() => _AnimatedIconsPageState();
 }
 
+const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, .2);
+
 class _AnimatedIconsPageState extends State<AnimatedIconsPage>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
@@ -38,10 +40,10 @@ class _AnimatedIconsPageState extends State<AnimatedIconsPage>
     return Scaffold(
       appBar: CustomAppBar(
         context,
-        color: Color(0xff9f86ff),
+        color: animatedIconsColor,
         searchController: AnimatedIconsService().searchController,
         leadingIcon: AnimatedIcon(
-          icon: AnimatedIcons.search_ellipsis,
+          icon: AnimatedIcons.menu_close,
           size: 36.0,
           progress: animation,
         ),

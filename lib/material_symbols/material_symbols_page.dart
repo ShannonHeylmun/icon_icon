@@ -92,10 +92,10 @@ class MaterialSymbolsPage extends StatelessWidget {
         context,
         color: Color(0xff9f86ff),
         searchController: MaterialSymbolsService().searchController,
-        leadingIcon: Icon(CupertinoIcons.app_badge_fill, size: 36),
+        leadingIcon: Icon(Symbols.mode_cool, size: 36),
         paddingLeft: 0,
         actions: [
-          IconButton(onPressed: selectStyle, icon: Icon(Symbols.filter_list)),
+          IconButton(onPressed: selectStyle, icon: Icon(Symbols.filter)),
         ],
       ),
       body: StreamBuilder(

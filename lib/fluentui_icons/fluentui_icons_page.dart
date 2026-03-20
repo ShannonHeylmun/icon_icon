@@ -85,7 +85,7 @@ class FluentIconsPage extends StatelessWidget {
         context,
         color: Color(0xff9f86ff),
         searchController: FluentIconsService().searchController,
-        leadingIcon: Icon(FluentIcons.fluent_24_regular, size: 36),
+        leadingIcon: Icon(FluentIcons.weather_snowflake_24_regular, size: 36),
         paddingLeft: 0,
         actions: [
           IconButton(

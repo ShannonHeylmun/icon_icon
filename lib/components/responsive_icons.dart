@@ -22,14 +22,14 @@ class ResponsiveIcons extends StatelessWidget {
                     spacing: 8,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text("Double Tap to Copy Code Point"),
                       Text("Long Press to Copy Name"),
+                      Text("Double Tap to Copy Code Point"),
                     ],
                   ),
                 ]
               : [
-                  Text("Double Tap to Copy Code Point"),
                   Text("Long Press to Copy Name"),
+                  Text("Double Tap to Copy Code Point"),
                 ],
         ),
       ),
@@ -53,9 +53,9 @@ class ResponsiveIcons extends StatelessWidget {
                   );
                 },
                 child: ListTile(
-                  leading: Icon(iconsToShow[index].$2),
+                  leading: Icon(iconsToShow[index].$2, size: 48),
                   title: Text(iconsToShow[index].$1),
-                  dense: true,
+                  subtitle: Text(iconsToShow[index].$2.codePoint.toString()),
                 ),
               );
             },

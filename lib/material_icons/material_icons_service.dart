@@ -5,13 +5,13 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import 'package:rxdart/subjects.dart';
 
-List<(String, IconData?)> getAllIcons() {
+List<(String, IconData)> getAllIcons() {
   List<String> names = MdiIcons.getNames();
-  List<(String, IconData?)> icons = [];
+  List<(String, IconData)> iconList = [];
   for (var name in names) {
-    icons.add((name, MdiIcons.fromString(name)));
+    iconList.add((name, MdiIcons.fromString(name) ?? MdiIcons.imageBroken));
   }
-  return icons;
+  return iconList;
 }
 
 class MaterialIconsService {
@@ -32,12 +32,10 @@ class MaterialIconsService {
 
   void _updateRefinedList() {
     String searchTerm = _searchController.text.toLowerCase();
-    _refinedList = getAllIcons()
-        .where(
-          (icon) =>
-              icon.toString().toLowerCase().contains(searchTerm.toLowerCase()),
-        )
-        .toList();
+    _refinedList = getAllIcons().where((icon) {
+      return icon.$1.toLowerCase().contains(searchTerm) ||
+          (icon.$2.codePoint.toString().contains(searchTerm));
+    }).toList();
     _refinedListBehaviorSubject.add(_refinedList);
   }
 

@@ -13,7 +13,7 @@ class HugeIconsLookupPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         context,
-        leadingIcon: HugeIcon(icon: HugeIcons.strokeRoundedHugeicons),
+        leadingIcon: HugeIcon(icon: HugeIcons.strokeRoundedSnow),
         searchController: IconsService().searchController,
         color: seedColor,
       ),

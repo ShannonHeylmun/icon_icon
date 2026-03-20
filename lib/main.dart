@@ -85,37 +85,13 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
               padding: EdgeInsets.zero,
               children: [
                 ListTile(
-                  leading: Text(
-                    UnicodeEmojis.allEmojis.first.emoji,
-                    style: TextStyle(fontSize: 24),
-                  ),
-                  title: Text("Unicode Emoji"),
-                  onTap: () {
-                    _selectedPage.add(EmojiScreen());
-                    _key.currentState!.closeDrawer();
-                  },
-                ),
-                ListTile(
-                  leading: HugeIcon(icon: HugeIcons.strokeRoundedHugeicons),
-                  title: Text("Huge Icons"),
-                  onTap: () {
-                    _selectedPage.add(HugeIconsLookupPage());
-                    _key.currentState!.closeDrawer();
-                  },
-                ),
-                ListTile(
-                  leading: Icon(MdiIcons.materialDesign, size: 24),
-                  title: Text("Material Design Icons"),
-                  onTap: () {
-                    _selectedPage.add(MaterialIconsPage());
-                    _key.currentState!.closeDrawer();
-                  },
-                ),
-                ListTile(
-                  leading: AnimatedIcon(
-                    icon: AnimatedIcons.search_ellipsis,
-                    size: 24.0,
-                    progress: animation,
+                  leading: RotatedBox(
+                    quarterTurns: 2,
+                    child: AnimatedIcon(
+                      icon: AnimatedIcons.arrow_menu,
+                      size: 24.0,
+                      progress: animation,
+                    ),
                   ),
                   title: Text("Animated Icons"),
                   onTap: () {
@@ -124,7 +100,34 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Symbols.abc),
+                  leading: Text(
+                    UnicodeEmojis.search("snowflake")!.first.emoji,
+                    style: TextStyle(fontSize: 22),
+                  ),
+                  title: Text("Unicode Emoji"),
+                  onTap: () {
+                    _selectedPage.add(EmojiScreen());
+                    _key.currentState!.closeDrawer();
+                  },
+                ),
+                ListTile(
+                  leading: HugeIcon(icon: HugeIcons.strokeRoundedSnow),
+                  title: Text("Huge Icons"),
+                  onTap: () {
+                    _selectedPage.add(HugeIconsLookupPage());
+                    _key.currentState!.closeDrawer();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(MdiIcons.snowflake, size: 24),
+                  title: Text("Material Design Icons"),
+                  onTap: () {
+                    _selectedPage.add(MaterialIconsPage());
+                    _key.currentState!.closeDrawer();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Symbols.mode_cool),
                   title: Text("Material Symbols"),
                   onTap: () {
                     _selectedPage.add(MaterialSymbolsPage());
@@ -132,7 +135,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   },
                 ),
                 ListTile(
-                  leading: Icon(FluentIcons.fluent_20_filled),
+                  leading: Icon(FluentIcons.weather_snowflake_24_filled),
                   title: Text("Fluent Icons"),
                   onTap: () {
                     _selectedPage.add(FluentIconsPage());
