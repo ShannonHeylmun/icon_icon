@@ -1,4 +1,3 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
@@ -12,7 +11,7 @@ class MaterialSymbolsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> askedToLead() async {
+    Future<void> selectStyle() async {
       switch (await showDialog<SymbolStyle>(
         context: context,
         builder: (BuildContext context) {
@@ -96,23 +95,14 @@ class MaterialSymbolsPage extends StatelessWidget {
         leadingIcon: Icon(CupertinoIcons.app_badge_fill, size: 36),
         paddingLeft: 0,
         actions: [
-          IconButton(onPressed: askedToLead, icon: Icon(Symbols.filter_list)),
+          IconButton(onPressed: selectStyle, icon: Icon(Symbols.filter_list)),
         ],
       ),
       body: StreamBuilder(
         stream: MaterialSymbolsService().refinedListStream,
         builder: (context, asyncSnapshot) {
           List<(String, IconData)> iconsToShow = asyncSnapshot.data ?? [];
-          return ResponsiveIcons(
-            iconsToShow: iconsToShow,
-            onLongPress: () async {
-              print("longPress");
-              await FlutterClipboard.copy("todo");
-            },
-            onDoubleTap: () async {
-              await FlutterClipboard.copy("todo");
-            },
-          );
+          return ResponsiveIcons(iconsToShow: iconsToShow);
         },
       ),
     );

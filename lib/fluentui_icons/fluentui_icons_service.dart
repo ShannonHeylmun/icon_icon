@@ -24,9 +24,10 @@ class FluentIconsService {
 
   void _refineListBySearch() {
     String searchTerm = _searchController.text.toLowerCase();
-    _refinedList = getAllIcons()
-        .where((element) => element.$1.contains(searchTerm))
-        .toList();
+    _refinedList = getAllIcons().where((element) {
+      return element.$1.contains(searchTerm) ||
+          element.$2.codePoint.toString().contains(searchTerm);
+    }).toList();
 
     _refinedListBehaviorSubject.add(_refinedList);
   }

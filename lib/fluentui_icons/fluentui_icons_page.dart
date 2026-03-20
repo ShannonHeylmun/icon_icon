@@ -1,9 +1,9 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/components/responsive_icons.dart';
 import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_service.dart';
-import 'package:material_symbols_icons/get.dart';
 
 class FluentIconsPage extends StatelessWidget {
   const FluentIconsPage({super.key});
@@ -99,13 +99,7 @@ class FluentIconsPage extends StatelessWidget {
         builder: (context, asyncSnapshot) {
           List<(String, IconData)> iconsToShow = asyncSnapshot.data ?? [];
 
-          return ResponsiveIcons(
-            iconsToShow: iconsToShow,
-            onDoubleTap: () => print("ToDo"),
-            onLongPress: () {
-              print("ToDo");
-            },
-          );
+          return ResponsiveIcons(iconsToShow: iconsToShow);
         },
       ),
     );

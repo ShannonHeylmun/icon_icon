@@ -1,17 +1,11 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class ResponsiveIcons extends StatelessWidget {
   final List<(String, IconData)> iconsToShow;
-  final GestureLongPressCallback onLongPress;
-  final GestureDoubleTapCallback? onDoubleTap;
 
-  const ResponsiveIcons({
-    super.key,
-    required this.iconsToShow,
-    required this.onLongPress,
-    this.onDoubleTap,
-  });
+  const ResponsiveIcons({super.key, required this.iconsToShow});
 
   Future<void> onTap(BuildContext context, index) {
     return showModalBottomSheet(
@@ -22,7 +16,7 @@ class ResponsiveIcons extends StatelessWidget {
           spacing: 20,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.max,
-          children: MediaQuery.sizeOf(context).shortestSide > 400
+          children: MediaQuery.sizeOf(context).width < 600
               ? [
                   Column(
                     spacing: 8,
@@ -50,8 +44,14 @@ class ResponsiveIcons extends StatelessWidget {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () => onTap(context, index),
-                onLongPress: onLongPress,
-                onDoubleTap: onDoubleTap,
+                onLongPress: () async {
+                  await FlutterClipboard.copy(iconsToShow[index].$1);
+                },
+                onDoubleTap: () async {
+                  await FlutterClipboard.copy(
+                    iconsToShow[index].$2.codePoint.toString(),
+                  );
+                },
                 child: ListTile(
                   leading: Icon(iconsToShow[index].$2),
                   title: Text(iconsToShow[index].$1),
@@ -69,8 +69,14 @@ class ResponsiveIcons extends StatelessWidget {
               return Card(
                 child: InkWell(
                   onTap: () => onTap(context, index),
-                  onLongPress: onLongPress,
-                  onDoubleTap: onDoubleTap,
+                  onLongPress: () async {
+                    await FlutterClipboard.copy(iconsToShow[index].$1);
+                  },
+                  onDoubleTap: () async {
+                    await FlutterClipboard.copy(
+                      iconsToShow[index].$2.codePoint.toString(),
+                    );
+                  },
                   child: GridTile(
                     header: Text(
                       iconsToShow[index].$1,
