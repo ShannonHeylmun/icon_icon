@@ -102,10 +102,11 @@ class MaterialSymbolsPage extends StatelessWidget {
       body: StreamBuilder(
         stream: MaterialSymbolsService().refinedListStream,
         builder: (context, asyncSnapshot) {
-          List<(String, IconData)> iconsToShow = asyncSnapshot.data!;
+          List<(String, IconData)> iconsToShow = asyncSnapshot.data ?? [];
           return ResponsiveIcons(
             iconsToShow: iconsToShow,
             onLongPress: () async {
+              print("longPress");
               await FlutterClipboard.copy("todo");
             },
             onDoubleTap: () async {

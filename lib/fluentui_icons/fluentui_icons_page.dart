@@ -97,9 +97,15 @@ class FluentIconsPage extends StatelessWidget {
       body: StreamBuilder(
         stream: FluentIconsService().refinedListStream,
         builder: (context, asyncSnapshot) {
-          List<(String, IconData)> iconsToShow = asyncSnapshot.data!;
+          List<(String, IconData)> iconsToShow = asyncSnapshot.data ?? [];
 
-          return ResponsiveIcons(iconsToShow: iconsToShow, onLongPress: () {});
+          return ResponsiveIcons(
+            iconsToShow: iconsToShow,
+            onDoubleTap: () => print("ToDo"),
+            onLongPress: () {
+              print("ToDo");
+            },
+          );
         },
       ),
     );

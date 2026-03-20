@@ -24,6 +24,9 @@ class MaterialSymbolsService {
   void _updateRefinedList() {
     String searchTerm = _searchController.text.toLowerCase();
     List<(String, IconData)> refinedList = getAllIcons();
+    refinedList = getAllIcons()
+        .where((element) => element.$1.contains(searchTerm))
+        .toList();
     // refinedList.removeWhere((s, i) {
     //   return !(s.toLowerCase().contains(searchTerm.toLowerCase()) ||
     //       i

@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/symbols.dart';
 
 class ResponsiveIcons extends StatelessWidget {
   final List<(String, IconData)> iconsToShow;
@@ -57,9 +56,6 @@ class ResponsiveIcons extends StatelessWidget {
                   leading: Icon(iconsToShow[index].$2),
                   title: Text(iconsToShow[index].$1),
                   dense: true,
-                  // subtitle: Text(
-                  //   iconsToShow.values.toString()[index].runes.toString(),
-                  // ),
                 ),
               );
             },
@@ -80,15 +76,20 @@ class ResponsiveIcons extends StatelessWidget {
                       iconsToShow[index].$1,
                       textAlign: TextAlign.center,
                     ),
-                    // footer: Text(
-                    //   iconsToShow.values
-                    //       .toList()[index]
-                    //       .codePoint
-                    //       .toRadixString(16)
-                    //       .toUpperCase(),
-                    //   textAlign: TextAlign.center,
-                    // ),
-                    child: Icon(iconsToShow[index].$2, size: 48),
+                    footer: Text(
+                      iconsToShow[index].$2.codePoint
+                          .toString()
+                          // .toRadixString(16)
+                          .toUpperCase(),
+                      textAlign: TextAlign.center,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(iconsToShow[index].$2, size: 48),
+                        Text(iconsToShow[index].$2.fontFamily ?? ""),
+                      ],
+                    ),
                   ),
                 ),
               );

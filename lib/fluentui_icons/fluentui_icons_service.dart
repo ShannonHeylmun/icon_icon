@@ -15,36 +15,29 @@ class FluentIconsService {
   }
   FluentIconsService._internal() {
     getAllIcons();
-    _searchController.addListener(_updateRefinedList);
+    _searchController.addListener(_refineListBySearch);
   }
 
   void dispose() {
-    _searchController.removeListener(_updateRefinedList);
+    _searchController.removeListener(_refineListBySearch);
   }
 
-  void _updateRefinedList() {
+  void _refineListBySearch() {
     String searchTerm = _searchController.text.toLowerCase();
-    _refinedList = getAllIcons();
-    // _refinedList.removeWhere((s, i) {
-    //   return !(s.toLowerCase().contains(searchTerm.toLowerCase()) ||
-    //       i
-    //           .toString()
-    //           .replaceAll("IconData(", "")
-    //           .replaceAll("+0", "+")
-    //           .replaceAll(")", "")
-    //           .toLowerCase()
-    //           .contains(searchTerm.toLowerCase()));
-    // });
+    _refinedList = getAllIcons()
+        .where((element) => element.$1.contains(searchTerm))
+        .toList();
+
     _refinedListBehaviorSubject.add(_refinedList);
   }
 
   final TextEditingController _searchController = TextEditingController();
   TextEditingController get searchController => _searchController;
-  late List<(String, IconData)> _refinedList;
+  late List<(String, IconData)> _refinedList = fluentuiIconByName;
   List<(String, IconData)> get refinedList => _refinedList;
 
   final BehaviorSubject<List<(String, IconData)>> _refinedListBehaviorSubject =
-      BehaviorSubject.seeded(fluentuiIconByName);
+      BehaviorSubject.seeded([]);
   Stream<List<(String, IconData)>> get refinedListStream =>
       _refinedListBehaviorSubject.stream;
 
@@ -53,18 +46,18 @@ class FluentIconsService {
 
   void updateSymbolStyle(FluentIconSymbolStyle symbolStyle) {
     symbolStyleBehaviorSubject.add(symbolStyle);
-    _updateRefinedList();
+    _refineListBySearch();
   }
 
   List<(String, IconData)> getAllIcons() {
+    print("GETTING ALL ICONS");
     List<(String, IconData)> icons = fluentuiIconByName;
-    print(symbolStyleBehaviorSubject.value.name);
-    // icons.removeWhere((s, i) {
-    //   return i.fontFamily == null ||
-    //       !i.fontFamily!.toLowerCase().contains(
-    //         symbolStyleBehaviorSubject.value.name,
-    //       );
-    // });
+    // refine by `FluentIconSymbolStyle`
+    icons = icons.where((i) {
+      return (i.$2.fontFamily!.toLowerCase().contains(
+        symbolStyleBehaviorSubject.value.name.toLowerCase(),
+      ));
+    }).toList();
     _refinedListBehaviorSubject.add(icons);
     return icons;
   }

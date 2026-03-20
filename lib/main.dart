@@ -2,6 +2,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as material;
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_page.dart';
 import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_page.dart';
@@ -58,12 +59,18 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  // baseTheme.copyWith(
+  //     textTheme: GoogleFonts.latoTextTheme(baseTheme.textTheme),
+  //   )
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Glyph Lookup',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: seedColor)),
+      theme: ThemeData(
+        colorScheme: .fromSeed(seedColor: seedColor),
+        textTheme: GoogleFonts.notoSansTextTheme(ThemeData().textTheme),
+      ),
       home: Scaffold(
         key: _key,
         body: StreamBuilder(
