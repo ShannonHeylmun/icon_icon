@@ -65,16 +65,44 @@ class EmojiScreen extends StatelessWidget {
       bottomNavigationBar: BottomSearchCard(
         controller: EmojiService().searchController,
       ),
-      body: Scaffold(
-        body: StreamBuilder(
-          stream: EmojiService().refinedListStream,
-          builder: (context, AsyncSnapshot<List<Emoji>> asyncSnapshot) {
-            List<Emoji> iconsToShow = asyncSnapshot.data ?? [];
-            return MediaQuery.sizeOf(context).shortestSide < 600
-                ? ListView.builder(
-                    itemCount: iconsToShow.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
+      body: StreamBuilder(
+        stream: EmojiService().refinedListStream,
+        builder: (context, AsyncSnapshot<List<Emoji>> asyncSnapshot) {
+          List<Emoji> iconsToShow = asyncSnapshot.data ?? [];
+          return MediaQuery.sizeOf(context).shortestSide < 600
+              ? ListView.builder(
+                  itemCount: iconsToShow.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () => onTap(context, iconsToShow[index]),
+                      onLongPress: () async {
+                        await FlutterClipboard.copy(
+                          (iconsToShow[index]).unified,
+                        );
+                      },
+                      onDoubleTap: () async {
+                        await FlutterClipboard.copy((iconsToShow[index]).emoji);
+                      },
+                      child: ListTile(
+                        leading: Text(
+                          (iconsToShow[index]).emoji,
+                          style: TextStyle(fontSize: 32),
+                        ),
+                        title: Text((iconsToShow[index]).name),
+                        dense: true,
+                        subtitle: Text((iconsToShow[index]).unified),
+                      ),
+                    );
+                  },
+                )
+              : GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                  ),
+                  itemCount: iconsToShow.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: InkWell(
                         onTap: () => onTap(context, iconsToShow[index]),
                         onLongPress: () async {
                           await FlutterClipboard.copy(
@@ -82,65 +110,30 @@ class EmojiScreen extends StatelessWidget {
                           );
                         },
                         onDoubleTap: () async {
-                          await FlutterClipboard.copy(
-                            (iconsToShow[index]).emoji,
-                          );
+                          await FlutterClipboard.copy(iconsToShow[index].emoji);
                         },
-                        child: ListTile(
-                          leading: Text(
-                            (iconsToShow[index]).emoji,
-                            style: TextStyle(fontSize: 32),
-                          ),
-                          title: Text((iconsToShow[index]).name),
-                          dense: true,
-                          subtitle: Text((iconsToShow[index]).unified),
-                        ),
-                      );
-                    },
-                  )
-                : GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 200,
-                        ),
-                    itemCount: iconsToShow.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: InkWell(
-                          onTap: () => onTap(context, iconsToShow[index]),
-                          onLongPress: () async {
-                            await FlutterClipboard.copy(
-                              (iconsToShow[index]).unified,
-                            );
-                          },
-                          onDoubleTap: () async {
-                            await FlutterClipboard.copy(
-                              iconsToShow[index].emoji,
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  iconsToShow[index].emoji,
-                                  style: TextStyle(fontSize: 32),
-                                ),
-                                PreventOrphanText(
-                                  iconsToShow[index].name,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                iconsToShow[index].emoji,
+                                style: TextStyle(fontSize: 32),
+                              ),
+                              PreventOrphanText(
+                                iconsToShow[index].name,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
                         ),
-                      );
-                    },
-                  );
-          },
-        ),
+                      ),
+                    );
+                  },
+                );
+        },
       ),
     );
   }

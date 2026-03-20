@@ -16,6 +16,10 @@ import 'package:unicode_emojis/unicode_emojis.dart';
 
 const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
 
+const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, .2);
+const Color materialIconsColor = Color.fromARGB(255, 230, 113, 67);
+const Color materialSymbolsColor = Color(0xff9f86ff);
+const Color fluentuiIconsColor = Color.fromARGB(255, 62, 233, 156);
 main() {
   runApp(const MyApp());
 }
@@ -82,6 +86,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
               padding: EdgeInsets.zero,
               children: [
                 ListTile(
+                  tileColor: animatedIconsColor,
                   leading: RotatedBox(
                     quarterTurns: 2,
                     child: AnimatedIcon(
@@ -99,7 +104,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                 ListTile(
                   leading: Text(
                     UnicodeEmojis.search("snowflake").first.emoji,
-                    style: TextStyle(fontSize: 22),
+                    style: TextStyle(fontSize: 18),
                   ),
                   title: Text("Unicode Emoji"),
                   onTap: () {
@@ -108,6 +113,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   },
                 ),
                 ListTile(
+                  tileColor: seedColor,
                   leading: HugeIcon(icon: HugeIcons.strokeRoundedSnow),
                   title: Text("Huge Icons"),
                   onTap: () {
@@ -116,6 +122,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   },
                 ),
                 ListTile(
+                  tileColor: materialIconsColor,
                   leading: Icon(MdiIcons.snowflake, size: 24),
                   title: Text("Material Design Icons"),
                   onTap: () {
@@ -124,6 +131,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   },
                 ),
                 ListTile(
+                  tileColor: materialSymbolsColor,
                   leading: Icon(Symbols.mode_cool),
                   title: Text("Material Symbols"),
                   onTap: () {
@@ -132,6 +140,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   },
                 ),
                 ListTile(
+                  tileColor: fluentuiIconsColor,
                   leading: Icon(FluentIcons.weather_snowflake_24_filled),
                   title: Text("Fluent Icons"),
                   onTap: () {

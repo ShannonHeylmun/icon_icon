@@ -91,10 +91,7 @@ class ResponsiveIcons extends StatelessWidget {
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(iconsToShow[index].$2, size: 48),
-                        Text(iconsToShow[index].$2.fontFamily ?? ""),
-                      ],
+                      children: [Icon(iconsToShow[index].$2, size: 48)],
                     ),
                   ),
                 ),

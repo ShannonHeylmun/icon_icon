@@ -5,6 +5,7 @@ import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/components/responsive_icons.dart';
 import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_service.dart';
+import 'package:hugeicons_showcase/main.dart';
 
 class FluentIconsPage extends StatelessWidget {
   const FluentIconsPage({super.key});
@@ -84,7 +85,7 @@ class FluentIconsPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         context,
-        color: Color(0xff9f86ff),
+        color: fluentuiIconsColor,
         leadingIcon: Icon(FluentIcons.weather_snowflake_24_regular, size: 36),
         paddingLeft: 0,
         actions: [

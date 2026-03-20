@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/components/responsive_icons.dart';
+import 'package:hugeicons_showcase/main.dart';
 import 'package:hugeicons_showcase/material_symbols/material_symbols_service.dart';
 import 'package:material_symbols_icons/get.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -90,7 +91,7 @@ class MaterialSymbolsPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         context,
-        color: Color(0xff9f86ff),
+        color: materialSymbolsColor,
 
         leadingIcon: Icon(Symbols.mode_cool, size: 36),
         paddingLeft: 0,

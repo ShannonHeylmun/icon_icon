@@ -1,9 +1,9 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:footer/footer_view.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_service.dart';
 import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
+import 'package:hugeicons_showcase/main.dart';
 
 class AnimatedIconsPage extends StatefulWidget {
   const AnimatedIconsPage({super.key});
@@ -11,8 +11,6 @@ class AnimatedIconsPage extends StatefulWidget {
   @override
   State<AnimatedIconsPage> createState() => _AnimatedIconsPageState();
 }
-
-const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, .2);
 
 class _AnimatedIconsPageState extends State<AnimatedIconsPage>
     with SingleTickerProviderStateMixin {
