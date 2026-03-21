@@ -15,7 +15,7 @@ class HugeIconsLookupPage extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         leadingIcon: HugeIcon(icon: HugeIcons.strokeRoundedSnow),
-        color: seedColor,
+        backgroundColor: seedColor,
         titleText: "Huge Icons",
       ),
       bottomNavigationBar: BottomSearchCard(

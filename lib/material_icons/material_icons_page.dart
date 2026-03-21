@@ -15,7 +15,7 @@ class MaterialIconsPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         context,
-        color: materialIconsColor,
+        backgroundColor: materialIconsColor,
         titleText: "Material Design",
         leadingIcon: Icon(MdiIcons.snowflake, size: 30),
       ),

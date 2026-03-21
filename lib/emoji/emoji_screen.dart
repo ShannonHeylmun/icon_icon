@@ -57,7 +57,7 @@ class EmojiScreen extends StatelessWidget {
       key: emojiVariantsKey,
       appBar: CustomAppBar(
         context,
-        color: emojiColor,
+        backgroundColor: emojiColor,
         leadingIcon: Text(
           UnicodeEmojis.search("snowflake").first.emoji,
           style: TextStyle(fontSize: 30),

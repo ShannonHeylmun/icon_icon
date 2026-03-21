@@ -85,7 +85,7 @@ class FluentIconsPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         context,
-        color: fluentuiIconsColor,
+        backgroundColor: fluentuiIconsColor,
         leadingIcon: Icon(FluentIcons.weather_snowflake_24_regular, size: 36),
         paddingLeft: 0,
         actions: [

@@ -91,7 +91,7 @@ class MaterialSymbolsPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         context,
-        color: materialSymbolsColor,
+        backgroundColor: materialSymbolsColor,
 
         leadingIcon: Icon(Symbols.mode_cool, size: 36),
         paddingLeft: 0,

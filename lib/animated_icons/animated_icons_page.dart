@@ -40,7 +40,7 @@ class _AnimatedIconsPageState extends State<AnimatedIconsPage>
     return Scaffold(
       appBar: CustomAppBar(
         context,
-        color: animatedIconsColor,
+        backgroundColor: animatedIconsColor,
         leadingIcon: AnimatedIcon(
           icon: AnimatedIcons.menu_close,
           size: 36.0,

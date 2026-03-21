@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends AppBar {
   final TextEditingController? searchController;
-  final Color? color;
+
   final Widget leadingIcon;
   final BuildContext context;
   final double? paddingLeft;
@@ -10,15 +10,15 @@ class CustomAppBar extends AppBar {
 
   CustomAppBar(
     this.context, {
-    super.key,
-    this.color,
-    this.paddingLeft,
+    required this.leadingIcon,
     super.actions,
+    super.backgroundColor,
+    super.foregroundColor,
+    super.key,
+    this.paddingLeft,
     this.searchController,
     this.titleText,
-    required this.leadingIcon,
   }) : super(
-         backgroundColor: color,
          leadingWidth: 56,
          leading: GestureDetector(
            child: Padding(
