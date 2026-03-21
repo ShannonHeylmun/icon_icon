@@ -56,15 +56,15 @@ class MaterialSymbolsService {
       BehaviorSubject.seeded(SymbolStyle.rounded);
 
   void updateSymbolStyle(SymbolStyle symbolStyle) {
-    // symbolStyleBehaviorSubject.add(symbolStyle);
-    // _refinedListBehaviorSubject.add(
-    //   _refinedListBehaviorSubject.value
-    //       .map(
-    //         (e) =>
-    //             (e.$1, SymbolsGet.get(e.$1, symbolStyleBehaviorSubject.value)),
-    //       )
-    //       .toList(),
-    // );
+    symbolStyleBehaviorSubject.add(symbolStyle);
+    _refinedListBehaviorSubject.add(
+      _refinedListBehaviorSubject.value
+          .map(
+            (e) =>
+                (e.$1, SymbolsGet.get(e.$1, symbolStyleBehaviorSubject.value)),
+          )
+          .toList(),
+    );
   }
 
   List<(String, IconData)> getAllIcons({
