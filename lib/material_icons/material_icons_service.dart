@@ -41,11 +41,11 @@ class MaterialIconsService {
 
   final TextEditingController _searchController = TextEditingController();
   TextEditingController get searchController => _searchController;
-  late List<(String, IconData?)> _refinedList;
-  List<(String, IconData?)> get refinedList => _refinedList;
+  late List<(String, IconData)> _refinedList;
+  List<(String, IconData)> get refinedList => _refinedList;
 
-  final BehaviorSubject<List<(String, IconData?)>> _refinedListBehaviorSubject =
+  final BehaviorSubject<List<(String, IconData)>> _refinedListBehaviorSubject =
       BehaviorSubject.seeded(getAllIcons());
-  Stream<List<(String, IconData?)>> get refinedListStream =>
+  Stream<List<(String, IconData)>> get refinedListStream =>
       _refinedListBehaviorSubject.stream;
 }

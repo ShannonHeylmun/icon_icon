@@ -49,7 +49,7 @@ class ResponsiveIcons extends StatelessWidget {
                   await FlutterClipboard.copy(iconsToShow[index].$1);
                 },
                 onDoubleTap: () async {
-                  HapticFeedback.selectionClick();
+                  HapticFeedback.mediumImpact();
 
                   await FlutterClipboard.copy(
                     iconsToShow[index].$2.codePoint.toString(),
@@ -76,7 +76,7 @@ class ResponsiveIcons extends StatelessWidget {
                     await FlutterClipboard.copy(iconsToShow[index].$1);
                   },
                   onDoubleTap: () async {
-                    HapticFeedback.selectionClick();
+                    HapticFeedback.mediumImpact();
                     await FlutterClipboard.copy(
                       iconsToShow[index].$2.codePoint.toString(),
                     );
