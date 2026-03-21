@@ -1,5 +1,5 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
@@ -40,13 +40,18 @@ class HugeIconsLookupPage extends StatelessWidget {
                   "HugeIcons.strokeRounded${iconsToShow[index].$1}",
                 ),
                 onTap: () async {
-                  await FlutterClipboard.copy(
-                    "HugeIcons.strokeRounded${iconsToShow[index].$1}",
+                  await Clipboard.setData(
+                    ClipboardData(
+                      text: "HugeIcons.strokeRounded${iconsToShow[index].$1}",
+                    ),
                   );
                 },
                 onLongPress: () async {
-                  await FlutterClipboard.copy(
-                    "HugeIcon(icon: HugeIcons.strokeRounded${iconsToShow[index].$1})",
+                  await Clipboard.setData(
+                    ClipboardData(
+                      text:
+                          "HugeIcon(icon: HugeIcons.strokeRounded${iconsToShow[index].$1})",
+                    ),
                   );
                 },
               );

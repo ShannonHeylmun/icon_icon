@@ -1,5 +1,5 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/emoji/emoji_service.dart';
@@ -36,10 +36,14 @@ class EmojiScreen extends StatelessWidget {
                           ),
                         ),
                         onDoubleTap: () async {
-                          await FlutterClipboard.copy(variation.emoji);
+                          await Clipboard.setData(
+                            ClipboardData(text: variation.emoji),
+                          );
                         },
                         onLongPress: () async {
-                          await FlutterClipboard.copy(variation.unified);
+                          await Clipboard.setData(
+                            ClipboardData(text: variation.unified),
+                          );
                         },
                       );
                     }).toList(),
@@ -78,12 +82,14 @@ class EmojiScreen extends StatelessWidget {
                     return InkWell(
                       onTap: () => onTap(context, iconsToShow[index]),
                       onLongPress: () async {
-                        await FlutterClipboard.copy(
-                          (iconsToShow[index]).unified,
+                        await Clipboard.setData(
+                          ClipboardData(text: (iconsToShow[index]).unified),
                         );
                       },
                       onDoubleTap: () async {
-                        await FlutterClipboard.copy((iconsToShow[index]).emoji);
+                        await Clipboard.setData(
+                          ClipboardData(text: iconsToShow[index].emoji),
+                        );
                       },
                       child: ListTile(
                         leading: Text(
@@ -107,12 +113,14 @@ class EmojiScreen extends StatelessWidget {
                       child: InkWell(
                         onTap: () => onTap(context, iconsToShow[index]),
                         onLongPress: () async {
-                          await FlutterClipboard.copy(
-                            (iconsToShow[index]).unified,
+                          await Clipboard.setData(
+                            ClipboardData(text: iconsToShow[index].unified),
                           );
                         },
                         onDoubleTap: () async {
-                          await FlutterClipboard.copy(iconsToShow[index].emoji);
+                          await Clipboard.setData(
+                            ClipboardData(text: iconsToShow[index].emoji),
+                          );
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),

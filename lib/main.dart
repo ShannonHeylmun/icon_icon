@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 
 import 'package:flutter/material.dart';
@@ -5,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_page.dart';
 import 'package:hugeicons_showcase/components/custom_drawer_list_tile.dart';
-import 'package:hugeicons_showcase/credits_page.dart';
+import 'package:hugeicons_showcase/credits/credits_page.dart';
 import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_page.dart';
 import 'package:hugeicons_showcase/material_symbols/material_symbols_page.dart';
 import 'package:hugeicons_showcase/emoji/emoji_screen.dart';
@@ -22,7 +24,24 @@ const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, .2);
 const Color materialIconsColor = Color.fromARGB(255, 230, 113, 67);
 const Color materialSymbolsColor = Color(0xff9f86ff);
 const Color fluentuiIconsColor = Color.fromARGB(255, 62, 233, 156);
-main() {
+
+const Color creditsColor = Colors.black;
+
+Color seedColorContrast = contrastColor(seedColor);
+Color emojiColorContrast = contrastColor(emojiColor);
+Color animatedIconsColorContrast = contrastColor(animatedIconsColor);
+Color materialIconsColorContrast = contrastColor(materialIconsColor);
+Color materialSymbolsColorContrast = contrastColor(materialSymbolsColor);
+Color fluentuiIconsColorContrast = contrastColor(fluentuiIconsColor);
+Color creditsColorContrast = contrastColor(creditsColor);
+
+Widget hugeIcon = HugeIcon(icon: HugeIcons.strokeRoundedSnow);
+
+Widget creditsIcon = HugeIcon(
+  icon: HugeIcons.strokeRoundedLaurelWreath01,
+  color: creditsColorContrast,
+);
+void main() {
   runApp(const MyApp());
 }
 
@@ -33,6 +52,25 @@ class MyApp extends StatefulWidget {
 
   @override
   State<MyApp> createState() => _MyAppState();
+}
+
+Color contrastColor(Color color) {
+  int d = 0;
+
+  // Counting the perceptive luminance - human eye favors green color...
+  double luminance =
+      (pow((color.r * 255.0).round().clamp(0, 255) / 255, 2.2) * 0.2126 +
+          pow((color.g * 255.0).round().clamp(0, 255) / 255, 2.2) * 0.7152 +
+          pow((color.b * 255.0).round().clamp(0, 255) / 255, 2.2) * 0.0722) *
+      color.a;
+
+  if (luminance > 0.004) {
+    d = 0; // bright colors - black font
+  } else {
+    d = 255; // dark colors - white font
+  }
+
+  return Color.fromRGBO(d, d, d, 1);
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
@@ -69,9 +107,6 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  // baseTheme.copyWith(
-  //     textTheme: GoogleFonts.latoTextTheme(baseTheme.textTheme),
-  //   )
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -94,17 +129,16 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
               padding: EdgeInsets.zero,
               children: [
                 CustomDrawerListTile(
-                  leadingWidget: HugeIcon(
-                    icon: HugeIcons.strokeRoundedLaurelWreath01,
-                  ),
-                  tileColor: Colors.black,
-                  textColor: Colors.white,
-                  iconColor: Colors.white,
-                  title: Text("Credits"),
+                  leadingWidget: creditsIcon,
+                  tileColor: creditsColor,
+                  textColor: creditsColorContrast,
+                  title: "Credits",
                   onTapCallback: () => updateSelectedPage(CreditsPage()),
+                  context: context,
                 ),
                 CustomDrawerListTile(
                   tileColor: animatedIconsColor,
+                  textColor: animatedIconsColorContrast,
                   leadingWidget: RotatedBox(
                     quarterTurns: 2,
                     child: AnimatedIcon(
@@ -113,51 +147,54 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       progress: animation,
                     ),
                   ),
-                  title: Text("Animated Icons"),
-                  onTapCallback: () {
-                    updateSelectedPage(AnimatedIconsPage());
-                  },
+                  title: "Animated Icons",
+                  onTapCallback: () => updateSelectedPage(AnimatedIconsPage()),
+                  context: context,
                 ),
                 CustomDrawerListTile(
                   tileColor: emojiColor,
+                  textColor: emojiColorContrast,
                   leadingWidget: Text(
                     UnicodeEmojis.search("snowflake").first.emoji,
                     style: TextStyle(fontSize: 18),
                   ),
-                  title: Text("Unicode Emoji"),
-                  onTapCallback: () => _selectedPage.add(EmojiScreen()),
+                  title: "Unicode Emoji",
+                  onTapCallback: () => updateSelectedPage(EmojiScreen()),
+                  context: context,
                 ),
                 CustomDrawerListTile(
                   tileColor: seedColor,
-                  leadingWidget: HugeIcon(icon: HugeIcons.strokeRoundedSnow),
-                  title: Text("Huge Icons"),
-                  onTapCallback: () {
-                    _selectedPage.add(HugeIconsLookupPage());
-                  },
+                  textColor: seedColorContrast,
+                  leadingWidget: hugeIcon,
+                  title: "Huge Icons",
+                  onTapCallback: () =>
+                      updateSelectedPage(HugeIconsLookupPage()),
+                  context: context,
                 ),
                 CustomDrawerListTile(
                   tileColor: materialIconsColor,
+                  textColor: materialIconsColorContrast,
                   leadingWidget: Icon(MdiIcons.snowflake, size: 24),
-                  title: Text("Material Design Icons"),
-                  onTapCallback: () {
-                    _selectedPage.add(MaterialIconsPage());
-                  },
+                  title: "Material Design Icons",
+                  onTapCallback: () => updateSelectedPage(MaterialIconsPage()),
+                  context: context,
                 ),
                 CustomDrawerListTile(
                   tileColor: materialSymbolsColor,
+                  textColor: materialSymbolsColorContrast,
                   leadingWidget: Icon(Symbols.mode_cool),
-                  title: Text("Material Symbols"),
-                  onTapCallback: () {
-                    _selectedPage.add(MaterialSymbolsPage());
-                  },
+                  title: "Material Symbols",
+                  onTapCallback: () =>
+                      updateSelectedPage(MaterialSymbolsPage()),
+                  context: context,
                 ),
                 CustomDrawerListTile(
                   tileColor: fluentuiIconsColor,
+                  textColor: fluentuiIconsColorContrast,
                   leadingWidget: Icon(FluentIcons.weather_snowflake_24_filled),
-                  title: Text("Fluent Icons"),
-                  onTapCallback: () {
-                    _selectedPage.add(FluentIconsPage());
-                  },
+                  title: "Fluent Icons",
+                  onTapCallback: () => updateSelectedPage(FluentIconsPage()),
+                  context: context,
                 ),
               ],
             ),

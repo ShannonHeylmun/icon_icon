@@ -5,12 +5,13 @@ class CustomDrawerListTile extends ListTile {
   CustomDrawerListTile({
     super.key,
     leadingWidget,
-    super.tileColor,
-    textColor,
-    iconColor,
-    title,
+    super.tileColor = const Color.fromARGB(255, 171, 9, 9),
+    @override textColor,
+    @override iconColor,
+    @override title,
     titleCopyText,
     required VoidCallback onTapCallback,
+    required BuildContext context,
   }) : super(
          onTap: () {
            onTapCallback();
@@ -19,19 +20,19 @@ class CustomDrawerListTile extends ListTile {
          leading: ShaderMask(
            shaderCallback: (Rect bounds) {
              return RadialGradient(
-               center: Alignment.topLeft,
-               radius: 1.0,
-               colors: <Color>[
-                 iconColor ?? Colors.grey.shade900,
-                 iconColor ?? Colors.grey.shade900,
-               ],
-               tileMode: TileMode.mirror,
+               center: AlignmentGeometry.topCenter,
+               radius: 10,
+               colors: <Color>[textColor, textColor],
+               tileMode: TileMode.repeated,
              ).createShader(bounds);
            },
            child: leadingWidget,
          ),
-         textColor: textColor ?? Colors.grey.shade900,
-         iconColor: iconColor ?? Colors.grey.shade900,
-         title: title,
+         title: Text(
+           title,
+           style: Theme.of(
+             context,
+           ).textTheme.bodyLarge!.copyWith(color: textColor),
+         ),
        );
 }

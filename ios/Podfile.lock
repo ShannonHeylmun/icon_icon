@@ -1,20 +1,14 @@
 PODS:
-  - clipboard (3.0.9):
-    - Flutter
   - Flutter (1.0.0)
 
 DEPENDENCIES:
-  - clipboard (from `.symlinks/plugins/clipboard/ios`)
   - Flutter (from `Flutter`)
 
 EXTERNAL SOURCES:
-  clipboard:
-    :path: ".symlinks/plugins/clipboard/ios"
   Flutter:
     :path: Flutter
 
 SPEC CHECKSUMS:
-  clipboard: 85f02e190f24debf05943aff98c26644b2a90245
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
 
 PODFILE CHECKSUM: 3c63482e143d1b91d2d2560aee9fb04ecc74ac7e

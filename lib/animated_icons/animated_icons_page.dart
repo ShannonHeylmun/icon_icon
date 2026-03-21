@@ -1,4 +1,5 @@
-import 'package:clipboard/clipboard.dart';
+import "package:flutter/services.dart";
+
 import 'package:flutter/material.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_service.dart';
 import 'package:hugeicons_showcase/components/bottom_search_card.dart';
@@ -67,11 +68,15 @@ class _AnimatedIconsPageState extends State<AnimatedIconsPage>
                 ),
                 title: Text(iconsToShow[index].$1.toString()),
                 onTap: () async {
-                  await FlutterClipboard.copy(iconsToShow[index].$1);
+                  await Clipboard.setData(
+                    ClipboardData(text: iconsToShow[index].$1),
+                  );
                 },
                 onLongPress: () async {
-                  await FlutterClipboard.copy(
-                    "AnimatedIcon.${iconsToShow[index].$1}",
+                  await Clipboard.setData(
+                    ClipboardData(
+                      text: "AnimatedIcon.${iconsToShow[index].$1}",
+                    ),
                   );
                 },
               );

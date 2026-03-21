@@ -1,5 +1,3 @@
-import 'package:clipboard/clipboard.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,13 +21,13 @@ class ResponsiveIcons extends StatelessWidget {
                     spacing: 8,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text("Long Press to Copy Name"),
+                      Text("Long Press to Copy Emoji/Icon Name"),
                       Text("Double Tap to Copy Code Point"),
                     ],
                   ),
                 ]
               : [
-                  Text("Long Press to Copy Name"),
+                  Text("Long Press to Copy Emoji/Icon Name"),
                   Text("Double Tap to Copy Code Point"),
                 ],
         ),
@@ -46,13 +44,17 @@ class ResponsiveIcons extends StatelessWidget {
               return InkWell(
                 onTap: () => onTap(context, index),
                 onLongPress: () async {
-                  await FlutterClipboard.copy(iconsToShow[index].$1);
+                  await Clipboard.setData(
+                    ClipboardData(text: iconsToShow[index].$1),
+                  );
                 },
                 onDoubleTap: () async {
                   HapticFeedback.mediumImpact();
 
-                  await FlutterClipboard.copy(
-                    iconsToShow[index].$2.codePoint.toString(),
+                  await Clipboard.setData(
+                    ClipboardData(
+                      text: iconsToShow[index].$2.codePoint.toString(),
+                    ),
                   );
                 },
                 child: ListTile(
@@ -73,12 +75,16 @@ class ResponsiveIcons extends StatelessWidget {
                 child: InkWell(
                   onTap: () => onTap(context, index),
                   onLongPress: () async {
-                    await FlutterClipboard.copy(iconsToShow[index].$1);
+                    await Clipboard.setData(
+                      ClipboardData(text: iconsToShow[index].$1),
+                    );
                   },
                   onDoubleTap: () async {
                     HapticFeedback.mediumImpact();
-                    await FlutterClipboard.copy(
-                      iconsToShow[index].$2.codePoint.toString(),
+                    await Clipboard.setData(
+                      ClipboardData(
+                        text: iconsToShow[index].$2.codePoint.toString(),
+                      ),
                     );
                   },
                   child: GridTile(

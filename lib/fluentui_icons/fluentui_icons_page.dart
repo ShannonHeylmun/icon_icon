@@ -1,4 +1,3 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons_showcase/components/bottom_search_card.dart';

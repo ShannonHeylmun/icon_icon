@@ -51,7 +51,6 @@ class FluentIconsService {
   }
 
   List<(String, IconData)> getAllIcons() {
-    print("GETTING ALL ICONS");
     List<(String, IconData)> icons = fluentuiIconByName;
     // refine by `FluentIconSymbolStyle`
     icons = icons.where((i) {
