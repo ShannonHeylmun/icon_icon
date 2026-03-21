@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_page.dart';
+import 'package:hugeicons_showcase/components/custom_drawer_list_tile.dart';
 import 'package:hugeicons_showcase/credits_page.dart';
 import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_page.dart';
 import 'package:hugeicons_showcase/material_symbols/material_symbols_page.dart';
@@ -25,7 +26,7 @@ main() {
   runApp(const MyApp());
 }
 
-final GlobalKey<ScaffoldState> _key = GlobalKey();
+final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -39,6 +40,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     HugeIconsLookupPage(),
   );
 
+  void updateSelectedPage(Widget page) {
+    _selectedPage.add(page);
+  }
+
   late AnimationController controller;
   late Animation<double> animation;
 
@@ -49,7 +54,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     super.initState();
 
     controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1))
+        AnimationController(
+            vsync: this,
+            duration: const Duration(milliseconds: 1400),
+          )
           ..forward()
           ..repeat(reverse: true);
     animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
@@ -74,7 +82,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
         textTheme: GoogleFonts.notoSansTextTheme(ThemeData().textTheme),
       ),
       home: Scaffold(
-        key: _key,
+        key: drawerKey,
         body: StreamBuilder(
           builder: (context, AsyncSnapshot<Widget> snapshot) =>
               snapshot.hasData ? snapshot.data! : SizedBox.shrink(),
@@ -83,22 +91,21 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
         drawer: Drawer(
           child: SafeArea(
             child: ListView(
-              // Important: Remove any padding from the ListView.
               padding: EdgeInsets.zero,
               children: [
-                ListTile(
-                  leading: HugeIcon(
+                CustomDrawerListTile(
+                  leadingWidget: HugeIcon(
                     icon: HugeIcons.strokeRoundedLaurelWreath01,
                   ),
+                  tileColor: Colors.black,
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
                   title: Text("Credits"),
-                  onTap: () {
-                    _selectedPage.add(CreditsPage());
-                    _key.currentState!.closeDrawer();
-                  },
+                  onTapCallback: () => updateSelectedPage(CreditsPage()),
                 ),
-                ListTile(
+                CustomDrawerListTile(
                   tileColor: animatedIconsColor,
-                  leading: RotatedBox(
+                  leadingWidget: RotatedBox(
                     quarterTurns: 2,
                     child: AnimatedIcon(
                       icon: AnimatedIcons.arrow_menu,
@@ -107,57 +114,49 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                     ),
                   ),
                   title: Text("Animated Icons"),
-                  onTap: () {
-                    _selectedPage.add(AnimatedIconsPage());
-                    _key.currentState!.closeDrawer();
+                  onTapCallback: () {
+                    updateSelectedPage(AnimatedIconsPage());
                   },
                 ),
-                ListTile(
+                CustomDrawerListTile(
                   tileColor: emojiColor,
-                  leading: Text(
+                  leadingWidget: Text(
                     UnicodeEmojis.search("snowflake").first.emoji,
                     style: TextStyle(fontSize: 18),
                   ),
                   title: Text("Unicode Emoji"),
-                  onTap: () {
-                    _selectedPage.add(EmojiScreen());
-                    _key.currentState!.closeDrawer();
-                  },
+                  onTapCallback: () => _selectedPage.add(EmojiScreen()),
                 ),
-                ListTile(
+                CustomDrawerListTile(
                   tileColor: seedColor,
-                  leading: HugeIcon(icon: HugeIcons.strokeRoundedSnow),
+                  leadingWidget: HugeIcon(icon: HugeIcons.strokeRoundedSnow),
                   title: Text("Huge Icons"),
-                  onTap: () {
+                  onTapCallback: () {
                     _selectedPage.add(HugeIconsLookupPage());
-                    _key.currentState!.closeDrawer();
                   },
                 ),
-                ListTile(
+                CustomDrawerListTile(
                   tileColor: materialIconsColor,
-                  leading: Icon(MdiIcons.snowflake, size: 24),
+                  leadingWidget: Icon(MdiIcons.snowflake, size: 24),
                   title: Text("Material Design Icons"),
-                  onTap: () {
+                  onTapCallback: () {
                     _selectedPage.add(MaterialIconsPage());
-                    _key.currentState!.closeDrawer();
                   },
                 ),
-                ListTile(
+                CustomDrawerListTile(
                   tileColor: materialSymbolsColor,
-                  leading: Icon(Symbols.mode_cool),
+                  leadingWidget: Icon(Symbols.mode_cool),
                   title: Text("Material Symbols"),
-                  onTap: () {
+                  onTapCallback: () {
                     _selectedPage.add(MaterialSymbolsPage());
-                    _key.currentState!.closeDrawer();
                   },
                 ),
-                ListTile(
+                CustomDrawerListTile(
                   tileColor: fluentuiIconsColor,
-                  leading: Icon(FluentIcons.weather_snowflake_24_filled),
+                  leadingWidget: Icon(FluentIcons.weather_snowflake_24_filled),
                   title: Text("Fluent Icons"),
-                  onTap: () {
+                  onTapCallback: () {
                     _selectedPage.add(FluentIconsPage());
-                    _key.currentState!.closeDrawer();
                   },
                 ),
               ],
