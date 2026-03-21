@@ -8,7 +8,8 @@ class CustomDrawerListTile extends ListTile {
     super.tileColor,
     textColor,
     iconColor,
-    super.title,
+    title,
+    titleCopyText,
     required VoidCallback onTapCallback,
   }) : super(
          onTap: () {
@@ -31,5 +32,6 @@ class CustomDrawerListTile extends ListTile {
          ),
          textColor: textColor ?? Colors.grey.shade900,
          iconColor: iconColor ?? Colors.grey.shade900,
+         title: title,
        );
 }
