@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_page.dart';
+import 'package:hugeicons_showcase/credits_page.dart';
 import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_page.dart';
 import 'package:hugeicons_showcase/material_symbols/material_symbols_page.dart';
 import 'package:hugeicons_showcase/emoji/emoji_screen.dart';
@@ -15,7 +16,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
 const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
-
+const Color emojiColor = Color.fromRGBO(255, 220, 93, .4);
 const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, .2);
 const Color materialIconsColor = Color.fromARGB(255, 230, 113, 67);
 const Color materialSymbolsColor = Color(0xff9f86ff);
@@ -86,6 +87,16 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
               padding: EdgeInsets.zero,
               children: [
                 ListTile(
+                  leading: HugeIcon(
+                    icon: HugeIcons.strokeRoundedLaurelWreath01,
+                  ),
+                  title: Text("Credits"),
+                  onTap: () {
+                    _selectedPage.add(CreditsPage());
+                    _key.currentState!.closeDrawer();
+                  },
+                ),
+                ListTile(
                   tileColor: animatedIconsColor,
                   leading: RotatedBox(
                     quarterTurns: 2,
@@ -102,6 +113,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   },
                 ),
                 ListTile(
+                  tileColor: emojiColor,
                   leading: Text(
                     UnicodeEmojis.search("snowflake").first.emoji,
                     style: TextStyle(fontSize: 18),

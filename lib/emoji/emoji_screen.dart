@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/emoji/emoji_service.dart';
+import 'package:hugeicons_showcase/main.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 import 'package:prevent_orphan_text/prevent_orphan_text.dart';
 
@@ -56,6 +57,7 @@ class EmojiScreen extends StatelessWidget {
       key: emojiVariantsKey,
       appBar: CustomAppBar(
         context,
+        color: emojiColor,
         leadingIcon: Text(
           UnicodeEmojis.search("snowflake").first.emoji,
           style: TextStyle(fontSize: 30),
