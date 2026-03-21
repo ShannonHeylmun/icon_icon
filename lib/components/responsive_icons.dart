@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ResponsiveIcons extends StatelessWidget {
   final List<(String, IconData)> iconsToShow;
@@ -48,6 +49,8 @@ class ResponsiveIcons extends StatelessWidget {
                   await FlutterClipboard.copy(iconsToShow[index].$1);
                 },
                 onDoubleTap: () async {
+                  HapticFeedback.selectionClick();
+
                   await FlutterClipboard.copy(
                     iconsToShow[index].$2.codePoint.toString(),
                   );
@@ -73,6 +76,7 @@ class ResponsiveIcons extends StatelessWidget {
                     await FlutterClipboard.copy(iconsToShow[index].$1);
                   },
                   onDoubleTap: () async {
+                    HapticFeedback.selectionClick();
                     await FlutterClipboard.copy(
                       iconsToShow[index].$2.codePoint.toString(),
                     );
