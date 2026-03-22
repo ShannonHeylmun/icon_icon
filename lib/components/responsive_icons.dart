@@ -50,7 +50,6 @@ class ResponsiveIcons extends StatelessWidget {
                 },
                 onDoubleTap: () async {
                   HapticFeedback.heavyImpact();
-
                   await Clipboard.setData(
                     ClipboardData(
                       text: iconsToShow[index].$2.codePoint.toString(),
