@@ -4,14 +4,19 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
 List<Text> instructions = [
-  Text("Long Press to Copy Emoji/Icon Name"),
+  Text("Long Press to Copy Icon Name"),
+  Text("Double Tap to Copy Code Point"),
+];
+List<Text> emojiInstructions = [
+  Text("Long Press to Copy Emoji"),
   Text("Double Tap to Copy Code Point"),
 ];
 
 class ResponsiveIcons extends StatelessWidget {
   final List<(String, Object)> iconsToShow;
+  final Animation<double>? animation;
 
-  const ResponsiveIcons({super.key, required this.iconsToShow});
+  const ResponsiveIcons({super.key, required this.iconsToShow, this.animation});
 
   Future<void> onTap(BuildContext context, Object object) {
     return showModalBottomSheet(
@@ -43,7 +48,7 @@ class ResponsiveIcons extends StatelessWidget {
                             }).toList(),
                           )
                         : SizedBox.shrink(),
-                    ...instructions,
+                    ...emojiInstructions,
                   ],
                 )
               : Row(
@@ -77,7 +82,10 @@ class ResponsiveIcons extends StatelessWidget {
 
   Future<void> onDoubleTap(String s, Object o) async {
     HapticFeedback.heavyImpact();
-    await Clipboard.setData(ClipboardData(text: listSubtitle((s, o))));
+    String? str = listSubtitle((s, o));
+    if (str != null) {
+      await Clipboard.setData(ClipboardData(text: str));
+    }
   }
 
   @override
@@ -87,7 +95,7 @@ class ResponsiveIcons extends StatelessWidget {
             itemCount: iconsToShow.length,
             itemBuilder: (context, index) {
               (String, Object) iconData = iconsToShow[index];
-
+              String? subTitle = listSubtitle(iconData);
               return InkWell(
                 onTap: () => onTap(context, iconData.$2),
                 onLongPress: () => onLongPress(iconData.$1, iconData.$2),
@@ -95,7 +103,7 @@ class ResponsiveIcons extends StatelessWidget {
                 child: ListTile(
                   leading: listTileLeading(iconData.$2),
                   title: Text(listTitle(iconData)),
-                  subtitle: Text(listSubtitle(iconData)),
+                  subtitle: subTitle == null ? null : Text(subTitle),
                 ),
               );
             },
@@ -104,9 +112,11 @@ class ResponsiveIcons extends StatelessWidget {
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
             ),
+
             itemCount: iconsToShow.length,
             itemBuilder: (context, index) {
               (String, Object) iconData = iconsToShow[index];
+              String? footerText = listSubtitle(iconData);
               return Card(
                 child: InkWell(
                   onTap: () => onTap(context, iconData.$2),
@@ -114,10 +124,9 @@ class ResponsiveIcons extends StatelessWidget {
                   onDoubleTap: () => onDoubleTap(iconData.$1, iconData.$2),
                   child: GridTile(
                     header: Text(iconData.$1, textAlign: TextAlign.center),
-                    footer: Text(
-                      listSubtitle(iconData),
-                      textAlign: TextAlign.center,
-                    ),
+                    footer: footerText == null
+                        ? null
+                        : Text(footerText, textAlign: TextAlign.center),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [listTileLeading(iconData.$2)],
@@ -133,16 +142,15 @@ class ResponsiveIcons extends StatelessWidget {
     return iconData.$1;
   }
 
-  String listSubtitle((String, Object) iconData) {
-    print(iconData.$2.runtimeType);
+  String? listSubtitle((String, Object) iconData) {
     String typeString = iconData.$2.runtimeType.toString();
-
     return switch (typeString) {
       "IconDataRounded" => (iconData.$2 as IconData).codePoint.toString(),
       "IconData" => (iconData.$2 as IconData).codePoint.toString(),
       "List<List<dynamic>>" => "HugeIcons.strokeRounded${iconData.$1}",
       "_MdiIconData" => "${(iconData.$2 as IconData).codePoint}",
       "Emoji" => (iconData.$2 as Emoji).unified,
+      "_AnimatedIconData" => null,
       _ => "Error",
     };
   }
@@ -157,6 +165,11 @@ class ResponsiveIcons extends StatelessWidget {
       "Emoji" => Text(
         (iconData as Emoji).emoji,
         style: TextStyle(fontSize: 30),
+      ),
+      "_AnimatedIconData" => AnimatedIcon(
+        icon: (iconData as AnimatedIconData),
+        progress: animation!,
+        size: 48,
       ),
       _ => Icon(Icons.error),
     };

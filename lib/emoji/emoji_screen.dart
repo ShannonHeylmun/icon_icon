@@ -19,9 +19,16 @@ class EmojiScreen extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         backgroundColor: emojiColor,
-        leadingIcon: Text(
-          UnicodeEmojis.search("snowflake").first.emoji,
-          style: TextStyle(fontSize: 30),
+        leadingIcon: Stack(
+          children: [
+            Positioned(
+              top: 8,
+              child: Text(
+                UnicodeEmojis.search("snowflake").first.emoji,
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+          ],
         ),
         titleText: "Unicode Emoji",
       ),

@@ -19,6 +19,7 @@ class CustomAppBar extends AppBar {
     this.searchController,
     required this.titleText,
   }) : super(
+         centerTitle: true,
          leadingWidth: 56,
          leading: GestureDetector(
            child: Padding(

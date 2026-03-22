@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_service.dart';
 import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
+import 'package:hugeicons_showcase/components/responsive_icons.dart';
 import 'package:hugeicons_showcase/main.dart';
+
+late Animation<double> animation;
 
 class AnimatedIconsPage extends StatefulWidget {
   const AnimatedIconsPage({super.key});
@@ -16,13 +19,9 @@ class AnimatedIconsPage extends StatefulWidget {
 class _AnimatedIconsPageState extends State<AnimatedIconsPage>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
-  late Animation<double> animation;
   @override
   void initState() {
-    // TODO: implement initState
-
     super.initState();
-
     controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 1))
           ..forward()
@@ -42,10 +41,17 @@ class _AnimatedIconsPageState extends State<AnimatedIconsPage>
       appBar: CustomAppBar(
         context,
         backgroundColor: animatedIconsColor,
-        leadingIcon: AnimatedIcon(
-          icon: AnimatedIcons.menu_close,
-          size: 36.0,
-          progress: animation,
+        leadingIcon: Stack(
+          children: [
+            Positioned(
+              top: 8,
+              child: AnimatedIcon(
+                icon: AnimatedIcons.menu_close,
+                size: 36.0,
+                progress: animation,
+              ),
+            ),
+          ],
         ),
         titleText: "Animated Icons",
       ),
@@ -57,30 +63,9 @@ class _AnimatedIconsPageState extends State<AnimatedIconsPage>
         builder: (context, asyncSnapshot) {
           List<(String, AnimatedIconData)> iconsToShow =
               asyncSnapshot.data ?? [];
-          return ListView.builder(
-            itemCount: iconsToShow.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: AnimatedIcon(
-                  icon: iconsToShow[index].$2,
-                  size: 48,
-                  progress: animation,
-                ),
-                title: Text(iconsToShow[index].$1.toString()),
-                onTap: () async {
-                  await Clipboard.setData(
-                    ClipboardData(text: iconsToShow[index].$1),
-                  );
-                },
-                onLongPress: () async {
-                  await Clipboard.setData(
-                    ClipboardData(
-                      text: "AnimatedIcon.${iconsToShow[index].$1}",
-                    ),
-                  );
-                },
-              );
-            },
+          return ResponsiveIcons(
+            iconsToShow: iconsToShow,
+            animation: animation,
           );
         },
       ),
