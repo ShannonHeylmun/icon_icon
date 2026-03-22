@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
 List<Text> instructions = [
@@ -112,7 +113,6 @@ class ResponsiveIcons extends StatelessWidget {
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
             ),
-
             itemCount: iconsToShow.length,
             itemBuilder: (context, index) {
               (String, Object) iconData = iconsToShow[index];
@@ -143,35 +143,41 @@ class ResponsiveIcons extends StatelessWidget {
   }
 
   String? listSubtitle((String, Object) iconData) {
-    String typeString = iconData.$2.runtimeType.toString();
-    return switch (typeString) {
-      "IconDataRounded" => (iconData.$2 as IconData).codePoint.toString(),
-      "IconData" => (iconData.$2 as IconData).codePoint.toString(),
-      "List<List<dynamic>>" => "HugeIcons.strokeRounded${iconData.$1}",
-      "_MdiIconData" => "${(iconData.$2 as IconData).codePoint}",
-      "Emoji" => (iconData.$2 as Emoji).unified,
-      "_AnimatedIconData" => null,
-      _ => "Error",
-    };
+    switch (iconData.$2) {
+      case IconDataRounded():
+        return (iconData.$2 as IconData).codePoint.toString();
+      case IconData():
+        return (iconData.$2 as IconData).codePoint.toString();
+      case List<List<dynamic>>():
+        return "HugeIcons.strokeRounded${iconData.$1}";
+      case Emoji():
+        return (iconData.$2 as Emoji).unified;
+      case AnimatedIconData():
+        return null;
+      case _:
+        return "Error";
+    }
+    ;
   }
 
   Widget listTileLeading(Object iconData) {
-    String typeString = iconData.runtimeType.toString();
-    return switch (typeString) {
-      "IconDataRounded" => Icon(iconData as IconData, size: 48),
-      "IconData" => Icon(iconData as IconData, size: 48),
-      "List<List<dynamic>>" => HugeIcon(icon: iconData as List<List<dynamic>>),
-      "_MdiIconData" => Icon(iconData as IconData),
-      "Emoji" => Text(
-        (iconData as Emoji).emoji,
-        style: TextStyle(fontSize: 30),
-      ),
-      "_AnimatedIconData" => AnimatedIcon(
-        icon: (iconData as AnimatedIconData),
-        progress: animation!,
-        size: 48,
-      ),
-      _ => Icon(Icons.error),
-    };
+    switch (iconData) {
+      case IconDataRounded():
+        return Icon(iconData, size: 48);
+      case IconData():
+        return Icon(iconData, size: 48);
+      case List<List<dynamic>>():
+        return HugeIcon(icon: iconData);
+      case Emoji():
+        return Text(iconData.emoji, style: TextStyle(fontSize: 30));
+      case AnimatedIconData():
+        return AnimatedIcon(icon: iconData, progress: animation!, size: 48);
+      case _:
+        return Icon(Icons.error);
+      // "_MdiIconData" => Icon(iconData as IconData),
+      // "Emoji" =>
+      // _ =>
+    }
+    ;
   }
 }
