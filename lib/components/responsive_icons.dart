@@ -1,38 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:unicode_emojis/unicode_emojis.dart';
+
+List<Text> instructions = [
+  Text("Long Press to Copy Emoji/Icon Name"),
+  Text("Double Tap to Copy Code Point"),
+];
 
 class ResponsiveIcons extends StatelessWidget {
-  final List<(String, IconData)> iconsToShow;
+  final List<(String, Object)> iconsToShow;
 
   const ResponsiveIcons({super.key, required this.iconsToShow});
 
-  Future<void> onTap(BuildContext context, index) {
+  Future<void> onTap(BuildContext context, Object object) {
     return showModalBottomSheet(
       context: context,
-      builder: (context) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          spacing: 20,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
-          children: MediaQuery.sizeOf(context).width < 600
-              ? [
-                  Column(
-                    spacing: 8,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text("Long Press to Copy Emoji/Icon Name"),
-                      Text("Double Tap to Copy Code Point"),
-                    ],
-                  ),
-                ]
-              : [
-                  Text("Long Press to Copy Emoji/Icon Name"),
-                  Text("Double Tap to Copy Code Point"),
-                ],
-        ),
-      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: object.runtimeType == Emoji
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    (object as Emoji).skinVariations != null
+                        ? Wrap(
+                            spacing: 20,
+                            children: object.skinVariations!.map((variation) {
+                              return InkWell(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    variation.emoji,
+                                    style: TextStyle(fontSize: 32),
+                                  ),
+                                ),
+                                onDoubleTap: () =>
+                                    onDoubleTap(object.name, variation),
+                                onLongPress: () =>
+                                    onLongPress(object.name, variation),
+                              );
+                            }).toList(),
+                          )
+                        : SizedBox.shrink(),
+                    ...instructions,
+                  ],
+                )
+              : Row(
+                  spacing: 20,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.max,
+                  children: MediaQuery.sizeOf(context).width < 600
+                      ? [
+                          Column(
+                            spacing: 8,
+                            mainAxisSize: MainAxisSize.min,
+                            children: instructions,
+                          ),
+                        ]
+                      : instructions,
+                ),
+        );
+      },
     );
+  }
+
+  Future<void> onLongPress(String s, Object o) async {
+    await Clipboard.setData(
+      ClipboardData(text: o.runtimeType == Emoji ? (o as Emoji).emoji : s),
+    );
+  }
+
+  Future<void> onDoubleTap(String s, Object o) async {
+    HapticFeedback.heavyImpact();
+    await Clipboard.setData(ClipboardData(text: listSubtitle((s, o))));
   }
 
   @override
@@ -41,25 +82,16 @@ class ResponsiveIcons extends StatelessWidget {
         ? ListView.builder(
             itemCount: iconsToShow.length,
             itemBuilder: (context, index) {
+              (String, Object) iconData = iconsToShow[index];
+
               return InkWell(
-                onTap: () => onTap(context, index),
-                onLongPress: () async {
-                  await Clipboard.setData(
-                    ClipboardData(text: iconsToShow[index].$1),
-                  );
-                },
-                onDoubleTap: () async {
-                  HapticFeedback.heavyImpact();
-                  await Clipboard.setData(
-                    ClipboardData(
-                      text: iconsToShow[index].$2.codePoint.toString(),
-                    ),
-                  );
-                },
+                onTap: () => onTap(context, iconData.$2),
+                onLongPress: () => onLongPress(iconData.$1, iconData.$2),
+                onDoubleTap: () => onDoubleTap(iconData.$1, iconData.$2),
                 child: ListTile(
-                  leading: Icon(iconsToShow[index].$2, size: 48),
-                  title: Text(iconsToShow[index].$1),
-                  subtitle: Text(iconsToShow[index].$2.codePoint.toString()),
+                  leading: listTileLeading(iconData.$2),
+                  title: Text(iconData.$1),
+                  subtitle: Text(listSubtitle(iconData)),
                 ),
               );
             },
@@ -70,42 +102,59 @@ class ResponsiveIcons extends StatelessWidget {
             ),
             itemCount: iconsToShow.length,
             itemBuilder: (context, index) {
+              (String, Object) iconData = iconsToShow[index];
               return Card(
                 child: InkWell(
-                  onTap: () => onTap(context, index),
-                  onLongPress: () async {
-                    await Clipboard.setData(
-                      ClipboardData(text: iconsToShow[index].$1),
-                    );
-                  },
-                  onDoubleTap: () async {
-                    HapticFeedback.heavyImpact();
-                    await Clipboard.setData(
-                      ClipboardData(
-                        text: iconsToShow[index].$2.codePoint.toString(),
-                      ),
-                    );
-                  },
+                  onTap: () => onTap(context, iconData.$2),
+                  onLongPress: () => onLongPress(iconData.$1, iconData.$2),
+                  onDoubleTap: () => onDoubleTap(iconData.$1, iconData.$2),
                   child: GridTile(
-                    header: Text(
-                      iconsToShow[index].$1,
-                      textAlign: TextAlign.center,
-                    ),
+                    header: Text(iconData.$1, textAlign: TextAlign.center),
                     footer: Text(
-                      iconsToShow[index].$2.codePoint
-                          .toString()
-                          // .toRadixString(16)
-                          .toUpperCase(),
+                      listSubtitle(iconData),
                       textAlign: TextAlign.center,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Icon(iconsToShow[index].$2, size: 48)],
+                      children: [listTileLeading(iconData.$2)],
                     ),
                   ),
                 ),
               );
             },
           );
+  }
+
+  String listTitle((String, Object) iconData) {
+    return iconData.$1;
+  }
+
+  String listSubtitle((String, Object) iconData) {
+    print(iconData.$2.runtimeType);
+    String typeString = iconData.$2.runtimeType.toString();
+
+    return switch (typeString) {
+      "IconDataRounded" => (iconData.$2 as IconData).codePoint.toString(),
+      "IconData" => (iconData.$2 as IconData).codePoint.toString(),
+      "List<List<dynamic>>" => "HugeIcons.strokeRounded${iconData.$1}",
+      "_MdiIconData" => "${(iconData.$2 as IconData).codePoint}",
+      "Emoji" => (iconData.$2 as Emoji).unified,
+      _ => "Error",
+    };
+  }
+
+  Widget listTileLeading(Object iconData) {
+    String typeString = iconData.runtimeType.toString();
+    return switch (typeString) {
+      "IconDataRounded" => Icon(iconData as IconData, size: 48),
+      "IconData" => Icon(iconData as IconData, size: 48),
+      "List<List<dynamic>>" => HugeIcon(icon: iconData as List<List<dynamic>>),
+      "_MdiIconData" => Icon(iconData as IconData),
+      "Emoji" => Text(
+        (iconData as Emoji).emoji,
+        style: TextStyle(fontSize: 30),
+      ),
+      _ => Icon(Icons.error),
+    };
   }
 }

@@ -24,31 +24,31 @@ class EmojiService {
   void _updateRefinedList() {
     String searchTerm = _searchController.text.toLowerCase();
 
-    _refinedList = getAllEmoji().where((emoji) {
-      return emoji.name.toLowerCase().contains(searchTerm.toLowerCase()) ||
-          emoji.emoji == searchTerm ||
-          (emoji.skinVariations != null &&
-              emoji.skinVariations!
+    _refinedList = getAllEmoji().where((item) {
+      return item.$1.toLowerCase().contains(searchTerm.toLowerCase()) ||
+          item.$2.emoji == searchTerm ||
+          (item.$2.skinVariations != null &&
+              item.$2.skinVariations!
                   .where((element) => element.emoji == searchTerm)
                   .isNotEmpty) ||
-          emoji.unified.toLowerCase().contains(searchTerm.toLowerCase()) ||
-          emoji.shortName.toLowerCase().contains(searchTerm.toLowerCase());
+          item.$2.unified.toLowerCase().contains(searchTerm.toLowerCase()) ||
+          item.$2.shortName.toLowerCase().contains(searchTerm.toLowerCase());
     }).toList();
     _refinedListBehaviorSubject.add(_refinedList);
   }
 
-  List<Emoji> getAllEmoji() {
-    return emojiList;
+  List<(String, Emoji)> getAllEmoji() {
+    return emojisList;
   }
 
   final TextEditingController _searchController = TextEditingController();
   TextEditingController get searchController => _searchController;
-  late List<Emoji> _refinedList;
-  List<Emoji> get refinedList => _refinedList;
+  late List<(String, Emoji)> _refinedList;
+  List<(String, Emoji)> get refinedList => _refinedList;
 
-  final BehaviorSubject<List<Emoji>> _refinedListBehaviorSubject =
-      BehaviorSubject.seeded(emojiList);
+  final BehaviorSubject<List<(String, Emoji)>> _refinedListBehaviorSubject =
+      BehaviorSubject.seeded(emojisList);
 
-  Stream<List<Emoji>> get refinedListStream =>
+  Stream<List<(String, Emoji)>> get refinedListStream =>
       _refinedListBehaviorSubject.stream;
 }
