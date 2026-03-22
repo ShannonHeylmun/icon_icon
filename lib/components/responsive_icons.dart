@@ -72,10 +72,9 @@ class ResponsiveIcons extends StatelessWidget {
   }
 
   Future<void> onLongPress(String s, Object o) async {
-    String typeString = o.runtimeType.toString();
-    String copyText = switch (typeString) {
-      "Emoji" => (o as Emoji).emoji,
-      "List<List<dynamic>>" => "strokeRounded$s",
+    String copyText = switch (o) {
+      Emoji() => o.emoji,
+      List<List<dynamic>>() => "strokeRounded$s",
       _ => s,
     };
     await Clipboard.setData(ClipboardData(text: copyText));
@@ -157,7 +156,6 @@ class ResponsiveIcons extends StatelessWidget {
       case _:
         return "Error";
     }
-    ;
   }
 
   Widget listTileLeading(Object iconData) {
@@ -174,10 +172,6 @@ class ResponsiveIcons extends StatelessWidget {
         return AnimatedIcon(icon: iconData, progress: animation!, size: 48);
       case _:
         return Icon(Icons.error);
-      // "_MdiIconData" => Icon(iconData as IconData),
-      // "Emoji" =>
-      // _ =>
     }
-    ;
   }
 }
