@@ -57,7 +57,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   final BehaviorSubject<Widget> _selectedPage = BehaviorSubject.seeded(
-    HugeIconsLookupPage(),
+    EmojiScreen(),
   );
 
   void updateSelectedPage(Widget page) {
