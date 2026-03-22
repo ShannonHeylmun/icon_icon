@@ -66,9 +66,13 @@ class ResponsiveIcons extends StatelessWidget {
   }
 
   Future<void> onLongPress(String s, Object o) async {
-    await Clipboard.setData(
-      ClipboardData(text: o.runtimeType == Emoji ? (o as Emoji).emoji : s),
-    );
+    String typeString = o.runtimeType.toString();
+    String copyText = switch (typeString) {
+      "Emoji" => (o as Emoji).emoji,
+      "List<List<dynamic>>" => "strokeRounded$s",
+      _ => s,
+    };
+    await Clipboard.setData(ClipboardData(text: copyText));
   }
 
   Future<void> onDoubleTap(String s, Object o) async {
@@ -90,7 +94,7 @@ class ResponsiveIcons extends StatelessWidget {
                 onDoubleTap: () => onDoubleTap(iconData.$1, iconData.$2),
                 child: ListTile(
                   leading: listTileLeading(iconData.$2),
-                  title: Text(iconData.$1),
+                  title: Text(listTitle(iconData)),
                   subtitle: Text(listSubtitle(iconData)),
                 ),
               );

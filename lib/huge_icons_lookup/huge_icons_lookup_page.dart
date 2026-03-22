@@ -28,32 +28,6 @@ class HugeIconsLookupPage extends StatelessWidget {
           List<(String, List<List<dynamic>>)> iconsToShow =
               asyncSnapshot.data ?? [];
           return ResponsiveIcons(iconsToShow: iconsToShow);
-          // ListView.builder(
-          //   itemCount: iconsToShow.length,
-          //   itemBuilder: (context, index) {
-          //     return InkWell(
-          //       onDoubleTap: () async {
-          //         await Clipboard.setData(
-          //           ClipboardData(
-          //             text: "strokeRounded${iconsToShow[index].$1}",
-          //           ),
-          //         );
-          //       },
-          //       onLongPress: () async {
-          //         await Clipboard.setData(
-          //           ClipboardData(
-          //             text: "HugeIcons.strokeRounded${iconsToShow[index].$1}",
-          //           ),
-          //         );
-          //       },
-          //       child: ListTile(
-          //         leading: HugeIcon(icon: iconsToShow[index].$2, size: 48),
-          //         title: Text(iconsToShow[index].$1),
-          //         subtitle: Text("strokeRounded${iconsToShow[index].$1}"),
-          //       ),
-          //     );
-          //   },
-          // );
         },
       ),
     );
