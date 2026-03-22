@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:hugeicons_showcase/animated_icons/animated_icons_page.dart';
 import 'package:hugeicons_showcase/components/custom_drawer_list_tile.dart';
+import 'package:hugeicons_showcase/components/helpers.dart';
 import 'package:hugeicons_showcase/credits/credits_page.dart';
 import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_page.dart';
 import 'package:hugeicons_showcase/material_symbols/material_symbols_page.dart';
@@ -25,7 +26,7 @@ const Color materialIconsColor = Color.fromARGB(255, 230, 113, 67);
 const Color materialSymbolsColor = Color(0xff9f86ff);
 const Color fluentuiIconsColor = Color.fromARGB(255, 62, 233, 156);
 
-const Color creditsColor = Colors.black;
+Color creditsColor = Colors.grey.shade900;
 
 Color seedColorContrast = contrastColor(seedColor);
 Color emojiColorContrast = contrastColor(emojiColor);
@@ -52,25 +53,6 @@ class MyApp extends StatefulWidget {
 
   @override
   State<MyApp> createState() => _MyAppState();
-}
-
-Color contrastColor(Color color) {
-  int d = 0;
-
-  // Counting the perceptive luminance - human eye favors green color...
-  double luminance =
-      (pow((color.r * 255.0).round().clamp(0, 255) / 255, 2.2) * 0.2126 +
-          pow((color.g * 255.0).round().clamp(0, 255) / 255, 2.2) * 0.7152 +
-          pow((color.b * 255.0).round().clamp(0, 255) / 255, 2.2) * 0.0722) *
-      color.a;
-
-  if (luminance > 0.004) {
-    d = 0; // bright colors - black font
-  } else {
-    d = 255; // dark colors - white font
-  }
-
-  return Color.fromRGBO(d, d, d, 1);
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
@@ -114,7 +96,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       title: 'Glyph Lookup',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: seedColor),
-        textTheme: GoogleFonts.notoSansTextTheme(ThemeData().textTheme),
+        textTheme: GoogleFonts.notoSansTextTheme(),
       ),
       home: Scaffold(
         key: drawerKey,

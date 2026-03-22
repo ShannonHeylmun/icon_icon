@@ -2,13 +2,21 @@
 	"version": "0.2.0",
 	"configurations": [
 
+
 		{
-			"name": "icon_icon",
+			"name": "Debug icon_icon on Shannon's iPhone",
 			"request": "launch",
 			"type": "dart",
 			"flutterMode": "debug",
 			"program": "lib/main.dart",
-			
+			"deviceId": "iphone"
+		},{
+			"name": "Debug icon_icon on Shannon's iPad",
+			"request": "launch",
+			"type": "dart",
+			"flutterMode": "debug",
+			"program": "lib/main.dart",
+			"deviceId": "ipad"
 		},
 		{
 			"name": "icon_icon (profile mode)",
@@ -41,6 +49,6 @@
 			"type": "dart",
 			"flutterMode": "release",
 			"deviceId": "chrome",
-		}
+		},
 	]
 }

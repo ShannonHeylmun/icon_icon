@@ -36,7 +36,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts: ^8.0.2
   hugeicons: ^1.1.5
-  # dart_eval: ^0.8.4
   unicode_emojis: ^0.5.1
   rxdart: ^0.28.0
   reflectable: ^5.2.1
@@ -47,6 +46,7 @@ dependencies:
   prevent_orphan_text: ^0.0.3
   fluentui_system_icons: ^1.1.273
   footer: ^0.0.4
+  clipboard: ^3.0.14
 
 dev_dependencies:
   flutter_test:

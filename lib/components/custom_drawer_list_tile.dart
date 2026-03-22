@@ -30,9 +30,17 @@ class CustomDrawerListTile extends ListTile {
          ),
          title: Text(
            title,
-           style: Theme.of(
-             context,
-           ).textTheme.bodyLarge!.copyWith(color: textColor),
+           style: Theme.of(context).textTheme.titleLarge!.copyWith(
+             color: textColor,
+             fontWeight: FontWeight.bold,
+             shadows: [
+               Shadow(
+                 offset: Offset(1.0, 1.0),
+                 blurRadius: 3.0,
+                 color: Color.fromARGB(255, 136, 136, 100),
+               ),
+             ],
+           ),
          ),
        );
 }

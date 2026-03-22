@@ -20,12 +20,9 @@ class EmojiScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Double Tap to Copy Emoji"),
-            Text("Long Press to Copy Code Point"),
             emoji.skinVariations != null
                 ? Wrap(
                     spacing: 20,
-
                     children: emoji.skinVariations!.map((variation) {
                       return InkWell(
                         child: Padding(
@@ -36,6 +33,7 @@ class EmojiScreen extends StatelessWidget {
                           ),
                         ),
                         onDoubleTap: () async {
+                          HapticFeedback.heavyImpact();
                           await Clipboard.setData(
                             ClipboardData(text: variation.emoji),
                           );
@@ -49,6 +47,8 @@ class EmojiScreen extends StatelessWidget {
                     }).toList(),
                   )
                 : SizedBox.shrink(),
+            Text("Double Tap to Copy Emoji"),
+            Text("Long Press to Copy Code Point"),
           ],
         ),
       ),

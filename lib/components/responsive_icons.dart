@@ -49,7 +49,7 @@ class ResponsiveIcons extends StatelessWidget {
                   );
                 },
                 onDoubleTap: () async {
-                  HapticFeedback.mediumImpact();
+                  HapticFeedback.heavyImpact();
 
                   await Clipboard.setData(
                     ClipboardData(
@@ -80,7 +80,7 @@ class ResponsiveIcons extends StatelessWidget {
                     );
                   },
                   onDoubleTap: () async {
-                    HapticFeedback.mediumImpact();
+                    HapticFeedback.heavyImpact();
                     await Clipboard.setData(
                       ClipboardData(
                         text: iconsToShow[index].$2.codePoint.toString(),

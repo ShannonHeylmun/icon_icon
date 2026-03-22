@@ -6,7 +6,7 @@ class CustomAppBar extends AppBar {
   final Widget leadingIcon;
   final BuildContext context;
   final double? paddingLeft;
-  final String? titleText;
+  final String titleText;
 
   CustomAppBar(
     this.context, {
@@ -17,7 +17,7 @@ class CustomAppBar extends AppBar {
     super.key,
     this.paddingLeft,
     this.searchController,
-    this.titleText,
+    required this.titleText,
   }) : super(
          leadingWidth: 56,
          leading: GestureDetector(
@@ -28,28 +28,13 @@ class CustomAppBar extends AppBar {
            onTap: () => Scaffold.of(context).openDrawer(),
          ),
          titleSpacing: 0,
-         title: searchController == null
-             ? Text(titleText ?? "")
-             : Padding(
-                 padding: const EdgeInsets.only(bottom: 8.0),
-                 child: TextField(
-                   style: TextStyle(
-                     fontSize: 18,
-                     color: Color.fromRGBO(31, 31, 31, 1),
-                   ),
-                   controller: searchController,
-                   decoration: InputDecoration(
-                     hintText: 'Search...',
-                     // Add a clear button to the search bar
-                     suffixIcon: IconButton(
-                       icon: Icon(
-                         Icons.clear,
-                         color: Color.fromRGBO(31, 31, 31, 1),
-                       ),
-                       onPressed: () => searchController.clear(),
-                     ),
-                   ),
-                 ),
-               ),
+         title: Text(
+           titleText,
+           style: Theme.of(context).textTheme.titleLarge!.copyWith(
+             color: foregroundColor,
+             fontWeight: FontWeight.bold,
+             fontFamily: 'sans',
+           ),
+         ),
        );
 }
