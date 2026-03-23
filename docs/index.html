@@ -52,6 +52,7 @@
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
 	<script src="flutter_bootstrap.js" async></script>
+	<script>document.addEventListener( "contextmenu", event => event.preventDefault() );</script>
 	<script>
 		if ( 'serviceWorker' in navigator ) {
 			window.addEventListener( 'flutter-first-frame', function () {
