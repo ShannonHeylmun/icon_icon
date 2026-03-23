@@ -23,7 +23,9 @@ class IconsService {
     String searchTerm = _searchController.text.toLowerCase();
     _refinedList = hugeHelperList
         .where(
-          (icon) => icon.$1.toLowerCase().contains(searchTerm.toLowerCase()),
+          (icon) => "strokeRounded${icon.$1}".toLowerCase().contains(
+            searchTerm.toLowerCase(),
+          ),
         )
         .toList();
     _refinedListBehaviorSubject.add(_refinedList);

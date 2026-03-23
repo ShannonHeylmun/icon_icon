@@ -138,7 +138,12 @@ class ResponsiveIcons extends StatelessWidget {
   }
 
   String listTitle((String, Object) iconData) {
-    return iconData.$1;
+    switch (iconData.$2) {
+      case List<List<dynamic>>():
+        return "strokeRounded${iconData.$1}";
+      case _:
+        return iconData.$1;
+    }
   }
 
   String? listSubtitle((String, Object) iconData) {
