@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hugeicons/hugeicons.dart';
+
 import 'package:hugeicons_showcase/components/bottom_search_card.dart';
 import 'package:hugeicons_showcase/components/custom_app_bar.dart';
 import 'package:hugeicons_showcase/components/responsive_icons.dart';
@@ -15,7 +14,7 @@ class HugeIconsLookupPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         context,
-        leadingIcon: HugeIcon(icon: HugeIcons.strokeRoundedSnow),
+        leadingIcon: hugeIcon,
         backgroundColor: seedColor,
         titleText: "Huge Icons",
       ),

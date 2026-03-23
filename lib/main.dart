@@ -22,6 +22,10 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
+final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
+
+//Colors
+Color creditsColor = Colors.grey.shade900;
 const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
 const Color emojiColor = Color.fromRGBO(255, 220, 93, .4);
 const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, .2);
@@ -29,9 +33,6 @@ const Color materialIconsColor = Color.fromARGB(255, 230, 113, 67);
 const Color materialSymbolsColor = Color(0xff9f86ff);
 const Color fluentuiIconsColor = Color.fromARGB(255, 62, 233, 156);
 const Color iconoirColor = Color.fromRGBO(188, 201, 210, 1);
-
-Color creditsColor = Colors.grey.shade900;
-
 Color seedColorContrast = contrastColor(seedColor);
 Color emojiColorContrast = contrastColor(emojiColor);
 Color animatedIconsColorContrast = contrastColor(animatedIconsColor);
@@ -41,8 +42,8 @@ Color fluentuiIconsColorContrast = contrastColor(fluentuiIconsColor);
 Color creditsColorContrast = contrastColor(creditsColor);
 Color iconnoirColorContrast = contrastColor(iconoirColor);
 
+//Icons
 Widget hugeIcon = HugeIcon(icon: HugeIcons.strokeRoundedSnow);
-
 Widget creditsIcon = HugeIcon(
   icon: HugeIcons.strokeRoundedLaurelWreath01,
   color: creditsColorContrast,
@@ -51,8 +52,6 @@ Widget iconoirIcon = SnowFlake();
 void main() {
   runApp(const MyApp());
 }
-
-final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -75,8 +74,6 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     super.initState();
 
     controller =
@@ -99,7 +96,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Glyph Lookup',
+      title: 'icon_icon',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: seedColor),
         textTheme: GoogleFonts.notoSansTextTheme(),

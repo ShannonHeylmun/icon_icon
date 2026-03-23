@@ -29,6 +29,10 @@ List<Credit> packages = [
     copyText: "https://pub.dev/packages/fluentui_system_icons",
     name: 'fluentui_system_icons',
   ),
+  Credit(
+    copyText: "https://pub.dev/packages/iconoir_flutter",
+    name: "iconoir_flutter",
+  ),
 ];
 
 class CreditsPage extends StatelessWidget {
