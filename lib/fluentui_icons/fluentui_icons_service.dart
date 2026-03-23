@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hugeicons_showcase/fluentui_icons/fluentui_icon_list.dart';
+import 'package:icon_icon/fluentui_icons/fluentui_icon_list.dart';
 
 import 'package:rxdart/subjects.dart';
 

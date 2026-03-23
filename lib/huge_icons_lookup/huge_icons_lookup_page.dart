@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:hugeicons_showcase/components/bottom_search_card.dart';
-import 'package:hugeicons_showcase/components/custom_app_bar.dart';
-import 'package:hugeicons_showcase/components/responsive_icons.dart';
-import 'package:hugeicons_showcase/huge_icons_lookup/icons_service.dart';
-import 'package:hugeicons_showcase/main.dart';
+import 'package:icon_icon/components/bottom_search_card.dart';
+import 'package:icon_icon/components/custom_app_bar.dart';
+import 'package:icon_icon/components/responsive_icons.dart';
+import 'package:icon_icon/huge_icons_lookup/icons_service.dart';
+import 'package:icon_icon/main.dart';
 
 class HugeIconsLookupPage extends StatelessWidget {
   const HugeIconsLookupPage({super.key});

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hugeicons_showcase/animated_icons/animated_helper.dart';
+import 'package:icon_icon/animated_icons/animated_helper.dart';
 
 import 'package:rxdart/subjects.dart';
 

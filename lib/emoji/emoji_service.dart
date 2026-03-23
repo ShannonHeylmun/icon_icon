@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons_showcase/emoji/emoji_helper.dart';
+import 'package:icon_icon/emoji/emoji_helper.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 // Source - https://stackoverflow.com/a/68434802

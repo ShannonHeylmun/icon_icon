@@ -1,10 +1,10 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:hugeicons_showcase/components/bottom_search_card.dart';
-import 'package:hugeicons_showcase/components/custom_app_bar.dart';
-import 'package:hugeicons_showcase/components/responsive_icons.dart';
-import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_service.dart';
-import 'package:hugeicons_showcase/main.dart';
+import 'package:icon_icon/components/bottom_search_card.dart';
+import 'package:icon_icon/components/custom_app_bar.dart';
+import 'package:icon_icon/components/responsive_icons.dart';
+import 'package:icon_icon/fluentui_icons/fluentui_icons_service.dart';
+import 'package:icon_icon/main.dart';
 
 class FluentIconsPage extends StatelessWidget {
   const FluentIconsPage({super.key});

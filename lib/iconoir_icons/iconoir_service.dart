@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hugeicons_showcase/iconoir_icons/iconoir_icon_list.dart';
+import 'package:icon_icon/iconoir_icons/iconoir_icon_list.dart';
 import 'package:rxdart/subjects.dart';
 
 import 'package:material_symbols_icons/get.dart';

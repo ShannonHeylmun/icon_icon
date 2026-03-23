@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:hugeicons_showcase/main.dart';
+import 'package:icon_icon/main.dart';
 
 Color contrastColor(Color color) {
   // Counting the perceptive luminance - human eye favors green color...

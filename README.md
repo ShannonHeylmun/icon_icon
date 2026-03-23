@@ -1,8 +1,6 @@
-# hugeicons_showcase
+# icon_icon
 
-A small [Flutter](flutter.dev) project to showcase and help developers utilize the many icons provided by [flutter-hugeicons](https://pub.dev/packages/hugeicons).
-
-Provides for quickly searching and copying the relevant icon data for quicker flutter development.
+A small [Flutter](flutter.dev) project to showcase and help developers utilize the many icons and glyphs available within the Flutter framework. This is not intended to be limited in its utility to Flutter devs; for example, the emoji lookup provides the utility of copying the Emoji or the code point to the clipboard.
 
 Within the Apple ecosystem, this works with the system clipboard, providing for syncing across devices (if using).
 

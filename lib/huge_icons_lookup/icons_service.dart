@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hugeicons_showcase/huge_icons_lookup/helper_huge_icons.dart';
+import 'package:icon_icon/huge_icons_lookup/helper_huge_icons.dart';
 import 'package:rxdart/subjects.dart';
 
 class IconsService {
