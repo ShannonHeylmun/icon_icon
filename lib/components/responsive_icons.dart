@@ -153,6 +153,8 @@ class ResponsiveIcons extends StatelessWidget {
         return (iconData.$2 as Emoji).unified;
       case AnimatedIconData():
         return null;
+      case StatelessWidget():
+        return null;
       case _:
         return "Error";
     }
@@ -170,6 +172,8 @@ class ResponsiveIcons extends StatelessWidget {
         return Text(iconData.emoji, style: TextStyle(fontSize: 30));
       case AnimatedIconData():
         return AnimatedIcon(icon: iconData, progress: animation!, size: 48);
+      case StatelessWidget():
+        return iconData;
       case _:
         return Icon(Icons.error);
     }

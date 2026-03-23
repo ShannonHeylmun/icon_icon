@@ -10,10 +10,13 @@ import 'package:hugeicons_showcase/components/custom_drawer_list_tile.dart';
 import 'package:hugeicons_showcase/components/helpers.dart';
 import 'package:hugeicons_showcase/credits/credits_page.dart';
 import 'package:hugeicons_showcase/fluentui_icons/fluentui_icons_page.dart';
+import 'package:hugeicons_showcase/iconoir_icons/iconoir_page.dart';
 import 'package:hugeicons_showcase/material_symbols/material_symbols_page.dart';
 import 'package:hugeicons_showcase/emoji/emoji_screen.dart';
 import 'package:hugeicons_showcase/huge_icons_lookup/huge_icons_lookup_page.dart';
 import 'package:hugeicons_showcase/material_icons/material_icons_page.dart';
+import 'package:iconoir_flutter/regular/snow_flake.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:rxdart/rxdart.dart';
@@ -25,6 +28,7 @@ const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, .2);
 const Color materialIconsColor = Color.fromARGB(255, 230, 113, 67);
 const Color materialSymbolsColor = Color(0xff9f86ff);
 const Color fluentuiIconsColor = Color.fromARGB(255, 62, 233, 156);
+const Color iconoirColor = Color.fromRGBO(188, 201, 210, 1);
 
 Color creditsColor = Colors.grey.shade900;
 
@@ -35,6 +39,7 @@ Color materialIconsColorContrast = contrastColor(materialIconsColor);
 Color materialSymbolsColorContrast = contrastColor(materialSymbolsColor);
 Color fluentuiIconsColorContrast = contrastColor(fluentuiIconsColor);
 Color creditsColorContrast = contrastColor(creditsColor);
+Color iconnoirColorContrast = contrastColor(iconoirColor);
 
 Widget hugeIcon = HugeIcon(icon: HugeIcons.strokeRoundedSnow);
 
@@ -42,6 +47,7 @@ Widget creditsIcon = HugeIcon(
   icon: HugeIcons.strokeRoundedLaurelWreath01,
   color: creditsColorContrast,
 );
+Widget iconoirIcon = SnowFlake();
 void main() {
   runApp(const MyApp());
 }
@@ -176,6 +182,14 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   leadingWidget: Icon(FluentIcons.weather_snowflake_24_filled),
                   title: "Fluent Icons",
                   onTapCallback: () => updateSelectedPage(FluentIconsPage()),
+                  context: context,
+                ),
+                CustomDrawerListTile(
+                  tileColor: iconoirColor,
+                  textColor: fluentuiIconsColorContrast,
+                  leadingWidget: iconoirIcon,
+                  title: "Iconoir Icons",
+                  onTapCallback: () => updateSelectedPage(IconoirPage()),
                   context: context,
                 ),
               ],

@@ -315,6 +315,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.5"
+  iconoir_flutter:
+    dependency: "direct main"
+    description:
+      name: iconoir_flutter
+      sha256: "1d8d076d5dec9faf4e1ed6c10cf802957ca557477473937f82d8076b9077b085"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.11.0"
   io:
     dependency: transitive
     description:
@@ -444,7 +452,7 @@ packages:
     source: hosted
     version: "2.2.0"
   path:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: path
       sha256: "75cca69d1490965be98c73ceaea117e8a04dd21217b37b292c9ddbec0d955bc5"

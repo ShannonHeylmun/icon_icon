@@ -12,8 +12,10 @@ class MaterialSymbolsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: This should probably be a global function of some sort, since it's pretty commonly necessary
     Future<void> selectStyle() async {
-      switch (await showDialog<SymbolStyle>(
+      // Ask User for symbolStyle and return from dialog
+      SymbolStyle? symbolStyle = await showDialog<SymbolStyle?>(
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
@@ -73,18 +75,9 @@ class MaterialSymbolsPage extends StatelessWidget {
             ],
           );
         },
-      )) {
-        case SymbolStyle.outlined:
-          MaterialSymbolsService().updateSymbolStyle(SymbolStyle.outlined);
-          break;
-        case SymbolStyle.rounded:
-          MaterialSymbolsService().updateSymbolStyle(SymbolStyle.rounded);
-          break;
-        case SymbolStyle.sharp:
-          MaterialSymbolsService().updateSymbolStyle(SymbolStyle.sharp);
-          break;
-        case null:
-          break;
+      );
+      if (symbolStyle != null) {
+        MaterialSymbolsService().updateSymbolStyle(symbolStyle);
       }
     }
 
