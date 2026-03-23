@@ -29,7 +29,13 @@ class EmojiService {
           item.$2.emoji == searchTerm ||
           (item.$2.skinVariations != null &&
               item.$2.skinVariations!
-                  .where((element) => element.emoji == searchTerm)
+                  .where(
+                    (skinVariantEmoji) =>
+                        skinVariantEmoji.emoji == searchTerm ||
+                        skinVariantEmoji.unified.toLowerCase().contains(
+                          searchTerm,
+                        ),
+                  )
                   .isNotEmpty) ||
           item.$2.unified.toLowerCase().contains(searchTerm.toLowerCase()) ||
           item.$2.shortName.toLowerCase().contains(searchTerm.toLowerCase());
