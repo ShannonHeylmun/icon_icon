@@ -72,6 +72,7 @@ class ResponsiveIcons extends StatelessWidget {
   }
 
   Future<void> onLongPress(String s, Object o) async {
+    print('onLongPress');
     String copyText = switch (o) {
       Emoji() => o.emoji,
       List<List<dynamic>>() => "strokeRounded$s",
@@ -97,6 +98,7 @@ class ResponsiveIcons extends StatelessWidget {
               (String, Object) iconData = iconsToShow[index];
               String? subTitle = listSubtitle(iconData);
               return InkWell(
+                onSecondaryTap: () => onLongPress(iconData.$1, iconData.$2),
                 onTap: () => onTap(context, iconData.$2),
                 onLongPress: () => onLongPress(iconData.$1, iconData.$2),
                 onDoubleTap: () => onDoubleTap(iconData.$1, iconData.$2),
@@ -118,6 +120,7 @@ class ResponsiveIcons extends StatelessWidget {
               String? footerText = listSubtitle(iconData);
               return Card(
                 child: InkWell(
+                  onSecondaryTap: () => onLongPress(iconData.$1, iconData.$2),
                   onTap: () => onTap(context, iconData.$2),
                   onLongPress: () => onLongPress(iconData.$1, iconData.$2),
                   onDoubleTap: () => onDoubleTap(iconData.$1, iconData.$2),
