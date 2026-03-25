@@ -1,3 +1,6 @@
+import 'package:logging/logging.dart';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -14,10 +17,11 @@ List<Text> emojiInstructions = [
 ];
 
 class ResponsiveIcons extends StatelessWidget {
+  final log = Logger('MyAwesomeLogger');
   final List<(String, Object)> iconsToShow;
   final Animation<double>? animation;
 
-  const ResponsiveIcons({super.key, required this.iconsToShow, this.animation});
+  ResponsiveIcons({super.key, required this.iconsToShow, this.animation});
 
   Future<void> onTap(BuildContext context, Object object) {
     return showModalBottomSheet(
@@ -72,7 +76,10 @@ class ResponsiveIcons extends StatelessWidget {
   }
 
   Future<void> onLongPress(String s, Object o) async {
-    print('onLongPress');
+    if (kDebugMode) {
+      print('onLongPress');
+    }
+    log.info("Long Press");
     String copyText = switch (o) {
       Emoji() => o.emoji,
       List<List<dynamic>>() => "strokeRounded$s",

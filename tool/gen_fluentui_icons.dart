@@ -68,7 +68,9 @@ void main() {
   out.writeln('import \'package:flutter/widgets.dart\';');
   out.writeln('');
   out.writeln('final List<(String, IconData)> fluentuiIconByName = [');
-  for (var e in entries) out.writeln(e);
+  for (var e in entries) {
+    out.writeln(e);
+  }
   out.writeln('];');
   File(
     'lib/fluentui_icons/fluentui_icon_list.dart',

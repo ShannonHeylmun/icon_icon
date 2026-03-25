@@ -1,5 +1,3 @@
-import "package:flutter/services.dart";
-
 import 'package:flutter/material.dart';
 import 'package:icon_icon/animated_icons/animated_icons_service.dart';
 import 'package:icon_icon/components/bottom_search_card.dart';

@@ -25,8 +25,9 @@ Directory getPackageDirFromConfig(String packageName) {
 
   final data = jsonDecode(config.readAsStringSync()) as Map<String, dynamic>;
   final packages = (data['packages'] as List<dynamic>?);
-  if (packages == null)
+  if (packages == null) {
     throw StateError('package_config missing packages entry');
+  }
 
   for (final entry in packages.cast<Map<String, dynamic>>()) {
     if (entry['name'] == packageName) {

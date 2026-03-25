@@ -2,20 +2,40 @@ PODS:
   - clipboard (3.0.9):
     - Flutter
   - Flutter (1.0.0)
+  - package_info_plus (0.4.5):
+    - Flutter
+  - Sentry/HybridSDK (8.58.0)
+  - sentry_flutter (9.15.0):
+    - Flutter
+    - FlutterMacOS
+    - Sentry/HybridSDK (= 8.58.0)
 
 DEPENDENCIES:
   - clipboard (from `.symlinks/plugins/clipboard/ios`)
   - Flutter (from `Flutter`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Sentry
 
 EXTERNAL SOURCES:
   clipboard:
     :path: ".symlinks/plugins/clipboard/ios"
   Flutter:
     :path: Flutter
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
+  sentry_flutter:
+    :path: ".symlinks/plugins/sentry_flutter/ios"
 
 SPEC CHECKSUMS:
   clipboard: 85f02e190f24debf05943aff98c26644b2a90245
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
+  Sentry: d587a8fe91ca13503ecd69a1905f3e8a0fcf61be
+  sentry_flutter: 8939e491bc1511868118c96cae47d945e6f69798
 
 PODFILE CHECKSUM: 3c63482e143d1b91d2d2560aee9fb04ecc74ac7e
 
