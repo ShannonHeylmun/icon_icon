@@ -140,9 +140,12 @@ class ResponsiveIcons extends StatelessWidget {
                     ),
                     footer: footerText == null
                         ? null
-                        : PreventOrphanText(
-                            footerText,
-                            textAlign: TextAlign.center,
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SelectableText(
+                              footerText,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -192,7 +195,7 @@ class ResponsiveIcons extends StatelessWidget {
       case List<List<dynamic>>():
         return HugeIcon(icon: iconData);
       case Emoji():
-        return Text(iconData.emoji, style: TextStyle(fontSize: 30));
+        return SelectableText(iconData.emoji, style: TextStyle(fontSize: 30));
       case AnimatedIconData():
         return AnimatedIcon(icon: iconData, progress: animation!, size: 48);
       case StatelessWidget():

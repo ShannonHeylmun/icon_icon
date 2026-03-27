@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icon_icon/components/custom_app_bar.dart';
 import 'package:icon_icon/main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Credit {
   final String name;
@@ -33,13 +34,24 @@ List<Credit> packages = [
     copyText: "https://pub.dev/packages/iconoir_flutter",
     name: "iconoir_flutter",
   ),
+  Credit(
+    copyText: "https://github.com/ShannonHeylmun/icon_icon/issues",
+    name: "Report Issus Here",
+  ),
 ];
 
 class CreditsPage extends StatelessWidget {
-  void Function()? onTap(int index) {
+  void Function()? onTap(Credit index) {
     HapticFeedback.heavyImpact();
-    Clipboard.setData(ClipboardData(text: packages[index].copyText));
+    // Clipboard.setData(ClipboardData(text: index.copyText));
+    _launchUrl(Uri.parse(index.copyText));
     return null;
+  }
+
+  Future<void> _launchUrl(Uri _url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 
   const CreditsPage({super.key});
@@ -67,7 +79,7 @@ class CreditsPage extends StatelessWidget {
             itemBuilder: (context, index) => ListTile(
               title: Center(child: Text(packages[index].name)),
               titleAlignment: ListTileTitleAlignment.center,
-              onTap: onTap(index),
+              onTap: () => onTap(packages[index]),
               onLongPress: () => Clipboard.setData(
                 ClipboardData(text: packages[index].copyText),
               ),
