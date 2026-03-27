@@ -52,6 +52,7 @@ Widget creditsIcon = HugeIcon(
 );
 Widget iconoirIcon = SnowFlake();
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await SentryFlutter.init((options) {
     options.dsn = Env.sentryDSN;
     // Adds request headers and IP for users, for more info visit:

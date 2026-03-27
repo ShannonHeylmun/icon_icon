@@ -1,8 +1,10 @@
+// GENERATED - do not edit by hand
+// ignore_for_file: prefer_single_quotes
 import 'package:hugeicons/hugeicons.dart';
 
 List<(String, List<List<dynamic>>)> hugeHelperList = [
-  ("0Square", HugeIcons.strokeRounded0Square),
   ("0Circle", HugeIcons.strokeRounded0Circle),
+  ("0Square", HugeIcons.strokeRounded0Square),
   ("1Circle", HugeIcons.strokeRounded1Circle),
   ("1Square", HugeIcons.strokeRounded1Square),
   ("1stBracketCircle", HugeIcons.strokeRounded1stBracketCircle),
@@ -271,18 +273,9 @@ List<(String, List<List<dynamic>>)> hugeHelperList = [
   ("ArrangeByNumbers91", HugeIcons.strokeRoundedArrangeByNumbers91),
   ("Arrange", HugeIcons.strokeRoundedArrange),
   ("ArrowAllDirection", HugeIcons.strokeRoundedArrowAllDirection),
-  (
-    "ArrowDataTransferDiagonal",
-    HugeIcons.strokeRoundedArrowDataTransferDiagonal,
-  ),
-  (
-    "ArrowDataTransferHorizontal",
-    HugeIcons.strokeRoundedArrowDataTransferHorizontal,
-  ),
-  (
-    "ArrowDataTransferVertical",
-    HugeIcons.strokeRoundedArrowDataTransferVertical,
-  ),
+  ("ArrowDataTransferDiagonal", HugeIcons.strokeRoundedArrowDataTransferDiagonal),
+  ("ArrowDataTransferHorizontal", HugeIcons.strokeRoundedArrowDataTransferHorizontal),
+  ("ArrowDataTransferVertical", HugeIcons.strokeRoundedArrowDataTransferVertical),
   ("ArrowDiagonal", HugeIcons.strokeRoundedArrowDiagonal),
   ("ArrowDown01", HugeIcons.strokeRoundedArrowDown01),
   ("ArrowDown02", HugeIcons.strokeRoundedArrowDown02),
@@ -941,18 +934,6 @@ List<(String, List<List<dynamic>>)> hugeHelperList = [
   ("Chrysler", HugeIcons.strokeRoundedChrysler),
   ("Church", HugeIcons.strokeRoundedChurch),
   ("CinnamonRoll", HugeIcons.strokeRoundedCinnamonRoll),
-  (
-    "CircleArrowDataTransferDiagonal",
-    HugeIcons.strokeRoundedCircleArrowDataTransferDiagonal,
-  ),
-  (
-    "CircleArrowDataTransferHorizontal",
-    HugeIcons.strokeRoundedCircleArrowDataTransferHorizontal,
-  ),
-  (
-    "CircleArrowDataTransferVertical",
-    HugeIcons.strokeRoundedCircleArrowDataTransferVertical,
-  ),
   ("CircleArrowDiagonal01", HugeIcons.strokeRoundedCircleArrowDiagonal01),
   ("CircleArrowDiagonal02", HugeIcons.strokeRoundedCircleArrowDiagonal02),
   ("CircleArrowDown01", HugeIcons.strokeRoundedCircleArrowDown01),
@@ -1234,14 +1215,8 @@ List<(String, List<List<dynamic>>)> hugeHelperList = [
   ("CursorProgress02", HugeIcons.strokeRoundedCursorProgress02),
   ("CursorProgress03", HugeIcons.strokeRoundedCursorProgress03),
   ("CursorProgress04", HugeIcons.strokeRoundedCursorProgress04),
-  (
-    "CursorRectangleSelection01",
-    HugeIcons.strokeRoundedCursorRectangleSelection01,
-  ),
-  (
-    "CursorRectangleSelection02",
-    HugeIcons.strokeRoundedCursorRectangleSelection02,
-  ),
+  ("CursorRectangleSelection01", HugeIcons.strokeRoundedCursorRectangleSelection01),
+  ("CursorRectangleSelection02", HugeIcons.strokeRoundedCursorRectangleSelection02),
   ("CursorRemoveSelection01", HugeIcons.strokeRoundedCursorRemoveSelection01),
   ("CursorRemoveSelection02", HugeIcons.strokeRoundedCursorRemoveSelection02),
   ("CursorText", HugeIcons.strokeRoundedCursorText),
@@ -1381,15 +1356,9 @@ List<(String, List<List<dynamic>>)> hugeHelperList = [
   ("Dish02", HugeIcons.strokeRoundedDish02),
   ("DishWasher", HugeIcons.strokeRoundedDishWasher),
   ("Displeased", HugeIcons.strokeRoundedDispleased),
-  (
-    "DistributeHorizontalCenter",
-    HugeIcons.strokeRoundedDistributeHorizontalCenter,
-  ),
+  ("DistributeHorizontalCenter", HugeIcons.strokeRoundedDistributeHorizontalCenter),
   ("DistributeHorizontalLeft", HugeIcons.strokeRoundedDistributeHorizontalLeft),
-  (
-    "DistributeHorizontalRight",
-    HugeIcons.strokeRoundedDistributeHorizontalRight,
-  ),
+  ("DistributeHorizontalRight", HugeIcons.strokeRoundedDistributeHorizontalRight),
   ("DistributeVerticalBottom", HugeIcons.strokeRoundedDistributeVerticalBottom),
   ("DistributeVerticalCenter", HugeIcons.strokeRoundedDistributeVerticalCenter),
   ("DistributeVerticalTop", HugeIcons.strokeRoundedDistributeVerticalTop),
@@ -3711,18 +3680,6 @@ List<(String, List<List<dynamic>>)> hugeHelperList = [
   ("Spotify", HugeIcons.strokeRoundedSpotify),
   ("Sql", HugeIcons.strokeRoundedSql),
   ("Square01", HugeIcons.strokeRoundedSquare01),
-  (
-    "SquareArrowDataTransferDiagonal",
-    HugeIcons.strokeRoundedSquareArrowDataTransferDiagonal,
-  ),
-  (
-    "SquareArrowDataTransferHorizontal",
-    HugeIcons.strokeRoundedSquareArrowDataTransferHorizontal,
-  ),
-  (
-    "SquareArrowDataTransferVertical",
-    HugeIcons.strokeRoundedSquareArrowDataTransferVertical,
-  ),
   ("SquareArrowDiagonal01", HugeIcons.strokeRoundedSquareArrowDiagonal01),
   ("SquareArrowDiagonal02", HugeIcons.strokeRoundedSquareArrowDiagonal02),
   ("SquareArrowDown01", HugeIcons.strokeRoundedSquareArrowDown01),
