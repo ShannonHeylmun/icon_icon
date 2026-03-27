@@ -1,6 +1,5 @@
 import 'package:logging/logging.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -28,74 +27,73 @@ class ResponsiveIcons extends StatelessWidget {
     return showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: object.runtimeType == Emoji
-              ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    (object as Emoji).skinVariations != null
-                        ? Wrap(
-                            spacing: 20,
-                            children: object.skinVariations!.map((variation) {
-                              return InkWell(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    variation.emoji,
-                                    style: TextStyle(fontSize: 32),
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: object.runtimeType == Emoji
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      (object as Emoji).skinVariations != null
+                          ? Wrap(
+                              spacing: 20,
+                              children: object.skinVariations!.map((variation) {
+                                return InkWell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      variation.emoji,
+                                      style: TextStyle(fontSize: 32),
+                                    ),
                                   ),
-                                ),
-                                onDoubleTap: () =>
-                                    onDoubleTap(object.name, variation),
-                                onLongPress: () =>
-                                    onLongPress(object.name, variation),
-                                onSecondaryTap: () =>
-                                    onLongPress(object.name, variation),
-                              );
-                            }).toList(),
-                          )
-                        : SizedBox.shrink(),
-                    ...emojiInstructions,
-                  ],
-                )
-              : Row(
-                  spacing: 20,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.max,
-                  children: MediaQuery.sizeOf(context).width < 600
-                      ? [
-                          Column(
-                            spacing: 8,
-                            mainAxisSize: MainAxisSize.min,
-                            children: instructions,
-                          ),
-                        ]
-                      : instructions,
-                ),
+                                  onDoubleTap: () =>
+                                      onDoubleTap(object.name, variation),
+                                  onLongPress: () =>
+                                      onLongPress(object.name, variation),
+                                  onSecondaryTap: () =>
+                                      onLongPress(object.name, variation),
+                                );
+                              }).toList(),
+                            )
+                          : SizedBox.shrink(),
+                      ...emojiInstructions,
+                    ],
+                  )
+                : Row(
+                    spacing: 20,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.max,
+                    children: MediaQuery.sizeOf(context).width < 600
+                        ? [
+                            Column(
+                              spacing: 8,
+                              mainAxisSize: MainAxisSize.min,
+                              children: instructions,
+                            ),
+                          ]
+                        : instructions,
+                  ),
+          ),
         );
       },
     );
   }
 
-  Future<void> onLongPress(String s, Object o) async {
-    if (kDebugMode) {
-      print('onLongPress');
-    }
+  void onLongPress(String s, Object o) {
     log.info("Long Press");
     String copyText = switch (o) {
       Emoji() => o.emoji,
       List<List<dynamic>>() => "strokeRounded$s",
       _ => s,
     };
-    await Clipboard.setData(ClipboardData(text: copyText));
+    Clipboard.setData(ClipboardData(text: copyText));
   }
 
-  Future<void> onDoubleTap(String s, Object o) async {
+  void onDoubleTap(String s, Object o) {
     HapticFeedback.heavyImpact();
     String? str = listSubtitle((s, o));
     if (str != null) {
-      await Clipboard.setData(ClipboardData(text: str));
+      Clipboard.setData(ClipboardData(text: str));
     }
   }
 
@@ -129,6 +127,7 @@ class ResponsiveIcons extends StatelessWidget {
               (String, Object) iconData = iconsToShow[index];
               String? footerText = listSubtitle(iconData);
               return Card(
+                clipBehavior: Clip.hardEdge,
                 child: InkWell(
                   onTap: () => onTap(context, iconData.$2),
                   onLongPress: () => onLongPress(iconData.$1, iconData.$2),

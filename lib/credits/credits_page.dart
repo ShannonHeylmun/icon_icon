@@ -36,6 +36,12 @@ List<Credit> packages = [
 ];
 
 class CreditsPage extends StatelessWidget {
+  void Function()? onTap(int index) {
+    HapticFeedback.heavyImpact();
+    Clipboard.setData(ClipboardData(text: packages[index].copyText));
+    return null;
+  }
+
   const CreditsPage({super.key});
 
   @override
@@ -61,12 +67,7 @@ class CreditsPage extends StatelessWidget {
             itemBuilder: (context, index) => ListTile(
               title: Center(child: Text(packages[index].name)),
               titleAlignment: ListTileTitleAlignment.center,
-              onTap: () {
-                HapticFeedback.heavyImpact();
-                Clipboard.setData(
-                  ClipboardData(text: packages[index].copyText),
-                );
-              },
+              onTap: onTap(index),
               onLongPress: () => Clipboard.setData(
                 ClipboardData(text: packages[index].copyText),
               ),
