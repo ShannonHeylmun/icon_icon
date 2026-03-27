@@ -87,7 +87,8 @@ class CreditsCard extends StatelessWidget {
     return Card(
       child: InkWell(
         child: Center(child: Text(credit.name)),
-        onLongPress: () => Clipboard.setData(ClipboardData(text: "ToDo")),
+        onLongPress: () =>
+            Clipboard.setData(ClipboardData(text: credit.copyText)),
       ),
     );
   }

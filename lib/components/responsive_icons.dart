@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:prevent_orphan_text/prevent_orphan_text.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
 List<Text> instructions = [
@@ -48,6 +49,8 @@ class ResponsiveIcons extends StatelessWidget {
                                 onDoubleTap: () =>
                                     onDoubleTap(object.name, variation),
                                 onLongPress: () =>
+                                    onLongPress(object.name, variation),
+                                onSecondaryTap: () =>
                                     onLongPress(object.name, variation),
                               );
                             }).toList(),
@@ -105,13 +108,13 @@ class ResponsiveIcons extends StatelessWidget {
               (String, Object) iconData = iconsToShow[index];
               String? subTitle = listSubtitle(iconData);
               return InkWell(
-                onSecondaryTap: () => onLongPress(iconData.$1, iconData.$2),
                 onTap: () => onTap(context, iconData.$2),
                 onLongPress: () => onLongPress(iconData.$1, iconData.$2),
+                onSecondaryTap: () => onLongPress(iconData.$1, iconData.$2),
                 onDoubleTap: () => onDoubleTap(iconData.$1, iconData.$2),
                 child: ListTile(
                   leading: listTileLeading(iconData.$2),
-                  title: Text(listTitle(iconData)),
+                  title: PreventOrphanText(listTitle(iconData)),
                   subtitle: subTitle == null ? null : Text(subTitle),
                 ),
               );
@@ -127,15 +130,21 @@ class ResponsiveIcons extends StatelessWidget {
               String? footerText = listSubtitle(iconData);
               return Card(
                 child: InkWell(
-                  onSecondaryTap: () => onLongPress(iconData.$1, iconData.$2),
                   onTap: () => onTap(context, iconData.$2),
                   onLongPress: () => onLongPress(iconData.$1, iconData.$2),
                   onDoubleTap: () => onDoubleTap(iconData.$1, iconData.$2),
+                  onSecondaryTap: () => onLongPress(iconData.$1, iconData.$2),
                   child: GridTile(
-                    header: Text(iconData.$1, textAlign: TextAlign.center),
+                    header: PreventOrphanText(
+                      iconData.$1,
+                      textAlign: TextAlign.center,
+                    ),
                     footer: footerText == null
                         ? null
-                        : Text(footerText, textAlign: TextAlign.center),
+                        : PreventOrphanText(
+                            footerText,
+                            textAlign: TextAlign.center,
+                          ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [listTileLeading(iconData.$2)],

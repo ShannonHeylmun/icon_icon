@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:icon_icon/material_symbols/material_symbols_list.dart';
 import 'package:material_symbols_icons/get.dart';
 
 import 'package:rxdart/subjects.dart';
@@ -13,7 +14,7 @@ class MaterialSymbolsService {
     return _instance;
   }
   MaterialSymbolsService._internal() {
-    getAllIcons();
+    _refinedListBehaviorSubject.add(getAllIcons());
     _searchController.addListener(_updateRefinedList);
   }
 
@@ -23,22 +24,13 @@ class MaterialSymbolsService {
 
   void _updateRefinedList() {
     String searchTerm = _searchController.text.toLowerCase();
-    List<(String, IconData)> refinedList = getAllIcons();
+    List<(String, IconData)> refinedList = getAllIcons(
+      style: symbolStyleBehaviorSubject.value,
+    );
     refinedList = getAllIcons().where((element) {
       return element.$1.contains(searchTerm) ||
           element.$2.codePoint.toString().contains(searchTerm);
     }).toList();
-    // refinedList.removeWhere((s, i) {
-    //   return !(s.toLowerCase().contains(searchTerm.toLowerCase()) ||
-    //       i
-    //           .toString()
-    //           .replaceAll("IconData(", "")
-    //           .replaceAll("+0", "+")
-    //           .replaceAll(")", "")
-    //           .toLowerCase()
-    //           .contains(searchTerm.toLowerCase()) ||
-    //       i.toString().toLowerCase().contains(searchTerm.toLowerCase()));
-    // });
     _refinedListBehaviorSubject.add(refinedList);
   }
 
@@ -65,17 +57,5 @@ class MaterialSymbolsService {
           )
           .toList(),
     );
-  }
-
-  List<(String, IconData)> getAllIcons({
-    SymbolStyle style = SymbolStyle.rounded,
-  }) {
-    List<String> names = SymbolsGet.values.toList();
-    List<(String, IconData)> icons = [];
-    for (var name in names) {
-      icons.add((name, SymbolsGet.get(name, symbolStyleBehaviorSubject.value)));
-    }
-    _refinedListBehaviorSubject.add(icons);
-    return icons;
   }
 }
