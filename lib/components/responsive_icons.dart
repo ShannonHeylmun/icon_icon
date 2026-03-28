@@ -88,8 +88,9 @@ class ResponsiveIcons extends StatelessWidget {
     };
     try {
       log.info("Attempting to copy $copyText");
-      Clipboard.setData(ClipboardData(text: copyText));
-      log.info("copied $copyText");
+      Clipboard.setData(
+        ClipboardData(text: copyText),
+      ).then((val) => log.info("copied $copyText"));
     } catch (e) {
       log.shout(e);
     }
@@ -102,8 +103,9 @@ class ResponsiveIcons extends StatelessWidget {
     log.info("Double Tap to copy $str");
     if (str != null) {
       try {
-        Clipboard.setData(ClipboardData(text: str));
-        log.info("copied $str");
+        Clipboard.setData(
+          ClipboardData(text: str),
+        ).then((val) => log.info("copied $str"));
       } catch (e) {
         log.shout(e);
       }
