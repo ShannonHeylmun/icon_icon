@@ -1,9 +1,6 @@
 {
 	"version": "0.2.0",
 	"configurations": [
-	
-
-
 		{
 			"name": "Debug icon_icon on Shannon's iPhone",
 			"request": "launch",

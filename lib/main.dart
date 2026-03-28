@@ -51,7 +51,13 @@ Widget creditsIcon = HugeIcon(
   color: creditsColorContrast,
 );
 Widget iconoirIcon = SnowFlake();
+
+final log = Logger('OverallLogger');
 Future<void> main() async {
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.onRecord.listen((record) {
+    print('${record.level.name}: ${record.time}: ${record.message}');
+  });
   WidgetsFlutterBinding.ensureInitialized();
   await SentryFlutter.init((options) {
     options.dsn = Env.sentryDSN;
