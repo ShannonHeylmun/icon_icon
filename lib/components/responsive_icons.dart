@@ -88,7 +88,7 @@ class ResponsiveIcons extends StatelessWidget {
     };
     try {
       Clipboard.setData(ClipboardData(text: copyText));
-      log.info("copied");
+      log.info("copied $copyText");
     } catch (e) {
       log.shout(e);
     }
@@ -100,7 +100,7 @@ class ResponsiveIcons extends StatelessWidget {
     if (str != null) {
       try {
         Clipboard.setData(ClipboardData(text: str));
-        log.info("copied");
+        log.info("copied $str");
       } catch (e) {
         log.shout(e);
       }
