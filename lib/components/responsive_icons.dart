@@ -87,6 +87,7 @@ class ResponsiveIcons extends StatelessWidget {
       _ => s,
     };
     try {
+      log.info("Attempting to copy $copyText");
       Clipboard.setData(ClipboardData(text: copyText));
       log.info("copied $copyText");
     } catch (e) {
@@ -97,6 +98,8 @@ class ResponsiveIcons extends StatelessWidget {
   void onDoubleTap(String s, Object o) {
     HapticFeedback.heavyImpact();
     String? str = listSubtitle((s, o));
+
+    log.info("Double Tap to copy $str");
     if (str != null) {
       try {
         Clipboard.setData(ClipboardData(text: str));
