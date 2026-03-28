@@ -86,14 +86,22 @@ class ResponsiveIcons extends StatelessWidget {
       List<List<dynamic>>() => "strokeRounded$s",
       _ => s,
     };
-    Clipboard.setData(ClipboardData(text: copyText));
+    try {
+      Clipboard.setData(ClipboardData(text: copyText));
+    } catch (e) {
+      log.shout(e);
+    }
   }
 
   void onDoubleTap(String s, Object o) {
     HapticFeedback.heavyImpact();
     String? str = listSubtitle((s, o));
     if (str != null) {
-      Clipboard.setData(ClipboardData(text: str));
+      try {
+        Clipboard.setData(ClipboardData(text: str));
+      } catch (e) {
+        log.shout(e);
+      }
     }
   }
 
