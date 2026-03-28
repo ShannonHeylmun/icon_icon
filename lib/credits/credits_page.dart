@@ -43,7 +43,11 @@ List<Credit> packages = [
 class CreditsPage extends StatelessWidget {
   void Function()? onTap(Credit index) {
     // Clipboard.setData(ClipboardData(text: index.copyText));
-    _launchUrl(Uri.parse(index.copyText));
+    try {
+      _launchUrl(Uri.parse(index.copyText));
+    } catch (e) {
+      log.shout(e);
+    }
     return null;
   }
 
