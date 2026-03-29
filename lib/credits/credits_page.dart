@@ -44,6 +44,7 @@ class CreditsPage extends StatelessWidget {
   void Function()? onTap(Credit index) {
     Clipboard.setData(ClipboardData(text: index.copyText));
     try {
+      log.info("attempting to launch ${index.copyText}");
       launchUrl(Uri.parse(index.copyText));
     } catch (e) {
       log.shout(e);
