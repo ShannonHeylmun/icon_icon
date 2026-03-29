@@ -42,19 +42,13 @@ List<Credit> packages = [
 
 class CreditsPage extends StatelessWidget {
   void Function()? onTap(Credit index) {
-    // Clipboard.setData(ClipboardData(text: index.copyText));
+    Clipboard.setData(ClipboardData(text: index.copyText));
     try {
-      _launchUrl(Uri.parse(index.copyText));
+      launchUrl(Uri.parse(index.copyText));
     } catch (e) {
       log.shout(e);
     }
     return null;
-  }
-
-  Future<void> _launchUrl(Uri _url) async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
-    }
   }
 
   const CreditsPage({super.key});
