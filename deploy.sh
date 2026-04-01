@@ -15,6 +15,7 @@ echo "Building Web application..."
     if ! flutter build web \
         --base-href=$BASE_HREF \
         --release \
+		--no-wasm-dry-run \
 		--no-tree-shake-icons; then
         echo "Flutter build failed"
         exit 1

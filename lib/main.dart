@@ -7,7 +7,6 @@ import 'package:icon_icon/animated_icons/animated_icons_page.dart';
 import 'package:icon_icon/components/custom_drawer_list_tile.dart';
 import 'package:icon_icon/components/helpers.dart';
 import 'package:icon_icon/credits/credits_page.dart';
-import 'package:icon_icon/env/env.dart';
 import 'package:icon_icon/fluentui_icons/fluentui_icons_page.dart';
 import 'package:icon_icon/iconoir_icons/iconoir_page.dart';
 import 'package:icon_icon/material_symbols/material_symbols_page.dart';
@@ -20,9 +19,9 @@ import 'package:logging/logging.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:sentry_logging/sentry_logging.dart';
+// import 'package:sentry_logging/sentry_logging.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+// import 'package:sentry_flutter/sentry_flutter.dart';
 
 final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
@@ -53,31 +52,32 @@ Widget creditsIcon = HugeIcon(
 Widget iconoirIcon = SnowFlake();
 
 final log = Logger('OverallLogger');
-Future<void> main() async {
+void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
     print('${record.level.name}: ${record.time}: ${record.message}');
   });
   WidgetsFlutterBinding.ensureInitialized();
-  await SentryFlutter.init((options) {
-    options.dsn = Env.sentryDSN;
-    // Adds request headers and IP for users, for more info visit:
-    // https://docs.sentry.io/platforms/dart/guides/flutter/data-management/data-collected/
-    options.sendDefaultPii = true;
-    options.enableLogs = true;
-    // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
-    // We recommend adjusting this value in production.
-    options.tracesSampleRate = 1.0;
-    // The sampling rate for profiling is relative to tracesSampleRate
-    // Setting to 1.0 will profile 100% of sampled transactions:
-    options.profilesSampleRate = 1.0;
-    // Configure Session Replay
-    options.replay.sessionSampleRate = 0.1;
-    options.replay.onErrorSampleRate = 1.0;
-    options.addIntegration(LoggingIntegration(minSentryLogLevel: Level.INFO));
-    // If you want to enable sending structured logs, set `enableLogs` to `true`
-    options.enableLogs = true;
-  }, appRunner: () => runApp(SentryWidget(child: const MyApp())));
+  // await SentryFlutter.init((options) {
+  //   options.dsn = Env.sentryDSN;
+  //   // Adds request headers and IP for users, for more info visit:
+  //   // https://docs.sentry.io/platforms/dart/guides/flutter/data-management/data-collected/
+  //   options.sendDefaultPii = true;
+  //   options.enableLogs = true;
+  //   // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
+  //   // We recommend adjusting this value in production.
+  //   options.tracesSampleRate = 1.0;
+  //   // The sampling rate for profiling is relative to tracesSampleRate
+  //   // Setting to 1.0 will profile 100% of sampled transactions:
+  //   options.profilesSampleRate = 1.0;
+  //   // Configure Session Replay
+  //   options.replay.sessionSampleRate = 0.1;
+  //   options.replay.onErrorSampleRate = 1.0;
+  //   options.addIntegration(LoggingIntegration(minSentryLogLevel: Level.INFO));
+  //   // If you want to enable sending structured logs, set `enableLogs` to `true`
+  //   options.enableLogs = true;
+  // }, appRunner: () =>
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
