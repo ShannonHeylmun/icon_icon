@@ -8,11 +8,11 @@ import 'package:prevent_orphan_text/prevent_orphan_text.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
 List<Text> instructions = [
-  Text("Long Press to Copy Icon Name"),
+  Text("Tap to Copy Icon Name"),
   Text("Double Tap to Copy Code Point"),
 ];
 List<Text> emojiInstructions = [
-  Text("Long Press to Copy Emoji"),
+  Text("Tap to Copy Emoji"),
   Text("Double Tap to Copy Code Point"),
 ];
 
