@@ -23,7 +23,7 @@ class ResponsiveIcons extends StatelessWidget {
 
   ResponsiveIcons({super.key, required this.iconsToShow, this.animation});
 
-  Future<void> onTap(BuildContext context, Object object) {
+  Future<void> showInfoModal(BuildContext context, Object object) {
     return showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -35,25 +35,45 @@ class ResponsiveIcons extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       (object as Emoji).skinVariations != null
-                          ? Wrap(
-                              spacing: 20,
-                              children: object.skinVariations!.map((variation) {
-                                return InkWell(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      variation.emoji,
-                                      style: TextStyle(fontSize: 32),
+                          ? Container(
+                              constraints: BoxConstraints(
+                                maxWidth: 400,
+                                maxHeight: (object).skinVariations!.length <= 5
+                                    ? 100
+                                    : 400,
+                              ),
+                              child: GridView.builder(
+                                itemCount: object.skinVariations!.length,
+                                itemBuilder: (c, i) {
+                                  Emoji variation = object.skinVariations![i];
+                                  return InkWell(
+                                    child: Padding(
+                                      padding: EdgeInsetsGeometry.all(8.0),
+                                      child: Center(
+                                        child: Text(
+                                          variation.emoji,
+                                          style: TextStyle(fontSize: 32),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  onDoubleTap: () =>
-                                      onDoubleTap(object.name, variation),
-                                  onLongPress: () =>
-                                      onLongPress(object.name, variation),
-                                  onSecondaryTap: () =>
-                                      onLongPress(object.name, variation),
-                                );
-                              }).toList(),
+                                    onDoubleTap: () => copySubtitle(
+                                      context,
+                                      object.name,
+                                      variation,
+                                    ),
+                                    onTap: () => copyEmojiOrName(
+                                      context,
+                                      object.name,
+                                      variation,
+                                    ),
+                                  );
+                                },
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 5,
+                                    ),
+                              ),
                             )
                           : SizedBox.shrink(),
                       ...emojiInstructions,
@@ -66,7 +86,7 @@ class ResponsiveIcons extends StatelessWidget {
                     children: MediaQuery.sizeOf(context).width < 600
                         ? [
                             Column(
-                              spacing: 8,
+                              spacing: 20,
                               mainAxisSize: MainAxisSize.min,
                               children: instructions,
                             ),
@@ -79,33 +99,57 @@ class ResponsiveIcons extends StatelessWidget {
     );
   }
 
-  void onLongPress(String s, Object o) {
-    log.info("Long Press");
-    String copyText = switch (o) {
-      Emoji() => o.emoji,
-      List<List<dynamic>>() => "strokeRounded$s",
-      _ => s,
-    };
+  void copyEmojiOrName(BuildContext context, String s, Object o) {
+    String copyText = mainCopyText(o, s);
     try {
       log.info("Attempting to copy $copyText");
-      Clipboard.setData(
-        ClipboardData(text: copyText),
-      ).then((val) => log.info("copied $copyText"));
+      Clipboard.setData(ClipboardData(text: copyText)).then((val) {
+        final snackBar = SnackBar(
+          duration: const Duration(seconds: 2),
+          content: Text('Copied $copyText to your clipboard'),
+          persist: false,
+          showCloseIcon: true,
+        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      });
     } catch (e) {
       log.shout(e);
     }
   }
 
-  void onDoubleTap(String s, Object o) {
+  String mainCopyText(Object o, String s) {
+    if (o.runtimeType == Emoji) {
+      log.info("Emoji short names: ${(o as Emoji).shortNames.toString()}");
+      log.info("Emoji subcategory: ${(o).subcategory}");
+      log.info("Emoji texts: ${(o).texts.toString()}");
+    }
+    return switch (o) {
+      Emoji() => o.emoji,
+      List<List<dynamic>>() => "strokeRounded$s",
+      _ => s,
+    };
+  }
+
+  void copySubtitle(BuildContext context, String s, Object o) {
     HapticFeedback.heavyImpact();
     String? str = listSubtitle((s, o));
 
     log.info("Double Tap to copy $str");
     if (str != null) {
       try {
-        Clipboard.setData(
-          ClipboardData(text: str),
-        ).then((val) => log.info("copied $str"));
+        Clipboard.setData(ClipboardData(text: str)).then((val) {
+          final snackBar = SnackBar(
+            duration: const Duration(seconds: 2),
+            content: Text('Copied $str to your clipboard'),
+            persist: false,
+            showCloseIcon: true,
+          );
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+        });
       } catch (e) {
         log.shout(e);
       }
@@ -121,10 +165,10 @@ class ResponsiveIcons extends StatelessWidget {
               (String, Object) iconData = iconsToShow[index];
               String? subTitle = listSubtitle(iconData);
               return InkWell(
-                onTap: () => onTap(context, iconData.$2),
-                onLongPress: () => onLongPress(iconData.$1, iconData.$2),
-                onSecondaryTap: () => onLongPress(iconData.$1, iconData.$2),
-                onDoubleTap: () => onDoubleTap(iconData.$1, iconData.$2),
+                onTap: () => copyEmojiOrName(context, iconData.$1, iconData.$2),
+                onLongPress: () => showInfoModal(context, iconData.$2),
+                onDoubleTap: () =>
+                    copySubtitle(context, iconData.$1, iconData.$2),
                 child: ListTile(
                   leading: listTileLeading(iconData.$2),
                   title: PreventOrphanText(listTitle(iconData)),
@@ -135,36 +179,51 @@ class ResponsiveIcons extends StatelessWidget {
           )
         : GridView.builder(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
+              maxCrossAxisExtent: 256,
             ),
             itemCount: iconsToShow.length,
             itemBuilder: (context, index) {
               (String, Object) iconData = iconsToShow[index];
-              String? footerText = listSubtitle(iconData);
               return Card(
                 clipBehavior: Clip.hardEdge,
                 child: InkWell(
-                  onTap: () => onTap(context, iconData.$2),
-                  onLongPress: () => onLongPress(iconData.$1, iconData.$2),
-                  onDoubleTap: () => onDoubleTap(iconData.$1, iconData.$2),
-                  onSecondaryTap: () => onLongPress(iconData.$1, iconData.$2),
+                  onTap: () =>
+                      copyEmojiOrName(context, iconData.$1, iconData.$2),
+                  onLongPress: () => showInfoModal(context, iconData.$2),
+                  onDoubleTap: () =>
+                      copySubtitle(context, iconData.$1, iconData.$2),
+                  onSecondaryTap: () =>
+                      copyEmojiOrName(context, iconData.$1, iconData.$2),
                   child: GridTile(
-                    header: PreventOrphanText(
-                      iconData.$1,
-                      textAlign: TextAlign.center,
-                    ),
-                    footer: footerText == null
-                        ? null
-                        : Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SelectableText(
-                              footerText,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [listTileLeading(iconData.$2)],
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: PreventOrphanText(
+                            iconData.$1,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            listTileLeading(iconData.$2),
+                            listSubtitle(iconData) == null
+                                ? SizedBox.shrink()
+                                : Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      listSubtitle(iconData)!,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: category(iconData.$2),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -210,13 +269,22 @@ class ResponsiveIcons extends StatelessWidget {
       case List<List<dynamic>>():
         return HugeIcon(icon: iconData);
       case Emoji():
-        return SelectableText(iconData.emoji, style: TextStyle(fontSize: 30));
+        return Text(iconData.emoji, style: TextStyle(fontSize: 30));
       case AnimatedIconData():
         return AnimatedIcon(icon: iconData, progress: animation!, size: 48);
       case StatelessWidget():
         return iconData;
       case _:
         return Icon(Icons.error);
+    }
+  }
+
+  Widget category(Object $2) {
+    switch ($2) {
+      case Emoji():
+        return Text($2.category.description, textAlign: TextAlign.center);
+      case _:
+        return SizedBox.shrink();
     }
   }
 }

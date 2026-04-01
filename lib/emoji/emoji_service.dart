@@ -14,23 +14,49 @@ class EmojiService {
     _searchController.addListener(_updateRefinedList);
   }
 
-  void _updateRefinedList() {
-    final searchTerm = _searchController.text.toLowerCase();
+  bool _matchesName(String name, String searchTerm) =>
+      name.toLowerCase().contains(searchTerm);
 
-    _refinedList = getAllEmoji().where((item) {
-      return item.$1.toLowerCase().contains(searchTerm) ||
-          item.$2.emoji == searchTerm ||
-          (item.$2.text != null &&
-              item.$2.text!.toLowerCase().contains(searchTerm)) ||
-          (item.$2.skinVariations?.any(
-                (skinVariantEmoji) =>
-                    skinVariantEmoji.emoji == searchTerm ||
-                    skinVariantEmoji.unified.toLowerCase().contains(searchTerm),
-              ) ??
-              false) ||
-          item.$2.unified.toLowerCase().contains(searchTerm) ||
-          item.$2.shortName.toLowerCase().contains(searchTerm);
-    }).toList();
+  bool _matchesEmoji(Emoji emoji, String searchTerm) =>
+      emoji.emoji == searchTerm;
+
+  bool _matchesTextOrTexts(Emoji emoji, String searchTerm) {
+    return emoji.text?.contains(searchTerm) ??
+        emoji.text?.contains(searchTerm.toLowerCase()) ??
+        emoji.texts?.any((a) => a.contains(searchTerm)) ??
+        emoji.texts?.any((a) => a.contains(searchTerm)) ??
+        false;
+  }
+
+  bool _matchesUnified(Emoji emoji, String searchTerm) =>
+      emoji.unified.toLowerCase().contains(searchTerm);
+
+  bool _matchesShortName(Emoji emoji, String searchTerm) =>
+      emoji.shortName.toLowerCase().contains(searchTerm);
+
+  bool _matchesSkinVariation(Emoji emoji, String searchTerm) =>
+      emoji.skinVariations?.any(
+        (v) =>
+            v.emoji == searchTerm ||
+            v.unified.toLowerCase().contains(searchTerm),
+      ) ??
+      false;
+
+  bool _emojiMatchesSearch((String, Emoji) item) {
+    final searchTerm = _searchController.text.toLowerCase();
+    final (name, emoji) = item;
+    return _matchesName(name, searchTerm) ||
+        _matchesEmoji(emoji, searchTerm) ||
+        _matchesUnified(emoji, searchTerm) ||
+        _matchesShortName(emoji, searchTerm) ||
+        _matchesSkinVariation(emoji, searchTerm) ||
+        _matchesTextOrTexts(emoji, _searchController.text);
+  }
+
+  void _updateRefinedList() {
+    _refinedList = getAllEmoji()
+        .where((item) => _emojiMatchesSearch(item))
+        .toList();
     _refinedListBehaviorSubject.add(_refinedList);
   }
 
