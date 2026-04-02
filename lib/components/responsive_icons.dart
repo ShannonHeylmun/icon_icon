@@ -171,7 +171,7 @@ class ResponsiveIcons extends StatelessWidget {
                     copySubtitle(context, iconData.$1, iconData.$2),
                 child: ListTile(
                   leading: listTileLeading(iconData.$2),
-                  title: PreventOrphanText(listTitle(iconData)),
+                  title: Text(listTitle(iconData)),
                   subtitle: subTitle == null ? null : Text(subTitle),
                 ),
               );
@@ -195,16 +195,17 @@ class ResponsiveIcons extends StatelessWidget {
                   onSecondaryTap: () =>
                       copyEmojiOrName(context, iconData.$1, iconData.$2),
                   child: GridTile(
+                    header: Text(
+                      listTitle((iconData.$1, iconData.$2)),
+                      textAlign: TextAlign.center,
+                    ),
+                    footer: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: category(iconData.$2),
+                    ),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: PreventOrphanText(
-                            iconData.$1,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
                         Column(
                           children: [
                             listTileLeading(iconData.$2),
@@ -218,10 +219,6 @@ class ResponsiveIcons extends StatelessWidget {
                                     ),
                                   ),
                           ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: category(iconData.$2),
                         ),
                       ],
                     ),
