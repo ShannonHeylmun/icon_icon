@@ -140,6 +140,9 @@ class ResponsiveIcons extends StatelessWidget {
 
     log.info("Double Tap to copy $str");
     if (str != null) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).clearSnackBars();
+      }
       try {
         Clipboard.setData(ClipboardData(text: str)).then((val) {
           final snackBar = SnackBar(
