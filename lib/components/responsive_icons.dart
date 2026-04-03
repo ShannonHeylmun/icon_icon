@@ -102,6 +102,9 @@ class ResponsiveIcons extends StatelessWidget {
     String copyText = mainCopyText(o, s);
     try {
       log.info("Attempting to copy $copyText");
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).clearSnackBars();
+      }
       Clipboard.setData(ClipboardData(text: copyText)).then((val) {
         final snackBar = SnackBar(
           duration: const Duration(seconds: 2),
