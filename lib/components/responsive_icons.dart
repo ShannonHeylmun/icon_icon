@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:material_symbols_icons/symbols.dart';
-import 'package:prevent_orphan_text/prevent_orphan_text.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
 List<Text> instructions = [
@@ -195,9 +194,13 @@ class ResponsiveIcons extends StatelessWidget {
                   onSecondaryTap: () =>
                       copyEmojiOrName(context, iconData.$1, iconData.$2),
                   child: GridTile(
-                    header: Text(
-                      listTitle((iconData.$1, iconData.$2)),
-                      textAlign: TextAlign.center,
+                    header: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        listTitle((iconData.$1, iconData.$2)),
+                        textAlign: TextAlign.center,
+                        softWrap: true,
+                      ),
                     ),
                     footer: Padding(
                       padding: const EdgeInsets.all(8.0),
