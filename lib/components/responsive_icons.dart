@@ -1,3 +1,5 @@
+import 'package:google_fonts/google_fonts.dart';
+import 'package:icon_icon/emoji/emoji_screen.dart';
 import 'package:logging/logging.dart';
 
 import 'package:flutter/material.dart';
@@ -51,7 +53,9 @@ class ResponsiveIcons extends StatelessWidget {
                                       child: Center(
                                         child: Text(
                                           variation.emoji,
-                                          style: TextStyle(fontSize: 32),
+                                          style: GoogleFonts.notoColorEmoji(
+                                            fontSize: 30,
+                                          ),
                                           textAlign: TextAlign.center,
                                         ),
                                       ),
@@ -101,9 +105,8 @@ class ResponsiveIcons extends StatelessWidget {
   void copyEmojiOrName(BuildContext context, String s, Object o) {
     String copyText = mainCopyText(o, s);
     try {
-      log.info("Attempting to copy $copyText");
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).clearSnackBars();
+      if (snackbarKey.currentContext!.mounted) {
+        ScaffoldMessenger.of(snackbarKey.currentContext!).clearSnackBars();
       }
       Clipboard.setData(ClipboardData(text: copyText)).then((val) {
         final snackBar = SnackBar(
@@ -113,7 +116,9 @@ class ResponsiveIcons extends StatelessWidget {
           showCloseIcon: true,
         );
         if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          ScaffoldMessenger.of(
+            snackbarKey.currentContext!,
+          ).showSnackBar(snackBar);
         }
       });
     } catch (e) {
@@ -268,6 +273,12 @@ class ResponsiveIcons extends StatelessWidget {
 
   Widget listTileLeading(Object iconData) {
     switch (iconData) {
+      case Emoji():
+        if (iconData.emoji == "🙂‍↔️" || iconData.emoji == "🙂‍↕️") {
+          // log.fine(iconData.emoji);
+        }
+    }
+    switch (iconData) {
       case IconDataRounded():
         return Icon(iconData, size: 48);
       case IconData():
@@ -275,7 +286,11 @@ class ResponsiveIcons extends StatelessWidget {
       case List<List<dynamic>>():
         return HugeIcon(icon: iconData);
       case Emoji():
-        return Text(iconData.emoji, style: TextStyle(fontSize: 30));
+        return Text(
+          iconData.emoji,
+          // style: TextStyle(fontSize: 30),
+          style: GoogleFonts.notoColorEmoji(fontSize: 30),
+        );
       case AnimatedIconData():
         return AnimatedIcon(icon: iconData, progress: animation!, size: 48);
       case StatelessWidget():

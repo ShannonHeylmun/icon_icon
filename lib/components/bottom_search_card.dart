@@ -7,7 +7,7 @@ class BottomSearchCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.fromLTRB(8, 0, 8, 8),
+      margin: EdgeInsets.all(0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextField(

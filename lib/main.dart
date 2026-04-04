@@ -53,7 +53,7 @@ Widget iconoirIcon = SnowFlake();
 
 final log = Logger('OverallLogger');
 void main() {
-  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.level = Level.INFO; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
     print('${record.level.name}: ${record.time}: ${record.message}');
   });
@@ -125,7 +125,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       debugShowCheckedModeBanner: false,
       title: 'icon_icon',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: seedColor),
+        colorScheme: .fromSeed(seedColor: Colors.indigoAccent),
         textTheme: GoogleFonts.notoSansTextTheme(),
       ),
       home: Scaffold(

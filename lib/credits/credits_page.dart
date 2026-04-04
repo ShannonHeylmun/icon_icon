@@ -44,7 +44,6 @@ class CreditsPage extends StatelessWidget {
   void Function()? onTap(Credit index) {
     Clipboard.setData(ClipboardData(text: index.copyText));
     try {
-      log.info("attempting to launch ${index.copyText}");
       launchUrl(Uri.parse(index.copyText));
     } catch (e) {
       log.shout(e);
@@ -64,32 +63,37 @@ class CreditsPage extends StatelessWidget {
         leadingIcon: creditsIcon,
         titleText: "Credits",
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            title: Text(
-              "Flutter Packages",
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 400),
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                title: Text(
+                  "Flutter Packages",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+              SliverList.builder(
+                itemCount: packages.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Center(child: Text(packages[index].name)),
+                  titleAlignment: ListTileTitleAlignment.center,
+                  onTap: () => onTap(packages[index]),
+                  onLongPress: () {
+                    try {
+                      Clipboard.setData(
+                        ClipboardData(text: packages[index].copyText),
+                      );
+                    } catch (e) {
+                      log.shout(e);
+                    }
+                  },
+                ),
+              ),
+            ],
           ),
-          SliverList.builder(
-            itemCount: packages.length,
-            itemBuilder: (context, index) => ListTile(
-              title: Center(child: Text(packages[index].name)),
-              titleAlignment: ListTileTitleAlignment.center,
-              onTap: () => onTap(packages[index]),
-              onLongPress: () {
-                try {
-                  Clipboard.setData(
-                    ClipboardData(text: packages[index].copyText),
-                  );
-                } catch (e) {
-                  log.shout(e);
-                }
-              },
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
