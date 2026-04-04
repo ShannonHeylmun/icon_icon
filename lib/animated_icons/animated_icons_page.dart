@@ -39,6 +39,7 @@ class _AnimatedIconsPageState extends State<AnimatedIconsPage>
       appBar: CustomAppBar(
         context,
         backgroundColor: animatedIconsColor,
+        foregroundColor: animatedIconsColorContrast,
         leadingIcon: Stack(
           children: [
             Positioned(

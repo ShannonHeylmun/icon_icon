@@ -85,7 +85,7 @@ class MaterialSymbolsPage extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         backgroundColor: materialSymbolsColor,
-
+        foregroundColor: materialSymbolsColorContrast,
         leadingIcon: Icon(Symbols.mode_cool, size: 36),
         paddingLeft: 0,
         actions: [

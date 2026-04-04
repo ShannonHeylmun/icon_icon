@@ -13,6 +13,7 @@ import 'package:icon_icon/material_symbols/material_symbols_page.dart';
 import 'package:icon_icon/emoji/emoji_screen.dart';
 import 'package:icon_icon/huge_icons_lookup/huge_icons_lookup_page.dart';
 import 'package:icon_icon/material_icons/material_icons_page.dart';
+import 'package:icon_icon/omnibus_glyphs/omnibus_glyphs_screen.dart';
 import 'package:iconoir_flutter/regular/snow_flake.dart';
 import 'package:logging/logging.dart';
 
@@ -20,7 +21,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:rxdart/rxdart.dart';
 // import 'package:sentry_logging/sentry_logging.dart';
-import 'package:unicode_emojis/unicode_emojis.dart';
 // import 'package:sentry_flutter/sentry_flutter.dart';
 
 final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
@@ -29,11 +29,12 @@ final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 Color creditsColor = Colors.grey.shade900;
 const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
 const Color emojiColor = Color.fromRGBO(255, 220, 93, .4);
-const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, .2);
-const Color materialIconsColor = Color.fromARGB(255, 230, 113, 67);
-const Color materialSymbolsColor = Color(0xff9f86ff);
-const Color fluentuiIconsColor = Color.fromARGB(255, 62, 233, 156);
-const Color iconoirColor = Color.fromRGBO(188, 201, 210, 1);
+const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, 1);
+const Color materialIconsColor = Color.fromRGBO(230, 113, 67, 1);
+const Color materialSymbolsColor = Color.fromRGBO(159, 134, 255, 1);
+const Color fluentuiIconsColor = Color.fromRGBO(62, 233, 156, 1);
+Color iconoirColor = Colors.blueGrey.shade200;
+Color omnibusGlyphsColor = Colors.indigo.shade900;
 Color seedColorContrast = contrastColor(seedColor);
 Color emojiColorContrast = contrastColor(emojiColor);
 Color animatedIconsColorContrast = contrastColor(animatedIconsColor);
@@ -42,6 +43,7 @@ Color materialSymbolsColorContrast = contrastColor(materialSymbolsColor);
 Color fluentuiIconsColorContrast = contrastColor(fluentuiIconsColor);
 Color creditsColorContrast = contrastColor(creditsColor);
 Color iconnoirColorContrast = contrastColor(iconoirColor);
+Color omnibusGlyphsColorContrast = contrastColor(omnibusGlyphsColor);
 
 //Icons
 Widget hugeIcon = HugeIcon(icon: HugeIcons.strokeRoundedSnow);
@@ -49,7 +51,7 @@ Widget creditsIcon = HugeIcon(
   icon: HugeIcons.strokeRoundedLaurelWreath01,
   color: creditsColorContrast,
 );
-Widget iconoirIcon = SnowFlake();
+Widget iconoirIcon = SnowFlake(color: iconnoirColorContrast);
 
 final log = Logger('OverallLogger');
 void main() {
@@ -157,6 +159,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       icon: AnimatedIcons.arrow_menu,
                       size: 24.0,
                       progress: animation,
+                      color: animatedIconsColorContrast,
                     ),
                   ),
                   title: "Animated Icons",
@@ -166,10 +169,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                 CustomDrawerListTile(
                   tileColor: emojiColor,
                   textColor: emojiColorContrast,
-                  leadingWidget: Text(
-                    UnicodeEmojis.search("snowflake").first.emoji,
-                    style: TextStyle(fontSize: 18),
-                  ),
+                  leadingWidget: Text("❄️", style: TextStyle(fontSize: 18)),
                   title: "Unicode Emoji",
                   onTapCallback: () => updateSelectedPage(EmojiScreen()),
                   context: context,
@@ -186,7 +186,11 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                 CustomDrawerListTile(
                   tileColor: materialIconsColor,
                   textColor: materialIconsColorContrast,
-                  leadingWidget: Icon(MdiIcons.snowflake, size: 24),
+                  leadingWidget: Icon(
+                    MdiIcons.snowflake,
+                    size: 24,
+                    color: materialIconsColorContrast,
+                  ),
                   title: "Material Design Icons",
                   onTapCallback: () => updateSelectedPage(MaterialIconsPage()),
                   context: context,
@@ -194,7 +198,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                 CustomDrawerListTile(
                   tileColor: materialSymbolsColor,
                   textColor: materialSymbolsColorContrast,
-                  leadingWidget: Icon(Symbols.mode_cool),
+                  leadingWidget: Icon(
+                    Symbols.mode_cool,
+                    color: materialSymbolsColorContrast,
+                  ),
                   title: "Material Symbols",
                   onTapCallback: () =>
                       updateSelectedPage(MaterialSymbolsPage()),
