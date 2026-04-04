@@ -223,6 +223,21 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   onTapCallback: () => updateSelectedPage(IconoirPage()),
                   context: context,
                 ),
+                CustomDrawerListTile(
+                  tileColor: omnibusGlyphsColor,
+                  textColor: omnibusGlyphsColorContrast,
+                  leadingWidget: Text(
+                    "❄️",
+                    style: GoogleFonts.notoEmoji(
+                      color: omnibusGlyphsColorContrast,
+                      fontSize: 18,
+                    ),
+                  ),
+                  title: "Search All",
+                  onTapCallback: () =>
+                      updateSelectedPage(OmnibusGlyphsScreen()),
+                  context: context,
+                ),
               ],
             ),
           ),
