@@ -34,6 +34,10 @@ class EmojiService {
   bool _matchesShortName(Emoji emoji, String searchTerm) =>
       emoji.shortName.toLowerCase().contains(searchTerm);
 
+  bool _matchesCategory(Emoji emoji, String searchTerm) =>
+      emoji.category.name.toLowerCase().contains(searchTerm) ||
+      emoji.category.description.toLowerCase().contains(searchTerm);
+
   bool _matchesSkinVariation(Emoji emoji, String searchTerm) =>
       emoji.skinVariations?.any(
         (v) =>
@@ -50,6 +54,7 @@ class EmojiService {
         _matchesUnified(emoji, searchTerm) ||
         _matchesShortName(emoji, searchTerm) ||
         _matchesSkinVariation(emoji, searchTerm) ||
+        _matchesCategory(emoji, searchTerm) ||
         _matchesTextOrTexts(emoji, _searchController.text);
   }
 
