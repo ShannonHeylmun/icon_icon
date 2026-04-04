@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icon_icon/components/helpers.dart';
 import 'package:icon_icon/main.dart';
 
 class CustomDrawerListTile extends ListTile {
@@ -36,8 +37,8 @@ class CustomDrawerListTile extends ListTile {
              shadows: [
                Shadow(
                  offset: Offset(1.0, 1.0),
-                 blurRadius: 3.0,
-                 color: Color.fromARGB(255, 136, 136, 100),
+                 blurRadius: 2.0,
+                 color: contrastColor(textColor),
                ),
              ],
            ),

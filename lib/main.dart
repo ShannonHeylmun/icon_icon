@@ -26,7 +26,7 @@ import 'package:rxdart/rxdart.dart';
 final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
 //Colors
-Color creditsColor = Colors.grey.shade900;
+Color creditsColor = Colors.blueGrey.shade900;
 const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
 const Color emojiColor = Color.fromRGBO(255, 220, 93, .4);
 const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, 1);
@@ -46,12 +46,17 @@ Color iconnoirColorContrast = contrastColor(iconoirColor);
 Color omnibusGlyphsColorContrast = contrastColor(omnibusGlyphsColor);
 
 //Icons
-Widget hugeIcon = HugeIcon(icon: HugeIcons.strokeRoundedSnow);
+Widget hugeIcon = HugeIcon(
+  icon: HugeIcons.strokeRoundedSnow,
+  size: 24,
+  color: seedColorContrast,
+);
 Widget creditsIcon = HugeIcon(
   icon: HugeIcons.strokeRoundedLaurelWreath01,
+  size: 24,
   color: creditsColorContrast,
 );
-Widget iconoirIcon = SnowFlake(color: iconnoirColorContrast);
+Widget iconoirIcon = SnowFlake(color: iconnoirColorContrast, width: 18);
 
 final log = Logger('OverallLogger');
 void main() {
@@ -223,21 +228,21 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   onTapCallback: () => updateSelectedPage(IconoirPage()),
                   context: context,
                 ),
-                CustomDrawerListTile(
-                  tileColor: omnibusGlyphsColor,
-                  textColor: omnibusGlyphsColorContrast,
-                  leadingWidget: Text(
-                    "❄️",
-                    style: GoogleFonts.notoEmoji(
-                      color: omnibusGlyphsColorContrast,
-                      fontSize: 18,
-                    ),
-                  ),
-                  title: "Search All",
-                  onTapCallback: () =>
-                      updateSelectedPage(OmnibusGlyphsScreen()),
-                  context: context,
-                ),
+                // CustomDrawerListTile(
+                //   tileColor: omnibusGlyphsColor,
+                //   textColor: omnibusGlyphsColorContrast,
+                //   leadingWidget: Text(
+                //     "❄️",
+                //     style: GoogleFonts.notoEmoji(
+                //       color: omnibusGlyphsColorContrast,
+                //       fontSize: 18,
+                //     ),
+                //   ),
+                //   title: "Search All",
+                //   onTapCallback: () =>
+                //       updateSelectedPage(OmnibusGlyphsScreen()),
+                //   context: context,
+                // ),
               ],
             ),
           ),

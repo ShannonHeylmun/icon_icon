@@ -15,8 +15,9 @@ class MaterialIconsPage extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         backgroundColor: materialIconsColor,
-        titleText: "Material Design",
-        leadingIcon: Icon(MdiIcons.snowflake, size: 30),
+        foregroundColor: materialIconsColorContrast,
+        titleText: "Material Icons",
+        leadingIcon: Icon(MdiIcons.snowflake, size: 36),
       ),
       bottomNavigationBar: BottomSearchCard(
         controller: MaterialIconsService().searchController,

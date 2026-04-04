@@ -16,6 +16,7 @@ class HugeIconsLookupPage extends StatelessWidget {
         context,
         leadingIcon: hugeIcon,
         backgroundColor: seedColor,
+        paddingLeft: 4,
         titleText: "Huge Icons",
       ),
       bottomNavigationBar: BottomSearchCard(

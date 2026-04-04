@@ -105,8 +105,8 @@ class ResponsiveIcons extends StatelessWidget {
   void copyEmojiOrName(BuildContext context, String s, Object o) {
     String copyText = mainCopyText(o, s);
     try {
-      if (snackbarKey.currentContext!.mounted) {
-        ScaffoldMessenger.of(snackbarKey.currentContext!).clearSnackBars();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).clearSnackBars();
       }
       Clipboard.setData(ClipboardData(text: copyText)).then((val) {
         final snackBar = SnackBar(
@@ -116,9 +116,7 @@ class ResponsiveIcons extends StatelessWidget {
           showCloseIcon: true,
         );
         if (context.mounted) {
-          ScaffoldMessenger.of(
-            snackbarKey.currentContext!,
-          ).showSnackBar(snackBar);
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       });
     } catch (e) {

@@ -21,9 +21,9 @@ class CustomAppBar extends AppBar {
   }) : super(
          centerTitle: true,
          leadingWidth: 56,
-         leading: GestureDetector(
+         leading: InkWell(
            child: Padding(
-             padding: EdgeInsetsGeometry.only(left: paddingLeft ?? 16),
+             padding: EdgeInsetsGeometry.only(left: paddingLeft ?? 8),
              child: leadingIcon,
            ),
            onTap: () => Scaffold.of(context).openDrawer(),

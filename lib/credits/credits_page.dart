@@ -67,6 +67,9 @@ class CreditsPage extends StatelessWidget {
         child: Container(
           constraints: BoxConstraints(maxWidth: 400),
           child: CustomScrollView(
+            scrollBehavior: ScrollConfiguration.of(
+              context,
+            ).copyWith(scrollbars: false, overscroll: false),
             slivers: [
               SliverAppBar(
                 title: Text(
