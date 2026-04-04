@@ -49,4 +49,3 @@ app.*.map.json
 sentry.properties
 shannons-macbook-pro.local.key.pem
 dev
-.vscode/launch.json
