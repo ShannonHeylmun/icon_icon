@@ -34,9 +34,21 @@ List<Credit> packages = [
     copyText: "https://pub.dev/packages/iconoir_flutter",
     name: "iconoir_flutter",
   ),
+];
+
+List<Credit> about = [
+  Credit(
+    copyText: "https://github.com/ShannonHeylmun/icon_icon/",
+    name: "Source",
+  ),
   Credit(
     copyText: "https://github.com/ShannonHeylmun/icon_icon/issues",
-    name: "Report Issus Here",
+    name: "Report Issues",
+  ),
+  Credit(
+    copyText:
+        "https://github.com/ShannonHeylmun/icon_icon/blob/main/LICENSE.md",
+    name: "License",
   ),
 ];
 
@@ -73,7 +85,7 @@ class CreditsPage extends StatelessWidget {
             slivers: [
               SliverAppBar(
                 title: Text(
-                  "Flutter Packages",
+                  "Stack and Packages",
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
@@ -87,6 +99,29 @@ class CreditsPage extends StatelessWidget {
                     try {
                       Clipboard.setData(
                         ClipboardData(text: packages[index].copyText),
+                      );
+                    } catch (e) {
+                      log.shout(e);
+                    }
+                  },
+                ),
+              ),
+              SliverAppBar(
+                title: Text(
+                  "About This Project",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+              SliverList.builder(
+                itemCount: about.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Center(child: Text(about[index].name)),
+                  titleAlignment: ListTileTitleAlignment.center,
+                  onTap: () => onTap(about[index]),
+                  onLongPress: () {
+                    try {
+                      Clipboard.setData(
+                        ClipboardData(text: about[index].copyText),
                       );
                     } catch (e) {
                       log.shout(e);
