@@ -1,4 +1,5 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,7 @@ import 'package:icon_icon/animated_icons/animated_icons_page.dart';
 import 'package:icon_icon/components/custom_drawer_list_tile.dart';
 import 'package:icon_icon/components/helpers.dart';
 import 'package:icon_icon/credits/credits_page.dart';
+import 'package:icon_icon/cupertino_icons/cupertino_icons_page.dart';
 import 'package:icon_icon/fluentui_icons/fluentui_icons_page.dart';
 import 'package:icon_icon/iconoir_icons/iconoir_page.dart';
 import 'package:icon_icon/material_symbols/material_symbols_page.dart';
@@ -30,6 +32,7 @@ Color creditsColor = Colors.blueGrey.shade900;
 const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
 const Color emojiColor = Color.fromRGBO(255, 220, 93, 1);
 const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, 1);
+const Color cupertinoIconsColor = CupertinoColors.systemCyan;
 const Color materialIconsColor = Color.fromRGBO(230, 113, 67, 1);
 const Color materialSymbolsColor = Color.fromRGBO(159, 134, 255, 1);
 const Color fluentuiIconsColor = Color.fromRGBO(62, 233, 156, 1);
@@ -37,6 +40,7 @@ Color iconoirColor = Colors.blueGrey.shade200;
 Color omnibusGlyphsColor = Colors.indigo.shade900;
 Color seedColorContrast = contrastColor(seedColor);
 Color emojiColorContrast = contrastColor(emojiColor);
+Color cupertinoIconsColorContrast = contrastColor(cupertinoIconsColor);
 Color animatedIconsColorContrast = contrastColor(animatedIconsColor);
 Color materialIconsColorContrast = contrastColor(materialIconsColor);
 Color materialSymbolsColorContrast = contrastColor(materialSymbolsColor);
@@ -61,6 +65,8 @@ Widget emojiIcon({double? size}) => Text(
   "❄️",
   style: GoogleFonts.notoEmoji(color: emojiColorContrast, fontSize: size ?? 18),
 );
+
+IconData cupertinoIconSnow = CupertinoIcons.snow;
 
 final log = Logger('OverallLogger');
 void main() {
@@ -235,6 +241,19 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       leadingWidget: iconoirIcon,
                       title: "Iconoir Icons",
                       onTapCallback: () => updateSelectedPage(IconoirPage()),
+                      context: context,
+                    ),
+                    CustomDrawerListTile(
+                      tileColor: cupertinoIconsColor,
+                      textColor: cupertinoIconsColorContrast,
+                      leadingWidget: Icon(
+                        cupertinoIconSnow,
+                        size: 24,
+                        color: cupertinoIconsColorContrast,
+                      ),
+                      title: "Cupertino Icons",
+                      onTapCallback: () =>
+                          updateSelectedPage(CupertinoIconsPage()),
                       context: context,
                     ),
                     // CustomDrawerListTile(

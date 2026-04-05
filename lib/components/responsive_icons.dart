@@ -252,8 +252,8 @@ class ResponsiveIcons extends StatelessWidget {
 
   String? listSubtitle((String, Object) iconData) {
     switch (iconData.$2) {
-      case IconDataRounded():
-        return (iconData.$2 as IconData).codePoint.toString();
+      // case IconDataRounded():
+      //   return (iconData.$2 as IconData).codePoint.toString();
       case IconData():
         return (iconData.$2 as IconData).codePoint.toString();
       case List<List<dynamic>>():
@@ -277,8 +277,8 @@ class ResponsiveIcons extends StatelessWidget {
         }
     }
     switch (iconData) {
-      case IconDataRounded():
-        return Icon(iconData, size: 48);
+      // case IconDataRounded():
+      //   return Icon(iconData, size: 48);
       case IconData():
         return Icon(iconData, size: 48);
       case List<List<dynamic>>():
