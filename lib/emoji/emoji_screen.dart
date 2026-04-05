@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icon_icon/components/bottom_search_card.dart';
 import 'package:icon_icon/components/custom_app_bar.dart';
 import 'package:icon_icon/components/responsive_icons.dart';
@@ -24,8 +25,11 @@ class EmojiScreen extends StatelessWidget {
             Positioned(
               top: 8,
               child: Text(
-                UnicodeEmojis.search("snowflake").first.emoji,
-                style: TextStyle(fontSize: 30),
+                "❄️",
+                style: GoogleFonts.notoEmoji(
+                  color: emojiColorContrast,
+                  fontSize: 30,
+                ),
               ),
             ),
           ],

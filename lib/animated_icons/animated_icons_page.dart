@@ -24,7 +24,10 @@ class _AnimatedIconsPageState extends State<AnimatedIconsPage>
         AnimationController(vsync: this, duration: const Duration(seconds: 1))
           ..forward()
           ..repeat(reverse: true);
-    animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
+    animation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(controller).drive(CurveTween(curve: Curves.easeInOut));
   }
 
   @override

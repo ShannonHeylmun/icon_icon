@@ -13,7 +13,7 @@ import 'package:icon_icon/material_symbols/material_symbols_page.dart';
 import 'package:icon_icon/emoji/emoji_screen.dart';
 import 'package:icon_icon/huge_icons_lookup/huge_icons_lookup_page.dart';
 import 'package:icon_icon/material_icons/material_icons_page.dart';
-import 'package:icon_icon/omnibus_glyphs/omnibus_glyphs_screen.dart';
+
 import 'package:iconoir_flutter/regular/snow_flake.dart';
 import 'package:logging/logging.dart';
 
@@ -28,7 +28,7 @@ final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 //Colors
 Color creditsColor = Colors.blueGrey.shade900;
 const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
-const Color emojiColor = Color.fromRGBO(255, 220, 93, .4);
+const Color emojiColor = Color.fromRGBO(255, 220, 93, 1);
 const Color animatedIconsColor = Color.fromRGBO(4, 104, 215, 1);
 const Color materialIconsColor = Color.fromRGBO(230, 113, 67, 1);
 const Color materialSymbolsColor = Color.fromRGBO(159, 134, 255, 1);
@@ -57,6 +57,10 @@ Widget creditsIcon = HugeIcon(
   color: creditsColorContrast,
 );
 Widget iconoirIcon = SnowFlake(color: iconnoirColorContrast, width: 18);
+Widget emojiIcon({double? size}) => Text(
+  "❄️",
+  style: GoogleFonts.notoEmoji(color: emojiColorContrast, fontSize: size ?? 18),
+);
 
 final log = Logger('OverallLogger');
 void main() {
@@ -132,121 +136,128 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       debugShowCheckedModeBanner: false,
       title: 'icon_icon',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.indigoAccent),
+        colorScheme: .fromSeed(seedColor: creditsColor),
         textTheme: GoogleFonts.notoSansTextTheme(),
       ),
-      home: Scaffold(
-        key: drawerKey,
-        body: StreamBuilder(
-          builder: (context, AsyncSnapshot<Widget> snapshot) =>
-              snapshot.hasData ? snapshot.data! : SizedBox.shrink(),
-          stream: _selectedPage.stream,
-        ),
-        drawer: Drawer(
-          child: SafeArea(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                CustomDrawerListTile(
-                  leadingWidget: creditsIcon,
-                  tileColor: creditsColor,
-                  textColor: creditsColorContrast,
-                  title: "Credits",
-                  onTapCallback: () => updateSelectedPage(CreditsPage()),
-                  context: context,
-                ),
-                CustomDrawerListTile(
-                  tileColor: animatedIconsColor,
-                  textColor: animatedIconsColorContrast,
-                  leadingWidget: RotatedBox(
-                    quarterTurns: 2,
-                    child: AnimatedIcon(
-                      icon: AnimatedIcons.arrow_menu,
-                      size: 24.0,
-                      progress: animation,
-                      color: animatedIconsColorContrast,
+      home: StreamBuilder(
+        stream: _selectedPage.stream,
+        builder: (context, snapshot) {
+          return Scaffold(
+            key: drawerKey,
+            body: snapshot.hasData ? snapshot.data! : SizedBox.shrink(),
+            drawer: Drawer(
+              backgroundColor: creditsColor,
+              child: SafeArea(
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    CustomDrawerListTile(
+                      leadingWidget: creditsIcon,
+                      tileColor: creditsColor,
+                      textColor: creditsColorContrast,
+                      title: "Credits",
+                      onTapCallback: () => updateSelectedPage(CreditsPage()),
+                      context: context,
                     ),
-                  ),
-                  title: "Animated Icons",
-                  onTapCallback: () => updateSelectedPage(AnimatedIconsPage()),
-                  context: context,
+                    CustomDrawerListTile(
+                      tileColor: animatedIconsColor,
+                      textColor: animatedIconsColorContrast,
+                      leadingWidget: RotatedBox(
+                        quarterTurns: 2,
+                        child: AnimatedIcon(
+                          icon: AnimatedIcons.arrow_menu,
+                          size: 24.0,
+                          progress: animation,
+                          color: animatedIconsColorContrast,
+                        ),
+                      ),
+                      title: "Animated Icons",
+                      onTapCallback: () =>
+                          updateSelectedPage(AnimatedIconsPage()),
+                      context: context,
+                    ),
+                    CustomDrawerListTile(
+                      tileColor: emojiColor,
+                      textColor: emojiColorContrast,
+                      leadingWidget: emojiIcon(),
+                      title: "Unicode Emoji",
+                      onTapCallback: () => updateSelectedPage(EmojiScreen()),
+                      context: context,
+                    ),
+                    CustomDrawerListTile(
+                      tileColor: seedColor,
+                      textColor: seedColorContrast,
+                      leadingWidget: hugeIcon,
+                      title: "Huge Icons",
+                      onTapCallback: () =>
+                          updateSelectedPage(HugeIconsLookupPage()),
+                      context: context,
+                    ),
+                    CustomDrawerListTile(
+                      tileColor: materialIconsColor,
+                      textColor: materialIconsColorContrast,
+                      leadingWidget: Icon(
+                        MdiIcons.snowflake,
+                        size: 24,
+                        color: materialIconsColorContrast,
+                      ),
+                      title: "Material Design Icons",
+                      onTapCallback: () =>
+                          updateSelectedPage(MaterialIconsPage()),
+                      context: context,
+                    ),
+                    CustomDrawerListTile(
+                      tileColor: materialSymbolsColor,
+                      textColor: materialSymbolsColorContrast,
+                      leadingWidget: Icon(
+                        Symbols.mode_cool,
+                        color: materialSymbolsColorContrast,
+                      ),
+                      title: "Material Symbols",
+                      onTapCallback: () =>
+                          updateSelectedPage(MaterialSymbolsPage()),
+                      context: context,
+                    ),
+                    CustomDrawerListTile(
+                      tileColor: fluentuiIconsColor,
+                      textColor: fluentuiIconsColorContrast,
+                      leadingWidget: Icon(
+                        FluentIcons.weather_snowflake_24_filled,
+                      ),
+                      title: "Fluent Icons",
+                      onTapCallback: () =>
+                          updateSelectedPage(FluentIconsPage()),
+                      context: context,
+                    ),
+                    CustomDrawerListTile(
+                      tileColor: iconoirColor,
+                      textColor: fluentuiIconsColorContrast,
+                      leadingWidget: iconoirIcon,
+                      title: "Iconoir Icons",
+                      onTapCallback: () => updateSelectedPage(IconoirPage()),
+                      context: context,
+                    ),
+                    // CustomDrawerListTile(
+                    //   tileColor: omnibusGlyphsColor,
+                    //   textColor: omnibusGlyphsColorContrast,
+                    //   leadingWidget: Text(
+                    //     "❄️",
+                    //     style: GoogleFonts.notoEmoji(
+                    //       color: omnibusGlyphsColorContrast,
+                    //       fontSize: 18,
+                    //     ),
+                    //   ),
+                    //   title: "Search All",
+                    //   onTapCallback: () =>
+                    //       updateSelectedPage(OmnibusGlyphsScreen()),
+                    //   context: context,
+                    // ),
+                  ],
                 ),
-                CustomDrawerListTile(
-                  tileColor: emojiColor,
-                  textColor: emojiColorContrast,
-                  leadingWidget: Text("❄️", style: TextStyle(fontSize: 18)),
-                  title: "Unicode Emoji",
-                  onTapCallback: () => updateSelectedPage(EmojiScreen()),
-                  context: context,
-                ),
-                CustomDrawerListTile(
-                  tileColor: seedColor,
-                  textColor: seedColorContrast,
-                  leadingWidget: hugeIcon,
-                  title: "Huge Icons",
-                  onTapCallback: () =>
-                      updateSelectedPage(HugeIconsLookupPage()),
-                  context: context,
-                ),
-                CustomDrawerListTile(
-                  tileColor: materialIconsColor,
-                  textColor: materialIconsColorContrast,
-                  leadingWidget: Icon(
-                    MdiIcons.snowflake,
-                    size: 24,
-                    color: materialIconsColorContrast,
-                  ),
-                  title: "Material Design Icons",
-                  onTapCallback: () => updateSelectedPage(MaterialIconsPage()),
-                  context: context,
-                ),
-                CustomDrawerListTile(
-                  tileColor: materialSymbolsColor,
-                  textColor: materialSymbolsColorContrast,
-                  leadingWidget: Icon(
-                    Symbols.mode_cool,
-                    color: materialSymbolsColorContrast,
-                  ),
-                  title: "Material Symbols",
-                  onTapCallback: () =>
-                      updateSelectedPage(MaterialSymbolsPage()),
-                  context: context,
-                ),
-                CustomDrawerListTile(
-                  tileColor: fluentuiIconsColor,
-                  textColor: fluentuiIconsColorContrast,
-                  leadingWidget: Icon(FluentIcons.weather_snowflake_24_filled),
-                  title: "Fluent Icons",
-                  onTapCallback: () => updateSelectedPage(FluentIconsPage()),
-                  context: context,
-                ),
-                CustomDrawerListTile(
-                  tileColor: iconoirColor,
-                  textColor: fluentuiIconsColorContrast,
-                  leadingWidget: iconoirIcon,
-                  title: "Iconoir Icons",
-                  onTapCallback: () => updateSelectedPage(IconoirPage()),
-                  context: context,
-                ),
-                // CustomDrawerListTile(
-                //   tileColor: omnibusGlyphsColor,
-                //   textColor: omnibusGlyphsColorContrast,
-                //   leadingWidget: Text(
-                //     "❄️",
-                //     style: GoogleFonts.notoEmoji(
-                //       color: omnibusGlyphsColorContrast,
-                //       fontSize: 18,
-                //     ),
-                //   ),
-                //   title: "Search All",
-                //   onTapCallback: () =>
-                //       updateSelectedPage(OmnibusGlyphsScreen()),
-                //   context: context,
-                // ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

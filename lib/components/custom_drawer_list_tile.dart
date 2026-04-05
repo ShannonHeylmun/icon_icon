@@ -13,6 +13,7 @@ class CustomDrawerListTile extends ListTile {
     titleCopyText,
     required VoidCallback onTapCallback,
     required BuildContext context,
+    Widget? trailing,
   }) : super(
          onTap: () {
            onTapCallback();
@@ -43,5 +44,6 @@ class CustomDrawerListTile extends ListTile {
              ],
            ),
          ),
+         trailing: trailing,
        );
 }
