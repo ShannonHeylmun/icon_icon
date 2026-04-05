@@ -172,15 +172,22 @@ class ResponsiveIcons extends StatelessWidget {
             itemBuilder: (context, index) {
               (String, Object) iconData = iconsToShow[index];
               String? subTitle = listSubtitle(iconData);
-              return InkWell(
-                onTap: () => copyEmojiOrName(context, iconData.$1, iconData.$2),
-                onLongPress: () => showInfoModal(context, iconData.$2),
-                onDoubleTap: () =>
-                    copySubtitle(context, iconData.$1, iconData.$2),
-                child: ListTile(
-                  leading: listTileLeading(iconData.$2),
-                  title: Text(listTitle(iconData)),
-                  subtitle: subTitle == null ? null : Text(subTitle),
+              String mainCopy = mainCopyText(iconData.$2, iconData.$1);
+              return Tooltip(
+                message: subTitle == null
+                    ? "Tap to copy $mainCopy"
+                    : "Tap to copy $mainCopy\nDouble Tap to copy $subTitle",
+                child: InkWell(
+                  onTap: () =>
+                      copyEmojiOrName(context, iconData.$1, iconData.$2),
+                  onLongPress: () => showInfoModal(context, iconData.$2),
+                  onDoubleTap: () =>
+                      copySubtitle(context, iconData.$1, iconData.$2),
+                  child: ListTile(
+                    leading: listTileLeading(iconData.$2),
+                    title: Text(listTitle(iconData)),
+                    subtitle: subTitle == null ? null : Text(subTitle),
+                  ),
                 ),
               );
             },
@@ -192,47 +199,54 @@ class ResponsiveIcons extends StatelessWidget {
             itemCount: iconsToShow.length,
             itemBuilder: (context, index) {
               (String, Object) iconData = iconsToShow[index];
-              return Card(
-                clipBehavior: Clip.hardEdge,
-                child: InkWell(
-                  onTap: () =>
-                      copyEmojiOrName(context, iconData.$1, iconData.$2),
-                  onLongPress: () => showInfoModal(context, iconData.$2),
-                  onDoubleTap: () =>
-                      copySubtitle(context, iconData.$1, iconData.$2),
-                  onSecondaryTap: () =>
-                      copyEmojiOrName(context, iconData.$1, iconData.$2),
-                  child: GridTile(
-                    header: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        listTitle((iconData.$1, iconData.$2)),
-                        textAlign: TextAlign.center,
-                        softWrap: true,
-                      ),
-                    ),
-                    footer: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: category(iconData.$2),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            listTileLeading(iconData.$2),
-                            listSubtitle(iconData) == null
-                                ? SizedBox.shrink()
-                                : Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      listSubtitle(iconData)!,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                          ],
+              String mainCopy = mainCopyText(iconData.$2, iconData.$1);
+              String? subTitle = listSubtitle(iconData);
+              return Tooltip(
+                message: subTitle == null
+                    ? "Tap to copy $mainCopy"
+                    : "Tap to copy $mainCopy\nDouble Tap to copy $subTitle",
+                child: Card(
+                  clipBehavior: Clip.hardEdge,
+                  child: InkWell(
+                    onTap: () =>
+                        copyEmojiOrName(context, iconData.$1, iconData.$2),
+                    onLongPress: () => showInfoModal(context, iconData.$2),
+                    onDoubleTap: () =>
+                        copySubtitle(context, iconData.$1, iconData.$2),
+                    onSecondaryTap: () =>
+                        copyEmojiOrName(context, iconData.$1, iconData.$2),
+                    child: GridTile(
+                      header: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          listTitle((iconData.$1, iconData.$2)),
+                          textAlign: TextAlign.center,
+                          softWrap: true,
                         ),
-                      ],
+                      ),
+                      footer: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: category(iconData.$2),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              listTileLeading(iconData.$2),
+                              listSubtitle(iconData) == null
+                                  ? SizedBox.shrink()
+                                  : Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        listSubtitle(iconData)!,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
