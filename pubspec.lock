@@ -189,10 +189,10 @@ packages:
     dependency: "direct main"
     description:
       name: cupertino_icons
-      sha256: ba631d1c7f7bef6b729a622b7b752645a2d076dba9976925b8f25725a30e1ee6
+      sha256: "41e005c33bd814be4d3096aff55b1908d419fde52ca656c8c47719ec745873cd"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.8"
+    version: "1.0.9"
   dart_style:
     dependency: transitive
     description:
@@ -388,10 +388,10 @@ packages:
     dependency: "direct main"
     description:
       name: hugeicons
-      sha256: d19c0e2b57ccf455dd8ef08b84da40ae6dbba898c92960a0a0ada77df7865b8a
+      sha256: "03845d6fc8fed4a9df27d3710c94499f6f624e2cd343e858be2578a4ec69ad0a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.5"
+    version: "1.1.6"
   iconoir_flutter:
     dependency: "direct main"
     description:
@@ -508,10 +508,10 @@ packages:
     dependency: "direct main"
     description:
       name: material_symbols_icons
-      sha256: c62b15f2b3de98d72cbff0148812f5ef5159f05e61fc9f9a089ec2bb234df082
+      sha256: "10a74aaa9e566c92f8aa14809d2dd78156fb93743348ebffec0345c38eb35706"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2906.0"
+    version: "4.2928.1"
   meta:
     dependency: transitive
     description:
@@ -740,10 +740,10 @@ packages:
     dependency: "direct main"
     description:
       name: sentry
-      sha256: a49b4fb1cba576fe216347dc2a0e6d76076fb998e6012857db96f991c23b7b3c
+      sha256: "288aee3d35f252ac0dc3a4b0accbbe7212fa2867604027f2cc5bc65334afd743"
       url: "https://pub.dev"
     source: hosted
-    version: "9.15.0"
+    version: "9.16.0"
   sentry_dart_plugin:
     dependency: "direct dev"
     description:
@@ -756,18 +756,18 @@ packages:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: "25150030c93bd1d4b727ab61cfb09e99121c69ce90fa820bb9ca16dab433e43a"
+      sha256: f9e87d5895cc437902aa2b081727ee7e46524fe7cc2e1910f535480a3eeb8bed
       url: "https://pub.dev"
     source: hosted
-    version: "9.15.0"
+    version: "9.16.0"
   sentry_logging:
     dependency: "direct main"
     description:
       name: sentry_logging
-      sha256: bcc9f1375b20b4d7189a1c0b03984b7b5fb05006a80620aeba71b424b699ad6d
+      sha256: "86c750f36c1a1fc64cedbfe8b6e2b523925bff571360ef13b4d010f20e059364"
       url: "https://pub.dev"
     source: hosted
-    version: "9.15.0"
+    version: "9.16.0"
   shelf:
     dependency: transitive
     description:
