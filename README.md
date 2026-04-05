@@ -1,7 +1,7 @@
 # icon_icon
 
-A small [Flutter](flutter.dev) project to showcase and help developers utilize a selection the many icons and glyphs available within the Flutter framework. This is not intended to be limited in its utility only to Flutter devs; for example, the emoji lookup allows for copying the Emoji or the code point to the clipboard, including skin variations.
+A small [Flutter](flutter.dev) project to showcase and help developers utilize a wide selection the icons and glyphs. While this was developed with my own Flutter workflows in mind, it should be useful for anyone working with the glyph sets offered herein. Visit [the live web app here](https://shannonheylmun.github.io/icon_icon/).
 
-Within the Apple ecosystem, this works with the system clipboard, providing for syncing across devices (if using).
+Search for Emoji by name, category, ASCII, code point, and skin variants. Copy emoji (click/tap) or code point (double click/tap) to the system clipboard. Within the Apple ecosystem, this provides for pasting across networked devices (if using).
 
-Visit [the live site here](https://shannonheylmun.github.io/icon_icon/).
+https://github.com/user-attachments/assets/3d5ddbf1-1f08-438b-a4f0-28a74380eb18
