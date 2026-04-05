@@ -273,7 +273,7 @@ class ResponsiveIcons extends StatelessWidget {
     switch (iconData) {
       case Emoji():
         if (iconData.emoji == "🙂‍↔️" || iconData.emoji == "🙂‍↕️") {
-          // log.fine(iconData.emoji);
+          // Hacky fix for specific emoji
         }
     }
     switch (iconData) {
@@ -292,7 +292,7 @@ class ResponsiveIcons extends StatelessWidget {
       case AnimatedIconData():
         return AnimatedIcon(icon: iconData, progress: animation!, size: 48);
       case StatelessWidget():
-        return iconData;
+        return SizedBox(height: 48, width: 48, child: iconData);
       case _:
         return Icon(Icons.error);
     }
