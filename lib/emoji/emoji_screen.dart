@@ -20,19 +20,9 @@ class EmojiScreen extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         backgroundColor: emojiColor,
-        leadingIcon: Stack(
-          children: [
-            Positioned(
-              top: 8,
-              child: Text(
-                "❄️",
-                style: GoogleFonts.notoEmoji(
-                  color: emojiColorContrast,
-                  fontSize: 30,
-                ),
-              ),
-            ),
-          ],
+        leadingIcon: Text(
+          "❄️",
+          style: GoogleFonts.notoEmoji(color: emojiColorContrast, fontSize: 30),
         ),
         titleText: "Unicode Emoji",
       ),

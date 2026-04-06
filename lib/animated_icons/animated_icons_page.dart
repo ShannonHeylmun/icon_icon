@@ -30,17 +30,10 @@ class _AnimatedIconsPageState extends State<AnimatedIconsPage> {
         context,
         backgroundColor: animatedIconsColor,
         foregroundColor: animatedIconsColorContrast,
-        leadingIcon: Stack(
-          children: [
-            Positioned(
-              top: 8,
-              child: AnimatedIcon(
-                icon: AnimatedIcons.menu_close,
-                size: 36.0,
-                progress: animation,
-              ),
-            ),
-          ],
+        leadingIcon: AnimatedIcon(
+          icon: AnimatedIcons.menu_close,
+          size: 36.0,
+          progress: animation,
         ),
         titleText: "Animated Icons",
       ),
