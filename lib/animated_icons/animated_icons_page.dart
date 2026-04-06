@@ -5,8 +5,6 @@ import 'package:icon_icon/components/custom_app_bar.dart';
 import 'package:icon_icon/components/responsive_icons.dart';
 import 'package:icon_icon/main.dart';
 
-late Animation<double> animation;
-
 class AnimatedIconsPage extends StatefulWidget {
   const AnimatedIconsPage({super.key});
 
@@ -14,25 +12,14 @@ class AnimatedIconsPage extends StatefulWidget {
   State<AnimatedIconsPage> createState() => _AnimatedIconsPageState();
 }
 
-class _AnimatedIconsPageState extends State<AnimatedIconsPage>
-    with SingleTickerProviderStateMixin {
-  late AnimationController controller;
+class _AnimatedIconsPageState extends State<AnimatedIconsPage> {
   @override
   void initState() {
     super.initState();
-    controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1))
-          ..forward()
-          ..repeat(reverse: true);
-    animation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(controller).drive(CurveTween(curve: Curves.easeInOut));
   }
 
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
   }
 
@@ -65,10 +52,7 @@ class _AnimatedIconsPageState extends State<AnimatedIconsPage>
         builder: (context, asyncSnapshot) {
           List<(String, AnimatedIconData)> iconsToShow =
               asyncSnapshot.data ?? [];
-          return ResponsiveIcons(
-            iconsToShow: iconsToShow,
-            animation: animation,
-          );
+          return ResponsiveIcons(iconsToShow: iconsToShow);
         },
       ),
     );
