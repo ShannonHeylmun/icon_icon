@@ -53,7 +53,9 @@ class CustomAppBar extends AppBar {
          actions: [
            Icon(Icons.light_mode),
            Switch(
-             value: BlocProvider.of<ThemeBloc>(context).state == ThemeMode.dark,
+             value: BlocProvider.of<ThemeBloc>(context).state is ThemeDark
+                 ? true
+                 : false,
              onChanged: (b) {
                log.info("Toggling theme.");
                try {

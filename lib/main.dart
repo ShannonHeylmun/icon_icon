@@ -110,7 +110,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeMode>(
+    return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, themeState) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -128,7 +128,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
               ThemeData.dark().textTheme,
             ),
           ),
-          themeMode: themeState,
+          themeMode: themeState is ThemeDark ? ThemeMode.dark : ThemeMode.light,
           home: StreamBuilder(
             stream: _selectedPage.stream,
             builder: (context, snapshot) {

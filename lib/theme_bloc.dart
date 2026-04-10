@@ -1,37 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class ThemeBloc extends Bloc<ThemeEvent, ThemeMode> {
-  ThemeBloc() : super(ThemeMode.system) {
+class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
+  ThemeBloc()
+    : super(ThemeMode.system == ThemeMode.dark ? ThemeDark() : ThemeLight()) {
     on<SetInitialTheme>((event, emit) async {
-      bool hasThemeDark = await isDark();
-
-      emit(hasThemeDark ? ThemeMode.dark : ThemeMode.light);
+      emit(ThemeMode.system == ThemeMode.dark ? ThemeDark() : ThemeLight());
     });
 
     on<ChangeTheme>((event, emit) async {
-      bool hasThemeDark = await isDark();
-
-      emit(hasThemeDark ? ThemeMode.light : ThemeMode.dark);
-      setTheme(!hasThemeDark);
+      emit(state is ThemeLight ? ThemeDark() : ThemeLight());
     });
   }
 }
 
 Future<bool> isDark() async {
-  final SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
-
-  return sharedPreferences.getBool('isDark') ??
-      ThemeMode.system == ThemeMode.dark;
-}
-
-Future<void> setTheme(bool isDark) async {
-  final SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
-
-  sharedPreferences.setBool('isDark', isDark);
+  return ThemeMode.system == ThemeMode.dark;
 }
 
 abstract class ThemeEvent {}
@@ -39,3 +23,9 @@ abstract class ThemeEvent {}
 class SetInitialTheme extends ThemeEvent {}
 
 class ChangeTheme extends ThemeEvent {}
+
+abstract class ThemeState {}
+
+class ThemeDark extends ThemeState {}
+
+class ThemeLight extends ThemeState {}
