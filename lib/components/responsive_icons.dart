@@ -1,14 +1,12 @@
 import 'dart:ui';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:icon_icon/emoji/emoji_screen.dart';
 import 'package:icon_icon/main.dart';
 import 'package:logging/logging.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:material_symbols_icons/symbols.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
 List<Text> instructions = [
@@ -127,11 +125,6 @@ class ResponsiveIcons extends StatelessWidget {
   }
 
   String mainCopyText(Object o, String s) {
-    if (o.runtimeType == Emoji) {
-      log.info("Emoji short names: ${(o as Emoji).shortNames.toString()}");
-      log.info("Emoji subcategory: ${(o).subcategory}");
-      log.info("Emoji texts: ${(o).texts.toString()}");
-    }
     return switch (o) {
       Emoji() => o.emoji,
       List<List<dynamic>>() => "strokeRounded$s",
@@ -143,7 +136,6 @@ class ResponsiveIcons extends StatelessWidget {
     HapticFeedback.heavyImpact();
     String? str = listSubtitle((s, o));
 
-    log.info("Double Tap to copy $str");
     if (str != null) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).clearSnackBars();
