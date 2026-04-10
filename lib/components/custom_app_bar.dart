@@ -51,13 +51,13 @@ class CustomAppBar extends AppBar {
            ),
          ),
          actions: [
-           //  Icon(Icons.light_mode),
-           //  Switch(
-           //    value: BlocProvider.of<ThemeBloc>(context).state,
-           //    onChanged: (b) =>
-           //        BlocProvider.of<ThemeBloc>(context).add(ChangeTheme()),
-           //  ),
-           //  Icon(Icons.dark_mode),
+           Icon(Icons.light_mode),
+           Switch(
+             value: BlocProvider.of<ThemeBloc>(context).state == ThemeMode.dark,
+             onChanged: (b) =>
+                 BlocProvider.of<ThemeBloc>(context).add(ChangeTheme()),
+           ),
+           Icon(Icons.dark_mode),
            if (supplementaryActions != null) ...supplementaryActions,
          ],
        );

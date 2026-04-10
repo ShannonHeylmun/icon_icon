@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ThemeBloc extends Bloc<ThemeEvent, bool> {
-  ThemeBloc() : super(false) {
+class ThemeBloc extends Bloc<ThemeEvent, ThemeMode> {
+  ThemeBloc() : super(ThemeMode.system) {
     on<SetInitialTheme>((event, emit) async {
       bool hasThemeDark = await isDark();
 
-      emit(hasThemeDark);
+      emit(hasThemeDark ? ThemeMode.dark : ThemeMode.light);
     });
 
     on<ChangeTheme>((event, emit) async {
       bool hasThemeDark = await isDark();
 
-      emit(!hasThemeDark);
+      emit(hasThemeDark ? ThemeMode.light : ThemeMode.dark);
       setTheme(!hasThemeDark);
     });
   }
