@@ -24,6 +24,7 @@
 			"type": "dart",
 		},
 		{
+			"deviceId": "iphone",
 			"flutterMode": "release",
 			"name": "icon_icon (release mode)",
 			"program": "lib/main.dart",

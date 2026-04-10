@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icon_icon/main.dart';
+import 'package:icon_icon/theme_bloc.dart';
 
 void setBrightness(ThemeMode themeMode) {
   brightnessStreamController.add(themeMode);
@@ -49,12 +51,13 @@ class CustomAppBar extends AppBar {
            ),
          ),
          actions: [
-           //  Icon(Icons.dark_mode),
-           //  Switch(
-           //    value: brightnessStreamController.stream.value == ThemeMode.light,
-           //    onChanged: toggleBrightness(),
-           //  ),
-           //  Icon(Icons.light_mode),
+           Icon(Icons.light_mode),
+           Switch(
+             value: BlocProvider.of<ThemeBloc>(context).state,
+             onChanged: (b) =>
+                 BlocProvider.of<ThemeBloc>(context).add(ChangeTheme()),
+           ),
+           Icon(Icons.dark_mode),
            if (supplementaryActions != null) ...supplementaryActions,
          ],
        );

@@ -1,12 +1,13 @@
-
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:icon_icon/components/my_drawer.dart';
 import 'package:icon_icon/colors.dart';
 import 'package:icon_icon/pages/emoji/emoji_screen.dart';
+import 'package:icon_icon/theme_bloc.dart';
 
 import 'package:iconoir_flutter/regular/snow_flake.dart';
 import 'package:logging/logging.dart';
@@ -68,7 +69,12 @@ void main() {
   //   // If you want to enable sending structured logs, set `enableLogs` to `true`
   //   options.enableLogs = true;
   // }, appRunner: () =>
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create: (context) => ThemeBloc()..add(SetInitialTheme()),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -104,9 +110,8 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: brightnessStreamController.stream,
-      builder: (context, asyncSnapshot) {
+    return BlocBuilder<ThemeBloc, bool>(
+      builder: (context, themeState) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'icon_icon',
@@ -123,7 +128,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
               ThemeData.dark().textTheme,
             ),
           ),
-          themeMode: asyncSnapshot.data!,
+          themeMode: themeState ? ThemeMode.dark : ThemeMode.light,
           home: StreamBuilder(
             stream: _selectedPage.stream,
             builder: (context, snapshot) {
