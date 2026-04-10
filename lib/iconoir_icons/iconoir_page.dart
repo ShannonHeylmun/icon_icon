@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icon_icon/colors.dart';
 import 'package:icon_icon/components/bottom_search_card.dart';
 import 'package:icon_icon/components/custom_app_bar.dart';
 import 'package:icon_icon/components/responsive_icons.dart';

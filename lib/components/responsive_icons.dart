@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icon_icon/emoji/emoji_screen.dart';
 import 'package:icon_icon/main.dart';
@@ -262,7 +264,15 @@ Widget listTileLeading(Object iconData) {
     case AnimatedIconData():
       return AnimatedIcon(icon: iconData, progress: animation, size: 48);
     case StatelessWidget():
-      return SizedBox(height: 48, width: 48, child: iconData);
+      return ColorFiltered(
+        colorFilter: ColorFilter.mode(
+          PlatformDispatcher.instance.platformBrightness == Brightness.dark
+              ? Colors.white
+              : Colors.black,
+          BlendMode.srcIn,
+        ), // Apply a red color filter to the icon
+        child: SizedBox(height: 48, width: 48, child: iconData),
+      );
     case _:
       return Icon(Icons.error);
   }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class BottomSearchCard extends StatelessWidget {
@@ -11,7 +13,14 @@ class BottomSearchCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextField(
-          style: TextStyle(fontSize: 18, color: Color.fromRGBO(31, 31, 31, 1)),
+          style: TextStyle(
+            fontSize: 18,
+            color:
+                PlatformDispatcher.instance.platformBrightness ==
+                    Brightness.dark
+                ? Colors.white
+                : Color.fromRGBO(31, 31, 31, 1),
+          ),
           controller: controller,
           decoration: InputDecoration(
             hintText: 'Search...',

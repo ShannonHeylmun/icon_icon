@@ -1,5 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:icon_icon/colors.dart';
 import 'package:icon_icon/components/bottom_search_card.dart';
 import 'package:icon_icon/components/custom_app_bar.dart';
 import 'package:icon_icon/components/responsive_icons.dart';
@@ -85,6 +86,7 @@ class FluentIconsPage extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         backgroundColor: fluentuiIconsColor,
+        foregroundColor: fluentuiIconsColorContrast,
         leadingIcon: Icon(FluentIcons.weather_snowflake_24_regular, size: 36),
         paddingLeft: 0,
         actions: [

@@ -1,0 +1,24 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:icon_icon/components/helpers.dart';
+
+Color creditsColor = Colors.blueGrey.shade900;
+const Color seedColor = Color.fromRGBO(158, 225, 99, 1);
+const Color emojiColor = Color.fromRGBO(255, 204, 0, 1);
+Color animatedIconsColor = Colors.blue.shade300;
+const Color cupertinoIconsColor = CupertinoColors.systemBlue;
+const Color materialIconsColor = Color.fromRGBO(230, 113, 67, 1);
+const Color materialSymbolsColor = Colors.deepPurple;
+const Color fluentuiIconsColor = Color.fromRGBO(62, 233, 156, 1);
+Color iconoirColor = Colors.blueGrey.shade200;
+Color omnibusGlyphsColor = Colors.indigo.shade900;
+Color seedColorContrast = contrastColor(seedColor);
+Color emojiColorContrast = contrastColor(emojiColor);
+Color cupertinoIconsColorContrast = contrastColor(cupertinoIconsColor);
+Color animatedIconsColorContrast = contrastColor(animatedIconsColor);
+Color materialIconsColorContrast = contrastColor(materialIconsColor);
+Color materialSymbolsColorContrast = contrastColor(materialSymbolsColor);
+Color fluentuiIconsColorContrast = contrastColor(fluentuiIconsColor);
+Color creditsColorContrast = contrastColor(creditsColor);
+Color iconnoirColorContrast = contrastColor(iconoirColor);
+Color omnibusGlyphsColorContrast = contrastColor(omnibusGlyphsColor);
