@@ -51,6 +51,10 @@ List<Credit> about = [
         "https://github.com/ShannonHeylmun/icon_icon/blob/main/LICENSE.md",
     name: "License",
   ),
+  Credit(
+    copyText: "https://ShannonHeylmun.github.io/",
+    name: "About The Developer",
+  ),
 ];
 
 class CreditsPage extends StatelessWidget {
@@ -86,29 +90,6 @@ class CreditsPage extends StatelessWidget {
             slivers: [
               SliverAppBar(
                 title: Text(
-                  "Stack and Packages",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ),
-              SliverList.builder(
-                itemCount: packages.length,
-                itemBuilder: (context, index) => ListTile(
-                  title: Center(child: Text(packages[index].name)),
-                  titleAlignment: ListTileTitleAlignment.center,
-                  onTap: () => onTap(packages[index]),
-                  onLongPress: () {
-                    try {
-                      Clipboard.setData(
-                        ClipboardData(text: packages[index].copyText),
-                      );
-                    } catch (e) {
-                      log.shout(e);
-                    }
-                  },
-                ),
-              ),
-              SliverAppBar(
-                title: Text(
                   "About This Project",
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
@@ -123,6 +104,29 @@ class CreditsPage extends StatelessWidget {
                     try {
                       Clipboard.setData(
                         ClipboardData(text: about[index].copyText),
+                      );
+                    } catch (e) {
+                      log.shout(e);
+                    }
+                  },
+                ),
+              ),
+              SliverAppBar(
+                title: Text(
+                  "Stack and Packages",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+              SliverList.builder(
+                itemCount: packages.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Center(child: Text(packages[index].name)),
+                  titleAlignment: ListTileTitleAlignment.center,
+                  onTap: () => onTap(packages[index]),
+                  onLongPress: () {
+                    try {
+                      Clipboard.setData(
+                        ClipboardData(text: packages[index].copyText),
                       );
                     } catch (e) {
                       log.shout(e);
