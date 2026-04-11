@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc()
     : super(ThemeMode.system == ThemeMode.dark ? ThemeDark() : ThemeLight()) {
-    on<SetInitialTheme>((event, emit) async {
-      emit(ThemeMode.system == ThemeMode.dark ? ThemeDark() : ThemeLight());
-    });
+    // on<SetInitialTheme>((event, emit) async {
+    //   emit(ThemeMode.system == ThemeMode.dark ? ThemeDark() : ThemeLight());
+    // });
 
     on<ChangeTheme>((event, emit) async {
       emit(state is ThemeLight ? ThemeDark() : ThemeLight());
@@ -20,7 +20,7 @@ Future<bool> isDark() async {
 
 abstract class ThemeEvent {}
 
-class SetInitialTheme extends ThemeEvent {}
+// class SetInitialTheme extends ThemeEvent {}
 
 class ChangeTheme extends ThemeEvent {}
 

@@ -1,12 +1,16 @@
 import 'dart:ui';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icon_icon/pages/emoji/emoji_screen.dart';
 import 'package:icon_icon/main.dart';
+import 'package:icon_icon/theme_bloc.dart';
 import 'package:logging/logging.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
 List<Text> instructions = [
@@ -170,7 +174,7 @@ class ResponsiveIcons extends StatelessWidget {
               return ToolTipListCard(
                 title: listTitle(iconData),
                 subTitle: subTitle,
-                leading: listTileLeading(iconData.$2),
+                leading: listTileLeading(iconData.$2, context),
                 onTap: () => copyEmojiOrName(context, iconData.$1, iconData.$2),
                 onDoubleTap: () =>
                     copySubtitle(context, iconData.$1, iconData.$2),
@@ -192,7 +196,7 @@ class ResponsiveIcons extends StatelessWidget {
               return ToolTipGridCard(
                 title: listTitle(iconData),
                 subTitle: subTitle ?? "",
-                leading: listTileLeading(iconData.$2),
+                leading: listTileLeading(iconData.$2, context),
                 onTap: () => copyEmojiOrName(context, iconData.$1, iconData.$2),
                 onDoubleTap: () =>
                     copySubtitle(context, iconData.$1, iconData.$2),
@@ -233,7 +237,7 @@ String? listSubtitle((String, Object) iconData) {
   }
 }
 
-Widget listTileLeading(Object iconData) {
+Widget listTileLeading(Object iconData, BuildContext context) {
   switch (iconData) {
     case Emoji():
       if (iconData.emoji == "🙂‍↔️" || iconData.emoji == "🙂‍↕️") {
@@ -258,7 +262,7 @@ Widget listTileLeading(Object iconData) {
     case StatelessWidget():
       return ColorFiltered(
         colorFilter: ColorFilter.mode(
-          PlatformDispatcher.instance.platformBrightness == Brightness.dark
+          context.read<ThemeBloc>().state is ThemeDark
               ? Colors.white
               : Colors.black,
           BlendMode.srcIn,
@@ -312,7 +316,7 @@ class ToolTipListCard extends StatelessWidget {
         onLongPress: () => onLongPress(),
         onDoubleTap: () => onDoubleTap(),
         child: ListTile(
-          leading: listTileLeading(iconData.$2),
+          leading: listTileLeading(iconData.$2, context),
           title: Text(listTitle(iconData)),
           subtitle: subTitle == null ? null : Text(subTitle!),
         ),
@@ -374,7 +378,7 @@ class ToolTipGridCard extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    listTileLeading(iconData.$2),
+                    listTileLeading(iconData.$2, context),
                     listSubtitle(iconData) == null
                         ? SizedBox.shrink()
                         : Padding(

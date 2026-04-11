@@ -1,9 +1,9 @@
 // GENERATED - do not edit by hand
 // ignore_for_file: prefer_single_quotes
-import 'package:flutter/material.dart';
 import 'package:iconoir_flutter/iconoir_flutter.dart' as iconoir;
 
-List<(String, StatelessWidget)> iconoirIcons = [
+
+const iconoirIcons = [
   ('Accessibility', iconoir.Accessibility()),
   ('AccessibilitySign', iconoir.AccessibilitySign()),
   ('AccessibilityTech', iconoir.AccessibilityTech()),
@@ -1618,10 +1618,7 @@ List<(String, StatelessWidget)> iconoirIcons = [
   ('WateringSoil', iconoir.WateringSoil()),
   ('WebWindow', iconoir.WebWindow()),
   ('WebWindowEnergyConsumption', iconoir.WebWindowEnergyConsumption()),
-  (
-    'WebWindowEnergyConsumptionSolid',
-    iconoir.WebWindowEnergyConsumptionSolid(),
-  ),
+  ('WebWindowEnergyConsumptionSolid', iconoir.WebWindowEnergyConsumptionSolid()),
   ('WebWindowSolid', iconoir.WebWindowSolid()),
   ('WebWindowXmark', iconoir.WebWindowXmark()),
   ('WebWindowXmarkSolid', iconoir.WebWindowXmarkSolid()),

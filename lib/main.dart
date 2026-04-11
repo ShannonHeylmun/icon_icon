@@ -69,12 +69,7 @@ void main() {
   //   // If you want to enable sending structured logs, set `enableLogs` to `true`
   //   options.enableLogs = true;
   // }, appRunner: () =>
-  runApp(
-    BlocProvider(
-      create: (context) => ThemeBloc()..add(SetInitialTheme()),
-      child: const MyApp(),
-    ),
-  );
+  runApp(BlocProvider(create: (context) => ThemeBloc(), child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
