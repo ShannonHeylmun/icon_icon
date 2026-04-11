@@ -57,7 +57,6 @@ class CustomAppBar extends AppBar {
                  ? true
                  : false,
              onChanged: (b) {
-               log.info("Toggling theme.");
                try {
                  BlocProvider.of<ThemeBloc>(context).add(ChangeTheme());
                } catch (e) {
