@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icon_icon/theme_bloc.dart';
 
 class BottomSearchCard extends StatelessWidget {
   final TextEditingController controller;
@@ -15,9 +17,7 @@ class BottomSearchCard extends StatelessWidget {
         child: TextField(
           style: TextStyle(
             fontSize: 18,
-            color:
-                PlatformDispatcher.instance.platformBrightness ==
-                    Brightness.dark
+            color: context.read<ThemeBloc>().state is ThemeDark
                 ? Colors.white
                 : Color.fromRGBO(31, 31, 31, 1),
           ),
