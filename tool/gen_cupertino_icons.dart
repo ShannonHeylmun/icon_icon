@@ -76,7 +76,7 @@ void main() {
   out.writeln('];');
 
   File(
-    'lib/cupertino_icons/cupertino_icon_list.dart',
+    'lib/pages/cupertino_icons/cupertino_icon_list.dart',
   ).writeAsStringSync(out.toString());
   print('wrote ${entries.length} entries');
 }
@@ -94,7 +94,17 @@ String? _findFlutterRoot() {
     // e.g. /some/path/flutter/bin/flutter  →  /some/path/flutter
     final flutterBin = (whichResult.stdout as String).trim();
     final candidate = p.dirname(p.dirname(flutterBin));
-    if (File(p.join(candidate, 'packages', 'flutter', 'lib', 'src', 'cupertino', 'icons.dart')).existsSync()) {
+    if (File(
+      p.join(
+        candidate,
+        'packages',
+        'flutter',
+        'lib',
+        'src',
+        'cupertino',
+        'icons.dart',
+      ),
+    ).existsSync()) {
       return candidate;
     }
   }

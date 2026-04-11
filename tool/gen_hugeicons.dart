@@ -31,7 +31,8 @@ void main() {
       .listSync(recursive: true)
       .whereType<File>()
       .firstWhere(
-        (f) => p.basename(f.path) == 'hugeicons.dart' &&
+        (f) =>
+            p.basename(f.path) == 'hugeicons.dart' &&
             f.path.contains('hugeicons-'),
         orElse: () => throw StateError(
           'hugeicons.dart not found. Ensure "flutter pub get" has been run.',
@@ -66,15 +67,13 @@ void main() {
   out.writeln('// ignore_for_file: prefer_single_quotes');
   out.writeln('import \'package:hugeicons/hugeicons.dart\';');
   out.writeln('');
-  out.writeln(
-    'List<(String, List<List<dynamic>>)> hugeHelperList = [',
-  );
+  out.writeln('List<(String, List<List<dynamic>>)> hugeHelperList = [');
   for (var e in entries) {
     out.writeln(e);
   }
   out.writeln('];');
   File(
-    'lib/huge_icons_lookup/helper_huge_icons.dart',
+    'lib/pages/huge_icons_lookup/helper_huge_icons.dart',
   ).writeAsStringSync(out.toString());
   print('wrote ${entries.length} entries');
 }

@@ -73,7 +73,7 @@ void main() {
   }
   out.writeln('];');
   File(
-    'lib/fluentui_icons/fluentui_icon_list.dart',
+    'lib/pages/fluentui_icons/fluentui_icon_list.dart',
   ).writeAsStringSync(out.toString());
   print('wrote ${entries.length} entries');
 }

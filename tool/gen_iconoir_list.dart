@@ -130,39 +130,9 @@ void main() {
 
   out.writeln('];');
 
-  final outputFile = File('lib/iconoir_icons/iconoir_icon_list.dart');
+  final outputFile = File('lib/pages/iconoir_icons/iconoir_icon_list.dart');
   outputFile.createSync(recursive: true);
   outputFile.writeAsStringSync(out.toString());
 
   print('wrote ${iconNames.length} entries to ${outputFile.path}');
 }
-// SAMPLE ACTION
-// name: Generate icon lists
-
-// on:
-//   push:
-//     branches: [main]
-//   workflow_dispatch:
-
-// jobs:
-//   generate:
-//     runs-on: ubuntu-latest
-//     steps:
-//       - uses: actions/checkout@v4
-//       - uses: subosito/flutter-action@v2
-//         with:
-//           flutter-version: 'stable'
-//       - run: flutter pub get
-//       - run: dart tool/gen_fluentui_icons.dart
-//       - run: dart tool/gen_iconoir_icons.dart
-//       - name: Show stats
-//         run: |
-//           wc -l lib/fluentui_icons/fluentui_icon_list.dart
-//           wc -l lib/iconoir_icons/iconoir_icon_list.dart
-//       - uses: stefanzweifel/git-auto-commit-action@v4
-//         with:
-//           commit_message: 'chore: update generated icon lists'
-//           branch: add_page_drawer
-//           file_pattern: |
-//             lib/fluentui_icons/*
-//             lib/iconoir_icons/*

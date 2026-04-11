@@ -15,7 +15,9 @@ Directory findFlutterSdk() {
   final pathEnv = Platform.environment['PATH'] ?? '';
   final separator = Platform.isWindows ? ';' : ':';
   for (final dir in pathEnv.split(separator)) {
-    final exe = File(p.join(dir, Platform.isWindows ? 'flutter.bat' : 'flutter'));
+    final exe = File(
+      p.join(dir, Platform.isWindows ? 'flutter.bat' : 'flutter'),
+    );
     if (exe.existsSync()) {
       // bin/flutter → SDK root is two levels up from the resolved symlink
       final resolved = exe.resolveSymbolicLinksSync();
@@ -31,13 +33,36 @@ Directory findFlutterSdk() {
 File findAnimatedIconsSource(Directory sdkRoot) {
   // Standard location inside the Flutter repo / SDK
   final candidates = [
-    p.join(sdkRoot.path, 'packages', 'flutter', 'lib', 'src', 'material',
-        'animated_icons', 'animated_icons_data.dart'),
-    p.join(sdkRoot.path, 'packages', 'flutter', 'lib', 'src', 'material',
-        'animated_icons', 'animated_icons.dart'),
+    p.join(
+      sdkRoot.path,
+      'packages',
+      'flutter',
+      'lib',
+      'src',
+      'material',
+      'animated_icons',
+      'animated_icons_data.dart',
+    ),
+    p.join(
+      sdkRoot.path,
+      'packages',
+      'flutter',
+      'lib',
+      'src',
+      'material',
+      'animated_icons',
+      'animated_icons.dart',
+    ),
     // Older SDK layouts kept it directly in material/
-    p.join(sdkRoot.path, 'packages', 'flutter', 'lib', 'src', 'material',
-        'animated_icons.dart'),
+    p.join(
+      sdkRoot.path,
+      'packages',
+      'flutter',
+      'lib',
+      'src',
+      'material',
+      'animated_icons.dart',
+    ),
   ];
 
   for (final c in candidates) {
@@ -121,7 +146,7 @@ void main() {
 
   out.writeln('];');
 
-  final outputFile = File('lib/animated_icons/animated_helper.dart');
+  final outputFile = File('lib/pages/animated_icons/animated_helper.dart');
   outputFile.createSync(recursive: true);
   outputFile.writeAsStringSync(out.toString());
 
