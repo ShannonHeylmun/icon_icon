@@ -35,6 +35,10 @@ List<Credit> packages = [
     copyText: "https://pub.dev/packages/iconoir_flutter",
     name: "iconoir_flutter",
   ),
+  Credit(
+    copyText: "https://pub.dev/packages/cupertino_icons",
+    name: "cupertino_icons",
+  ),
 ];
 
 List<Credit> about = [
