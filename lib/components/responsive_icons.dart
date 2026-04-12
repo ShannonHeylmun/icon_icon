@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:icon_icon/pages/emoji/emoji_screen.dart';
 import 'package:icon_icon/main.dart';
 import 'package:icon_icon/theme_bloc.dart';
 import 'package:logging/logging.dart';
@@ -10,7 +7,6 @@ import 'package:logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:material_symbols_icons/symbols.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
 List<Text> instructions = [
