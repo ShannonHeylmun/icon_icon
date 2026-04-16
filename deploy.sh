@@ -5,7 +5,7 @@ set -e
 BUILD_DIRECTORY="build/web"
 DEPLOY_DIRECTORY="docs"
 COMMIT_MESSAGE="Deploy On Pages"
-# BASE_HREF="//"
+BASE_HREF="/icon_icon/"
 
 build_flutter_web() {
 echo "Building Web application..."
@@ -13,7 +13,7 @@ echo "Building Web application..."
     rm -rf "$BUILD_DIRECTORY"
     
     if ! flutter build web \
-        # --base-href=$BASE_HREF \
+        --base-href=$BASE_HREF \
         --release \
 		--no-wasm-dry-run \
 		--no-tree-shake-icons; then
