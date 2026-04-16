@@ -13,7 +13,6 @@ echo "Building Web application..."
     rm -rf "$BUILD_DIRECTORY"
     
     if ! flutter build web \
-        # --base-href=$BASE_HREF \
         --release \
 		--no-wasm-dry-run \
 		--no-tree-shake-icons; then
