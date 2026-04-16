@@ -23,16 +23,11 @@ class BottomSearchCard extends StatelessWidget {
           decoration: InputDecoration(
             hintText: 'Search...',
             // Add a clear button to the search bar
-            suffixIcon: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.clear, color: Color.fromRGBO(31, 31, 31, 1)),
-                  onPressed: () {
-                    controller.clear();
-                  },
-                ),
-              ],
+            suffixIcon: IconButton(
+              icon: Icon(Icons.clear),
+              onPressed: () {
+                controller.clear();
+              },
             ),
           ),
         ),
