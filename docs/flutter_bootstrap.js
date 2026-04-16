@@ -37,6 +37,6 @@ _flutter.buildConfig = {"engineRevision":"425cfb54d01a9472b3e81d9e76fd63a4a44cfb
 
 
 _flutter.loader.load({
-  assetBase: "/icon_icon/",
+//   assetBase: "/icon_icon/",
   renderer: "skwasm",
 });
