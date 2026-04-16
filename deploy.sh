@@ -34,6 +34,8 @@ echo "Deploying to GitHub Pages..."
         exit 1
     fi
 
+    cp CNAME "$DEPLOY_DIRECTORY/CNAME"
+
     if git add .; then
         git commit -m "$COMMIT_MESSAGE" && git push
     else
