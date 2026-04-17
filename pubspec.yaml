@@ -96,10 +96,8 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Material Design Icons
-      fonts:
-        - asset: packages/material_design_icons_flutter/fonts/materialdesignicons-webfont.ttf
+  # Icon fonts are loaded deferred via IconFontService, not declared here,
+  # so they are excluded from FontManifest.json and don't block initial load.
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

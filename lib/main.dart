@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
+import 'package:icon_icon/services/icon_font_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -70,6 +70,9 @@ void main() {
   //   options.enableLogs = true;
   // }, appRunner: () =>
   runApp(BlocProvider(create: (context) => ThemeBloc(), child: const MyApp()));
+  WidgetsBinding.instance.addPostFrameCallback(
+    (_) => IconFontService.loadMaterialDesignIcons(),
+  );
 }
 
 class MyApp extends StatefulWidget {
