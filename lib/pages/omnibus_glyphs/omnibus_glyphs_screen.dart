@@ -16,11 +16,7 @@ class OmnibusGlyphsScreen extends StatelessWidget {
         context,
         backgroundColor: omnibusGlyphsColor,
         foregroundColor: omnibusGlyphsColorContrast,
-        leadingIcon: Stack(
-          children: [
-            Positioned(
-              top: 8,
-              child: Text(
+        leadingIcon: Text(
           "❄️",
           style: GoogleFonts.notoEmoji(
             color: omnibusGlyphsColorContrast,
