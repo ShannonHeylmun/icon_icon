@@ -304,6 +304,7 @@ class ToolTipListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
+      waitDuration: Duration(milliseconds: 400),
       message: subTitle == null
           ? "Tap to copy $mainCopy\nLong Press for skin tones (if available)"
           : "Tap to copy $mainCopy\nDouble Tap to copy $subTitle\nLong Press for skin tones (if available)",
@@ -346,6 +347,7 @@ class ToolTipGridCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
+      waitDuration: Duration(milliseconds: 400),
       message: subTitle == null
           ? "Tap to copy $mainCopy"
           : "Tap to copy $mainCopy\nDouble Tap to copy $subTitle",
