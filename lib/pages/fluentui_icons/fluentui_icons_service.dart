@@ -14,7 +14,7 @@ class FluentIconsService {
     return _instance;
   }
   FluentIconsService._internal() {
-    getAllIcons();
+    Future(() => getAllIcons());
     _searchController.addListener(_refineListBySearch);
   }
 

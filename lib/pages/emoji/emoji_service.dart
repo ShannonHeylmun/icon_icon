@@ -10,7 +10,7 @@ class EmojiService {
     return _instance;
   }
   EmojiService._internal() {
-    getAllEmoji();
+    Future(() => _refinedListBehaviorSubject.add(emojisList));
     _searchController.addListener(_updateRefinedList);
   }
 
@@ -75,7 +75,7 @@ class EmojiService {
   List<(String, Emoji)> get refinedList => _refinedList;
 
   final BehaviorSubject<List<(String, Emoji)>> _refinedListBehaviorSubject =
-      BehaviorSubject.seeded(emojisList);
+      BehaviorSubject.seeded([]);
 
   Stream<List<(String, Emoji)>> get refinedListStream =>
       _refinedListBehaviorSubject.stream;

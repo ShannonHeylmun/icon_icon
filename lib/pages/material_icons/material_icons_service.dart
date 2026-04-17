@@ -13,7 +13,7 @@ class MaterialIconsService {
     return _instance;
   }
   MaterialIconsService._internal() {
-    _refinedListBehaviorSubject.add(getAllIcons());
+    Future(() => _refinedListBehaviorSubject.add(getAllIcons()));
     _searchController.addListener(_updateRefinedList);
   }
 
@@ -36,7 +36,7 @@ class MaterialIconsService {
   List<(String, IconData)> get refinedList => _refinedList;
 
   final BehaviorSubject<List<(String, IconData)>> _refinedListBehaviorSubject =
-      BehaviorSubject.seeded(getAllIcons());
+      BehaviorSubject.seeded([]);
   Stream<List<(String, IconData)>> get refinedListStream =>
       _refinedListBehaviorSubject.stream;
 }

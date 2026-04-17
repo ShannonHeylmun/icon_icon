@@ -17,7 +17,7 @@ class AnimatedIconsService {
     return _instance;
   }
   AnimatedIconsService._internal() {
-    _refinedListBehaviorSubject.add(getAllIcons());
+    Future(() => _refinedListBehaviorSubject.add(getAllIcons()));
     _searchController.addListener(_updateRefinedList);
   }
 
@@ -42,7 +42,7 @@ class AnimatedIconsService {
   List<(String, AnimatedIconData)> get refinedList => _refinedList;
 
   final BehaviorSubject<List<(String, AnimatedIconData)>>
-  _refinedListBehaviorSubject = BehaviorSubject.seeded(getAllIcons());
+  _refinedListBehaviorSubject = BehaviorSubject.seeded([]);
   Stream<List<(String, AnimatedIconData)>> get refinedListStream =>
       _refinedListBehaviorSubject.stream;
 }

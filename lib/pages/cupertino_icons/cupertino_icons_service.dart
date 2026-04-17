@@ -17,7 +17,7 @@ class CupertinoIconsService {
     return _instance;
   }
   CupertinoIconsService._internal() {
-    _refinedListBehaviorSubject.add(getAllIcons());
+    Future(() => _refinedListBehaviorSubject.add(getAllIcons()));
     _searchController.addListener(_updateRefinedList);
   }
 
@@ -42,7 +42,7 @@ class CupertinoIconsService {
   List<(String, IconData)> get refinedList => _refinedList;
 
   final BehaviorSubject<List<(String, IconData)>> _refinedListBehaviorSubject =
-      BehaviorSubject.seeded(getAllIcons());
+      BehaviorSubject.seeded([]);
   Stream<List<(String, IconData)>> get refinedListStream =>
       _refinedListBehaviorSubject.stream;
 }

@@ -13,7 +13,7 @@ class IconoirService {
     return _instance;
   }
   IconoirService._internal() {
-    getAllIcons();
+    Future(() => getAllIcons());
     _searchController.addListener(_updateRefinedList);
   }
 

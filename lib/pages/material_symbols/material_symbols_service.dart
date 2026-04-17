@@ -14,7 +14,7 @@ class MaterialSymbolsService {
     return _instance;
   }
   MaterialSymbolsService._internal() {
-    _refinedListBehaviorSubject.add(getAllIcons());
+    Future(() => _refinedListBehaviorSubject.add(getAllIcons()));
     _searchController.addListener(_updateRefinedList);
   }
 

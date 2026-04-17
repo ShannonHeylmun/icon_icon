@@ -11,7 +11,7 @@ class IconsService {
     return _instance;
   }
   IconsService._internal() {
-    _refinedListBehaviorSubject.add(hugeHelperList);
+    Future(() => _refinedListBehaviorSubject.add(hugeHelperList));
     _searchController.addListener(_updateRefinedList);
   }
 
@@ -37,7 +37,7 @@ class IconsService {
   List<(String, List<List<dynamic>>)> get refinedList => _refinedList;
 
   final BehaviorSubject<List<(String, List<List<dynamic>>)>>
-  _refinedListBehaviorSubject = BehaviorSubject.seeded(hugeHelperList);
+  _refinedListBehaviorSubject = BehaviorSubject.seeded([]);
   Stream<List<(String, List<List<dynamic>>)>> get refinedListStream =>
       _refinedListBehaviorSubject.stream;
 }
