@@ -1,27 +1,38 @@
 import 'dart:convert';
 import 'dart:io';
 
-/// Removes deferred icon font families from build/web/FontManifest.json.
+/// Removes deferred icon font families from FontManifest.json.
+///
+/// Usage: dart scripts/defer_icon_fonts.dart [path/to/FontManifest.json]
+/// Defaults to docs/assets/FontManifest.json.
 ///
 /// These fonts are excluded from the manifest so the Flutter engine does not
-/// download them at startup. Instead, each page loads its fonts on demand via
+/// download them at startup. Each page loads its fonts on demand via
 /// FontLoader (see lib/services/icon_font_service.dart).
-void main() {
-  const manifestPath = 'build/web/FontManifest.json';
+///
+/// Family names use the package-namespaced form Flutter generates:
+/// `packages/<pkg>/<family>` for package-declared fonts.
+void main(List<String> args) {
+  final manifestPath = args.isNotEmpty
+      ? args[0]
+      : 'docs/assets/FontManifest.json';
+
   const deferredFamilies = {
+    // Project-level declaration (legacy builds before it was removed)
     'Material Design Icons',
-    'MaterialSymbolsOutlined',
-    'MaterialSymbolsRounded',
-    'MaterialSymbolsSharp',
-    'FluentSystemIcons-Regular',
-    'FluentSystemIcons-Filled',
-    'CupertinoIcons',
+    // Package-level declarations (always present via each package's pubspec)
+    'packages/material_design_icons_flutter/Material Design Icons',
+    'packages/material_symbols_icons/MaterialSymbolsOutlined',
+    'packages/material_symbols_icons/MaterialSymbolsRounded',
+    'packages/material_symbols_icons/MaterialSymbolsSharp',
+    'packages/fluentui_system_icons/FluentSystemIcons-Regular',
+    'packages/fluentui_system_icons/FluentSystemIcons-Filled',
+    'packages/cupertino_icons/CupertinoIcons',
   };
 
   final file = File(manifestPath);
   if (!file.existsSync()) {
     stderr.writeln('FontManifest.json not found at $manifestPath');
-    stderr.writeln('Run flutter build web first.');
     exit(1);
   }
 
@@ -34,6 +45,10 @@ void main() {
   file.writeAsStringSync(const JsonEncoder.withIndent('  ').convert(filtered));
 
   final removed = manifest.length - filtered.length;
-  stdout.writeln('Removed $removed deferred font families from FontManifest.json.');
-  stdout.writeln('Remaining: ${filtered.map((e) => e['family']).join(', ')}');
+  stdout.writeln(
+    'Removed $removed deferred font families from $manifestPath.',
+  );
+  stdout.writeln(
+    'Remaining: ${filtered.map((e) => e['family']).join(', ')}',
+  );
 }

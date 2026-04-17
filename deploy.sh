@@ -20,23 +20,23 @@ echo "Building Web application..."
         exit 1
     fi
 
-    dart scripts/defer_icon_fonts.dart
-
 }
 
 deploy_to_pages() {
 echo "Deploying to GitHub Pages..."
 
     mkdir -p "$DEPLOY_DIRECTORY"
-    
+
     rm -rf "${DEPLOY_DIRECTORY:?}/"*
-    
+
     if ! cp -r "$BUILD_DIRECTORY"/* "$DEPLOY_DIRECTORY"; then
         echo "Failed to copy build files"
         exit 1
     fi
 
     cp CNAME "$DEPLOY_DIRECTORY/CNAME"
+
+    dart scripts/defer_icon_fonts.dart "$DEPLOY_DIRECTORY/assets/FontManifest.json"
 
     if git add .; then
         git commit -m "$COMMIT_MESSAGE" && git push
