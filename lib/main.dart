@@ -71,7 +71,7 @@ void main() {
   // }, appRunner: () =>
   runApp(BlocProvider(create: (context) => ThemeBloc(), child: const MyApp()));
   WidgetsBinding.instance.addPostFrameCallback(
-    (_) => IconFontService.loadMaterialDesignIcons(),
+    (_) => IconFontService.loadAll(),
   );
 }
 

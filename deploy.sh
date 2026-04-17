@@ -20,6 +20,8 @@ echo "Building Web application..."
         exit 1
     fi
 
+    dart scripts/defer_icon_fonts.dart
+
 }
 
 deploy_to_pages() {
