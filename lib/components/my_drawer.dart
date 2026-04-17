@@ -1,5 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icon_icon/colors.dart';
 import 'package:icon_icon/components/custom_drawer_list_tile.dart';
 import 'package:icon_icon/main.dart';
@@ -12,6 +13,7 @@ import 'package:icon_icon/pages/huge_icons_lookup/huge_icons_lookup_page.dart';
 import 'package:icon_icon/pages/iconoir_icons/iconoir_page.dart';
 import 'package:icon_icon/pages/material_icons/material_icons_page.dart';
 import 'package:icon_icon/pages/material_symbols/material_symbols_page.dart';
+import 'package:icon_icon/pages/omnibus_glyphs/omnibus_glyphs_screen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -124,21 +126,20 @@ class MyDrawer extends StatelessWidget {
               onTapCallback: () => onPageSelected(CupertinoIconsPage()),
               context: context,
             ),
-            // CustomDrawerListTile(
-            //   tileColor: omnibusGlyphsColor,
-            //   textColor: omnibusGlyphsColorContrast,
-            //   leadingWidget: Text(
-            //     "❄️",
-            //     style: GoogleFonts.notoEmoji(
-            //       color: omnibusGlyphsColorContrast,
-            //       fontSize: 18,
-            //     ),
-            //   ),
-            //   title: "Search All",
-            //   onTapCallback: () =>
-            //       updateSelectedPage(OmnibusGlyphsScreen()),
-            //   context: context,
-            // ),
+            CustomDrawerListTile(
+              tileColor: omnibusGlyphsColor,
+              textColor: omnibusGlyphsColorContrast,
+              leadingWidget: Text(
+                "❄️",
+                style: GoogleFonts.notoEmoji(
+                  color: omnibusGlyphsColorContrast,
+                  fontSize: 18,
+                ),
+              ),
+              title: "Search All",
+              onTapCallback: () => onPageSelected(OmnibusGlyphsScreen()),
+              context: context,
+            ),
           ],
         ),
       ),
