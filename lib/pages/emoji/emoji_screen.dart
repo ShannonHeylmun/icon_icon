@@ -7,7 +7,6 @@ import 'package:icon_icon/components/responsive_icons.dart';
 import 'package:icon_icon/pages/emoji/emoji_service.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
-GlobalKey<ScaffoldState> snackbarKey = GlobalKey<ScaffoldState>();
 GlobalKey emojiVariantsKey = GlobalKey(debugLabel: "emojiVariantsKey");
 
 class EmojiScreen extends StatelessWidget {
@@ -34,10 +33,7 @@ class EmojiScreen extends StatelessWidget {
         stream: EmojiService().refinedListStream,
         builder: (context, AsyncSnapshot<List<(String, Emoji)>> asyncSnapshot) {
           List<(String, Emoji)> iconsToShow = asyncSnapshot.data ?? [];
-          return Scaffold(
-            key: snackbarKey,
-            body: ResponsiveIcons(iconsToShow: iconsToShow),
-          );
+          return ResponsiveIcons(iconsToShow: iconsToShow);
         },
       ),
     );

@@ -9,6 +9,7 @@ class IconFontService {
   static final Map<String, Future<void>> _futures = {};
 
   static Future<void> _load(String family, String assetPath) {
+    print("Loading");
     return _futures.putIfAbsent(family, () async {
       final loader = FontLoader(family);
       loader.addFont(rootBundle.load(assetPath));

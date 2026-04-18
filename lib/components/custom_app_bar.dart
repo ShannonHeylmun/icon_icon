@@ -51,6 +51,7 @@ class CustomAppBar extends AppBar {
            ),
          ),
          actions: [
+           if (supplementaryActions != null) ...supplementaryActions,
            Icon(Icons.light_mode),
            Switch(
              value: BlocProvider.of<ThemeBloc>(context).state is ThemeDark
@@ -65,7 +66,6 @@ class CustomAppBar extends AppBar {
              },
            ),
            Icon(Icons.dark_mode),
-           if (supplementaryActions != null) ...supplementaryActions,
          ],
        );
 }

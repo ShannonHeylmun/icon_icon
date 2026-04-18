@@ -9,6 +9,11 @@ import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
+// inherit: false prevents Text from registering as a DefaultTextStyle dependent,
+// so AnimatedTheme's per-frame lerp doesn't dirty or re-rasterize emoji glyphs.
+final _emojiTextStyle = GoogleFonts.notoColorEmoji(fontSize: 30, color: Colors.black).copyWith(inherit: false);
+final _emojiWidgetCache = <String, Widget>{};
+
 List<Text> instructions = [
   Text("Tap to Copy Icon Name"),
   Text("Double Tap to Copy Code Point"),
@@ -248,10 +253,9 @@ Widget listTileLeading(Object iconData, BuildContext context) {
     case List<List<dynamic>>():
       return HugeIcon(icon: iconData);
     case Emoji():
-      return Text(
+      return _emojiWidgetCache.putIfAbsent(
         iconData.emoji,
-        // style: TextStyle(fontSize: 30),
-        style: GoogleFonts.notoColorEmoji(fontSize: 30),
+        () => RepaintBoundary(child: Text(iconData.emoji, style: _emojiTextStyle)),
       );
     case AnimatedIconData():
       return AnimatedIcon(icon: iconData, progress: animation, size: 48);
@@ -313,8 +317,8 @@ class ToolTipListCard extends StatelessWidget {
         onLongPress: () => onLongPress(),
         onDoubleTap: () => onDoubleTap(),
         child: ListTile(
-          leading: listTileLeading(iconData.$2, context),
-          title: Text(listTitle(iconData)),
+          leading: leading,
+          title: Text(title),
           subtitle: subTitle == null ? null : Text(subTitle!),
         ),
       ),
@@ -362,7 +366,7 @@ class ToolTipGridCard extends StatelessWidget {
             header: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                listTitle((iconData.$1, iconData.$2)),
+                title,
                 textAlign: TextAlign.center,
                 softWrap: true,
               ),
@@ -376,13 +380,13 @@ class ToolTipGridCard extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    listTileLeading(iconData.$2, context),
-                    listSubtitle(iconData) == null
+                    leading,
+                    subTitle == null
                         ? SizedBox.shrink()
                         : Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              listSubtitle(iconData)!,
+                              subTitle!,
                               textAlign: TextAlign.center,
                             ),
                           ),

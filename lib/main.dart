@@ -70,9 +70,6 @@ void main() {
   //   options.enableLogs = true;
   // }, appRunner: () =>
   runApp(BlocProvider(create: (context) => ThemeBloc(), child: const MyApp()));
-  WidgetsBinding.instance.addPostFrameCallback(
-    (_) => IconFontService.loadAll(),
-  );
 }
 
 class MyApp extends StatefulWidget {
@@ -83,6 +80,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  static final _lightTheme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(seedColor: creditsColor),
+    textTheme: GoogleFonts.notoSansTextTheme(),
+  );
+  static final _darkTheme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: creditsColor,
+      brightness: Brightness.dark,
+    ),
+    textTheme: GoogleFonts.notoSansTextTheme(ThemeData.dark().textTheme),
+  );
+
   final BehaviorSubject<Widget> _selectedPage = BehaviorSubject.seeded(
     EmojiScreen(),
   );
@@ -113,34 +122,23 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'icon_icon',
-          theme: ThemeData(
-            colorScheme: .fromSeed(seedColor: creditsColor),
-            textTheme: GoogleFonts.notoSansTextTheme(),
-          ),
-          darkTheme: ThemeData(
-            colorScheme: .fromSeed(
-              seedColor: creditsColor,
-              brightness: Brightness.dark,
-            ),
-            textTheme: GoogleFonts.notoSansTextTheme(
-              ThemeData.dark().textTheme,
-            ),
-          ),
+          theme: _lightTheme,
+          darkTheme: _darkTheme,
           themeMode: themeState is ThemeDark ? ThemeMode.dark : ThemeMode.light,
-          home: StreamBuilder(
-            stream: _selectedPage.stream,
-            builder: (context, snapshot) {
-              return Scaffold(
-                key: drawerKey,
-                body: snapshot.hasData ? snapshot.data! : SizedBox.shrink(),
-                drawer: MyDrawer(
-                  onPageSelected: (page) {
-                    _selectedPage.add(page);
-                  },
-                  animation: animation,
-                ),
-              );
-            },
+          home: Scaffold(
+            key: drawerKey,
+            body: StreamBuilder(
+              stream: _selectedPage.stream,
+              builder: (context, snapshot) {
+                return snapshot.hasData ? snapshot.data! : SizedBox.shrink();
+              },
+            ),
+            drawer: MyDrawer(
+              onPageSelected: (page) {
+                _selectedPage.add(page);
+              },
+              animation: animation,
+            ),
           ),
         );
       },
