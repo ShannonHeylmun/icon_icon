@@ -9,9 +9,10 @@ import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
-// inherit: false prevents Text from registering as a DefaultTextStyle dependent,
-// so AnimatedTheme's per-frame lerp doesn't dirty or re-rasterize emoji glyphs.
-final _emojiTextStyle = GoogleFonts.notoColorEmoji(fontSize: 30, color: Colors.black).copyWith(inherit: false);
+final _emojiTextStyle = GoogleFonts.notoColorEmoji(
+  fontSize: 30,
+  color: Colors.black,
+).copyWith(inherit: false);
 final _emojiWidgetCache = <String, Widget>{};
 
 List<Text> instructions = [
@@ -108,6 +109,7 @@ class ResponsiveIcons extends StatelessWidget {
   }
 
   void copyEmojiOrName(BuildContext context, String s, Object o) {
+    HapticFeedback.heavyImpact();
     String copyText = mainCopyText(o, s);
     try {
       if (context.mounted) {
@@ -255,7 +257,9 @@ Widget listTileLeading(Object iconData, BuildContext context) {
     case Emoji():
       return _emojiWidgetCache.putIfAbsent(
         iconData.emoji,
-        () => RepaintBoundary(child: Text(iconData.emoji, style: _emojiTextStyle)),
+        () => RepaintBoundary(
+          child: Text(iconData.emoji, style: _emojiTextStyle),
+        ),
       );
     case AnimatedIconData():
       return AnimatedIcon(icon: iconData, progress: animation, size: 48);
@@ -365,11 +369,7 @@ class ToolTipGridCard extends StatelessWidget {
           child: GridTile(
             header: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                softWrap: true,
-              ),
+              child: Text(title, textAlign: TextAlign.center, softWrap: true),
             ),
             footer: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -385,10 +385,7 @@ class ToolTipGridCard extends StatelessWidget {
                         ? SizedBox.shrink()
                         : Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              subTitle!,
-                              textAlign: TextAlign.center,
-                            ),
+                            child: Text(subTitle!, textAlign: TextAlign.center),
                           ),
                   ],
                 ),

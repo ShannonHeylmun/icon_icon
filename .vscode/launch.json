@@ -33,11 +33,19 @@
 		},
 		{
 			"flutterMode": "profile",
-			"name": "icon_icon (profile mode)",
+			"name": "icon_icon (profile iphone)",
 			"program": "lib/main.dart",
 			"request": "launch",
 			"type": "dart",
 			"deviceId": "iphone",
+		},
+		{
+			"flutterMode": "profile",
+			"name": "icon_icon (profile ipad)",
+			"program": "lib/main.dart",
+			"request": "launch",
+			"type": "dart",
+			"deviceId": "ipad",
 		},{
 			"deviceId": "chrome",
 			"flutterMode": "release",
