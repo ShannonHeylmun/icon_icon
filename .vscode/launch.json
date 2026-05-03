@@ -46,10 +46,27 @@
 			"request": "launch",
 			"type": "dart",
 			"deviceId": "ipad",
-		},{
+		},
+		{
 			"deviceId": "chrome",
 			"flutterMode": "release",
 			"name":"icon_icon (Flutter release mode, Chrome)",
+			"program": "lib/main.dart",
+			"request": "launch",
+			"type": "dart",
+		},
+		{
+			"deviceId": "iphone",
+			"flutterMode": "release",
+			"name":"icon_icon (Flutter release mode, iphone)",
+			"program": "lib/main.dart",
+			"request": "launch",
+			"type": "dart",
+		},
+		{
+			"deviceId": "ipad",
+			"flutterMode": "release",
+			"name":"icon_icon (Flutter release mode, ipad)",
 			"program": "lib/main.dart",
 			"request": "launch",
 			"type": "dart",
