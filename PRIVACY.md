@@ -106,10 +106,7 @@ The Company will retain Your Personal Data only for as long as is necessary for 
 
 Where possible, We apply shorter retention periods and/or reduce identifiability by deleting, aggregating, or anonymizing data. Unless otherwise stated, the retention periods below are maximum periods ("up to") and We may delete or anonymize data sooner when it is no longer needed for the relevant purpose. We apply different retention periods to different categories of Personal Data based on the purpose of processing and legal obligations:
 
-## Account Information
-
-User Accounts: retained for the duration of your account relationship plus up to 24 months after account closure to handle any post-termination issues or resolve disputes.
-Usage Data
+## Usage Data
 
 Website analytics data (cookies, IP addresses, device identifiers): up to 24 months from the date of collection, which allows us to analyze trends while respecting privacy principles.
 
@@ -121,30 +118,28 @@ Usage Data is retained in accordance with the retention periods described above,
 
 We may retain Personal Data beyond the periods stated above for different reasons:
 
-Legal obligation: We are required by law to retain specific data (e.g., financial records for tax authorities).
-Legal claims: Data is necessary to establish, exercise, or defend legal claims.
-Your explicit request: You ask Us to retain specific information.
-Technical limitations: Data exists in backup systems that are scheduled for routine deletion.
+* Legal obligation: We are required by law to retain specific data (e.g., financial records for tax authorities).
+* Legal claims: Data is necessary to establish, exercise, or defend legal claims.
+* Your explicit request: You ask Us to retain specific information.
+* Technical limitations: Data exists in backup systems that are scheduled for routine deletion.
+
 You may request information about how long We will retain Your Personal Data by contacting Us.
 
 When retention periods expire, We securely delete or anonymize Personal Data according to the following procedures:
 
-Deletion: Personal Data is removed from Our systems and no longer actively processed.
-Backup retention: Residual copies may remain in encrypted backups for a limited period consistent with our backup retention schedule and are not restored except where necessary for security, disaster recovery, or legal compliance.
-Anonymization: In some cases, We convert Personal Data into anonymous statistical data that cannot be linked back to You. This anonymized data may be retained indefinitely for research and analytics.
-Transfer of Your Personal Data
+* Deletion: Personal Data is removed from Our systems and no longer actively processed.
+* Backup retention: Residual copies may remain in encrypted backups for a limited period consistent with our backup retention schedule and are not restored except where necessary for security, disaster recovery, or legal compliance.
+* Anonymization: In some cases, We convert Personal Data into anonymous statistical data that cannot be linked back to You. This anonymized data may be retained indefinitely for research and analytics.
+
+## Transfer of Your Personal Data
 
 Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ from those from Your jurisdiction.
 
 Where required by applicable law, We will ensure that international transfers of Your Personal Data are subject to appropriate safeguards and supplementary measures where appropriate. The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information.
 
-Delete Your Personal Data
+## Delete Your Personal Data
 
 You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You.
-
-Our Service may give You the ability to delete certain information about You from within the Service.
-
-You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any Personal Data that You have provided to Us.
 
 Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.
 
@@ -162,12 +157,13 @@ Under certain circumstances, the Company may be required to disclose Your Person
 
 The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:
 
-Comply with a legal obligation
-Protect and defend the rights or property of the Company
-Prevent or investigate possible wrongdoing in connection with the Service
-Protect the personal safety of Users of the Service or the public
-Protect against legal liability
-Security of Your Personal Data
+* Comply with a legal obligation
+* Protect and defend the rights or property of the Company
+* Prevent or investigate possible wrongdoing in connection with the Service
+* Protect the personal safety of Users of the Service or the public
+* Protect against legal liability
+
+## Security of Your Personal Data
 
 The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially reasonable means to protect Your Personal Data, We cannot guarantee its absolute security.
 
@@ -195,4 +191,4 @@ You are advised to review this Privacy Policy periodically for any changes. Chan
 
 If you have any questions about this Privacy Policy, You can contact us:
 
-By visiting the credits section our website: <http://www.iconicon.fyi>
+By visiting the credits section of our website: <http://www.iconicon.fyi>
